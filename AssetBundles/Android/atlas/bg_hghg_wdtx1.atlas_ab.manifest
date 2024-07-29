@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 841846851
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 73bd68c68ea00a53d19c780f68eabda5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 011d1bb1b97750065fc8e33fbaec9bad
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/UpdateAssets/Atlas/bg_hghg_wdtx1/bg_hghg_wdtx1Material.mat
+- Assets/UpdateAssets/Atlas/bg_hghg_wdtx1/bg_hghg_wdtx1.png
+Dependencies: []

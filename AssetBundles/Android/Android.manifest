@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 777142318
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: atlas/atlas02.atlas_ab
+      Dependencies: {}
+    Info_1:
+      Name: atlas/atlas01.atlas_ab
+      Dependencies: {}
+    Info_2:
+      Name: atlas/atlas00.atlas_ab
+      Dependencies: {}
+    Info_3:
+      Name: atlas/bg_hghg_wdtx1.atlas_ab
+      Dependencies: {}
+    Info_4:
+      Name: atlas/bg_hghg_wdtx2.atlas_ab
+      Dependencies: {}
+    Info_5:
+      Name: atlas/bg_hghg_wdtx3.atlas_ab
+      Dependencies: {}
+    Info_6:
+      Name: ui/workflow/loginpanel.prefab_ab
+      Dependencies:
+        Dependency_0: animtion/play.anim_ab
+    Info_7:
+      Name: animtion/play.anim_ab
+      Dependencies: {}
