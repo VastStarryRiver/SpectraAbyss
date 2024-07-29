@@ -22,7 +22,7 @@ public class SdkMsgManager : Singleton<SdkMsgManager>
 
         if (m_gameHelperJavaClass == null)
         {
-            m_gameHelperJavaClass = new AndroidJavaClass("com.GodDragon.SpectraAbyss.GameHelper");
+            //m_gameHelperJavaClass = new AndroidJavaClass("com.GodDragon.SpectraAbyss.GameHelper");
         }
 #endif
     }
