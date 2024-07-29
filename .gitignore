@@ -1,0 +1,9 @@
+.svn/
+.vs/
+/Library/
+/Temp/
+/obj/
+*.csproj
+*.sln
+Assets/StreamingAssets/WebData.txt
+Assets/StreamingAssets/WebData.txt.meta
