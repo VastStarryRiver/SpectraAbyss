@@ -17,14 +17,12 @@ public class SdkMsgManager : Singleton<SdkMsgManager>
         if (m_sdkObject == null)
         {
             m_sdkObject = new GameObject("SdkObject");
-            m_sdkObject.hideFlags = HideFlags.HideAndDontSave;
             m_messageReceiver = m_sdkObject.AddComponent<MessageReceiver>();
-            GameObject.DontDestroyOnLoad(m_sdkObject);
         }
 
         if (m_gameHelperJavaClass == null)
         {
-            m_gameHelperJavaClass = new AndroidJavaClass("com.GodDragon.MyFrameworkProject.GameHelper");
+            m_gameHelperJavaClass = new AndroidJavaClass("com.GodDragon.SpectraAbyss.GameHelper");
         }
 #endif
     }
