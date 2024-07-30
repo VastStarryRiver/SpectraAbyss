@@ -21,7 +21,7 @@ public class SdkMsgManager : Singleton<SdkMsgManager>
 
         if (m_gameHelperJavaClass == null && DataUtilityManager.m_platform != "Windows")
         {
-            //m_gameHelperJavaClass = new AndroidJavaClass("com.goddragon.spectraabyss.GameHelper");
+            m_gameHelperJavaClass = new AndroidJavaClass("com.goddragon.spectraabyss.GameHelper");
         }
     }
 
