@@ -13,18 +13,16 @@ public class SdkMsgManager : Singleton<SdkMsgManager>
 
     public void Init()
     {
-#if !UNITY_EDITOR
         if (m_sdkObject == null)
         {
             m_sdkObject = new GameObject("SdkObject");
             m_messageReceiver = m_sdkObject.AddComponent<MessageReceiver>();
         }
 
-        if (m_gameHelperJavaClass == null)
+        if (m_gameHelperJavaClass == null && DataUtilityManager.m_platform != "Windows")
         {
-            //m_gameHelperJavaClass = new AndroidJavaClass("com.GodDragon.SpectraAbyss.GameHelper");
+            //m_gameHelperJavaClass = new AndroidJavaClass("com.goddragon.spectraabyss.GameHelper");
         }
-#endif
     }
 
     /// <summary>
