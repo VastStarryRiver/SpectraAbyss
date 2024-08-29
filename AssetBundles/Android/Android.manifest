@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1408235020
+CRC: 2193130930
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -27,3 +27,6 @@ AssetBundleManifest:
       Name: ui/workflow/loginpanel.prefab_ab
       Dependencies:
         Dependency_0: animtion/play.anim_ab
+    Info_8:
+      Name: audios/music.audio_ab
+      Dependencies: {}

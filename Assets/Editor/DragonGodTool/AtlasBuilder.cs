@@ -233,7 +233,7 @@ public class AtlasBuilder
 
         string[] assetGUIDs = AssetDatabase.FindAssets("t:Sprite", new string[] { imageRootPath });//会包括子文件夹内符合要求的文件
 
-        if(assetGUIDs.Length <= 0)
+        if (assetGUIDs.Length <= 0)
         {
             return;
         }
@@ -285,6 +285,7 @@ public class AtlasBuilder
             string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[i]);
             TextureImporter textureImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
             textureImporter.textureType = TextureImporterType.Sprite;
+            textureImporter.isReadable = true;
             AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
         }
 

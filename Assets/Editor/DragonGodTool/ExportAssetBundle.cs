@@ -37,7 +37,11 @@ public class ExportAssetBundle
 
         SetPrefabImportSettings();
 
+        SetMaterialImportSettings();
+
         SetAnimImportSettings();
+
+        SetAudioImportSettings();
 
         BuildPipeline.BuildAssetBundles(dir, BuildAssetBundleOptions.None, buildTarget); //把所有设置了AssetBundle信息的资源都打包
     }
@@ -71,9 +75,10 @@ public class ExportAssetBundle
 
     private static void SetPrefabImportSettings()
     {
-        string dir = "Assets/UpdateAssets/UI";
+        string dir1 = "Assets/UpdateAssets/UI";
+        string dir2 = "Assets/UpdateAssets/Prefabs";
 
-        string[] assetGUIDs = AssetDatabase.FindAssets("t:Prefab", new string[] { dir });//会包括子文件夹内符合要求的文件
+        string[] assetGUIDs = AssetDatabase.FindAssets("t:Prefab", new string[] { dir1, dir2 });//会包括子文件夹内符合要求的文件
 
         if (assetGUIDs.Length <= 0)
         {
@@ -86,6 +91,26 @@ public class ExportAssetBundle
             string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "");
             assetBundleName = assetBundleName.Replace(".prefab", "");
             SetAssetImportSettings(assetPath, assetBundleName, "prefab_ab");
+        }
+    }
+
+    private static void SetMaterialImportSettings()
+    {
+        string dir = "Assets/UpdateAssets/Materials";
+
+        string[] assetGUIDs = AssetDatabase.FindAssets("t:Material", new string[] { dir });//会包括子文件夹内符合要求的文件
+
+        if (assetGUIDs.Length <= 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < assetGUIDs.Length; i++)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[i]);
+            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "");
+            assetBundleName = assetBundleName.Replace(".mat", "");
+            SetAssetImportSettings(assetPath, assetBundleName, "mat_ab");
         }
     }
 
@@ -106,6 +131,26 @@ public class ExportAssetBundle
             string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "");
             assetBundleName = assetBundleName.Replace(".anim", "");
             SetAssetImportSettings(assetPath, assetBundleName, "anim_ab");
+        }
+    }
+
+    private static void SetAudioImportSettings()
+    {
+        string dir = "Assets/UpdateAssets/Audios";
+
+        string[] assetGUIDs = AssetDatabase.FindAssets("t:AudioClip", new string[] { dir });//会包括子文件夹内符合要求的文件
+
+        if (assetGUIDs.Length <= 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < assetGUIDs.Length; i++)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[i]);
+            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "");
+            assetBundleName = assetBundleName.Replace(".mp3", "");
+            SetAssetImportSettings(assetPath, assetBundleName, "audio_ab");
         }
     }
 }

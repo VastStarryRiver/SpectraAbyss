@@ -41,6 +41,7 @@ public class LuaCallCSWrap
 		L.RegFunction("SetTextureRawImage", SetTextureRawImage);
 		L.RegFunction("SetTextureRawImageNativeSize", SetTextureRawImageNativeSize);
 		L.RegFunction("SetText", SetText);
+		L.RegFunction("SetParent", SetParent);
 		L.RegFunction("LoadConfigData", LoadConfigData);
 		L.RegFunction("GetLuaTableStr", GetLuaTableStr);
 		L.RegFunction("ReadFileByteData", ReadFileByteData);
@@ -1557,6 +1558,23 @@ public class LuaCallCSWrap
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaCallCS.SetText");
 			}
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetParent(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UnityEngine.Object arg0 = (UnityEngine.Object)ToLua.CheckObject<UnityEngine.Object>(L, 1);
+			UnityEngine.Transform arg1 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 2);
+			LuaCallCS.SetParent(arg0, arg1);
+			return 0;
 		}
 		catch (Exception e)
 		{

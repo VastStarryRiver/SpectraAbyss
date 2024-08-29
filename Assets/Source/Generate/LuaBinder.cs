@@ -188,7 +188,7 @@ public static class LuaBinder
 		L.AddPreLoad("UnityEngine.RenderTexture", LuaOpen_UnityEngine_RenderTexture, typeof(UnityEngine.RenderTexture));
 		L.AddPreLoad("UnityEngine.Rigidbody", LuaOpen_UnityEngine_Rigidbody, typeof(UnityEngine.Rigidbody));
 		L.EndPreLoad();
-		//Debugger.Log("Register lua type cost time: {0}", Time.realtimeSinceStartup - t);
+		Debugger.Log("Register lua type cost time: {0}", Time.realtimeSinceStartup - t);
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

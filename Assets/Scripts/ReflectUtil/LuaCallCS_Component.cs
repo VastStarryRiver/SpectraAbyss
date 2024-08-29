@@ -394,4 +394,10 @@ public static partial class LuaCallCS
             }
         }
     }
+
+    public static void SetParent(UnityEngine.Object obj, Transform parent)
+    {
+        Transform transform = GetTransform(obj);
+        transform.parent = parent;
+    }
 }
