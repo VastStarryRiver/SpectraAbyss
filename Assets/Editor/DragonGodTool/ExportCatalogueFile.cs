@@ -81,7 +81,7 @@ public static class ExportCatalogueFile
         {
             string suffix = Path.GetExtension(nextFile.Name);
 
-            if (suffix == ".meta")
+            if (suffix == ".meta" || nextFile.Name == ".emmyrc.json")
             {
                 goto A;
             }

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1922206936
+CRC: 4024342497
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -24,9 +24,9 @@ AssetBundleManifest:
       Name: animtion/play.anim_ab
       Dependencies: {}
     Info_7:
+      Name: audios/music.audio_ab
+      Dependencies: {}
+    Info_8:
       Name: ui/workflow/loginpanel.prefab_ab
       Dependencies:
         Dependency_0: animtion/play.anim_ab
-    Info_8:
-      Name: audios/music.audio_ab
-      Dependencies: {}
