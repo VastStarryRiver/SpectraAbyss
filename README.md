@@ -1,5 +1,5 @@
 #打包设置
-签名文件：user.keystore
+签名文件：SpectraAbyss.keystore
 签名文件的密码：149630764
 
 #Assets/StreamingAssets/WebData.txt文件自行创建，内容格式如下：

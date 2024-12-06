@@ -1,17 +1,12 @@
 
-=== Sat Aug  6 22:12:35 2022
+=== Tue Nov 12 00:48:39 2024
 
 Packages were changed.
-Update Mode: resetToDefaultDependencies
+Update Mode: mergeDefaultDependencies
 
 The following packages were added:
-  com.unity.analytics@3.2.3
-  com.unity.purchasing@2.0.3
-  com.unity.ads@2.0.8
-  com.unity.textmeshpro@1.4.1
-  com.unity.package-manager-ui@2.0.8
-  com.unity.collab-proxy@1.2.15
   com.unity.modules.ai@1.0.0
+  com.unity.modules.androidjni@1.0.0
   com.unity.modules.animation@1.0.0
   com.unity.modules.assetbundle@1.0.0
   com.unity.modules.audio@1.0.0
@@ -41,3 +36,11 @@ The following packages were added:
   com.unity.modules.vr@1.0.0
   com.unity.modules.wind@1.0.0
   com.unity.modules.xr@1.0.0
+The following packages were updated:
+  com.unity.collab-proxy from version 1.17.2 to 2.5.1
+  com.unity.ide.rider from version 3.0.15 to 3.0.31
+  com.unity.ide.visualstudio from version 2.0.16 to 2.0.22
+  com.unity.render-pipelines.universal from version 14.0.3 to 14.0.11
+  com.unity.textmeshpro from version 3.0.6 to 3.0.7
+  com.unity.timeline from version 1.7.1 to 1.7.6
+  com.unity.visualscripting from version 1.7.8 to 1.9.4

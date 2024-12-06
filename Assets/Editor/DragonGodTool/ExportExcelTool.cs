@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using ExcelDataReader;
+using Invariable;
+
+
 
 public class ExportExcelTool
 {
@@ -68,7 +71,7 @@ public class ExportExcelTool
 
         if (m_aesKeyAndIvDatas.Count > 0)
         {
-            LuaCallCS.SaveConfigDecryptData(m_aesKeyAndIvDatas, "AesKeyAndIvData.bin");
+            DataUtilityManager.SaveConfigDecryptData(m_aesKeyAndIvDatas, "AesKeyAndIvData.bin");
             m_aesKeyAndIvDatas.Clear();
         }
 
@@ -76,7 +79,7 @@ public class ExportExcelTool
         {
             foreach (var item in m_configKeys)
             {
-                LuaCallCS.SaveConfigDecryptData(item.Value, item.Key + "Keys.bin");
+                DataUtilityManager.SaveConfigDecryptData(item.Value, item.Key + "Keys.bin");
             }
 
             m_configKeys.Clear();
@@ -313,8 +316,8 @@ public class ExportExcelTool
         {
             Dictionary<string, byte[]> aesKeyAndIvData = new Dictionary<string, byte[]>();
 
-            byte[] key = LuaCallCS.GetRandomByteData(16);
-            byte[] iv = LuaCallCS.GetRandomByteData(16);
+            byte[] key = DataUtilityManager.GetRandomByteData(16);
+            byte[] iv = DataUtilityManager.GetRandomByteData(16);
 
             aesKeyAndIvData.Add("Key", key);
             aesKeyAndIvData.Add("Iv", iv);
@@ -322,9 +325,9 @@ public class ExportExcelTool
             m_aesKeyAndIvDatas.Add(configName, aesKeyAndIvData);
         }
 
-        byte[] serializeBytes = LuaCallCS.SerializeData(configData);
-        byte[] compressBytes = LuaCallCS.CompressByteData(serializeBytes);
-        byte[] encryptBytes = LuaCallCS.EncryptByteData(compressBytes, m_aesKeyAndIvDatas[configName]["Key"], m_aesKeyAndIvDatas[configName]["Iv"]);
+        byte[] serializeBytes = DataUtilityManager.SerializeData(configData);
+        byte[] compressBytes = DataUtilityManager.CompressByteData(serializeBytes);
+        byte[] encryptBytes = DataUtilityManager.EncryptByteData(compressBytes, m_aesKeyAndIvDatas[configName]["Key"], m_aesKeyAndIvDatas[configName]["Iv"]);
 
         string directoryPath = DataUtilityManager.m_configPath + "/" + platform + "/" + configName;
 
@@ -344,13 +347,7 @@ public class ExportExcelTool
 
     private static void CreateBinFile(string path, byte[] inputBytes)
     {
-        LuaCallCS.CreateFileByBytes(path, inputBytes);
-        AssetDatabase.Refresh();
-    }
-
-    private static void CreateTxtFile(string path, string content)
-    {
-        LuaCallCS.CreateTxtFile(path, content);
+        DataUtilityManager.CreateFileByBytes(path, inputBytes);
         AssetDatabase.Refresh();
     }
 }

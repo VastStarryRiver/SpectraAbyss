@@ -2,14 +2,16 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using Invariable;
 
 
 
 public class AtlasBuilder
 {
-    private static string m_texturesRootPath = Application.dataPath + "/GameAssets/Textures";//小图文件夹的根路径
-    private static string m_pngRootPath = Application.dataPath + "/GameAssets/Png";//大图文件夹的根路径
+    private static string m_pngRootPath = Application.dataPath + "/Png";//大图文件夹的根路径
+    private static string m_texturesRootPath = Application.dataPath + "/Textures";//小图文件夹的根路径
     private static string m_atlasRootPath = Application.dataPath + "/UpdateAssets/Atlas";//图集存储路径
+    private static string m_materialsRootPath = Application.dataPath + "/UpdateAssets/Materials/Atlas";//图集对应的材质球存储路径
 
 
 
@@ -19,6 +21,11 @@ public class AtlasBuilder
         if (Directory.Exists(m_atlasRootPath))
         {
             Directory.Delete(m_atlasRootPath, true);
+        }
+
+        if (Directory.Exists(m_materialsRootPath))
+        {
+            Directory.Delete(m_materialsRootPath, true);
         }
 
         SetImageAtlasData(m_texturesRootPath.Replace(Application.dataPath, "Assets"), out Dictionary<string, List<Texture2D>> textureAtlas);
@@ -110,11 +117,12 @@ public class AtlasBuilder
                 EditorUtility.DisplayProgressBar("设置" + atlasName + "图集的像素数据中......", "进度：" + progress + "/" + progress, 1);
             }
 
-            DataUtilityManager.InitDirectory(m_atlasRootPath + "/" + atlasName);
+            DataUtilityManager.InitDirectory(m_atlasRootPath);
+            DataUtilityManager.InitDirectory(m_materialsRootPath);
 
             byte[] bytes = atlas.EncodeToPNG();
 
-            using (FileStream fileStream = new FileStream(m_atlasRootPath + "/" + atlasName + "/" + atlasName + ".png", FileMode.Create))
+            using (FileStream fileStream = new FileStream(m_atlasRootPath + "/" + atlasName + ".png", FileMode.Create))
             {
                 using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
                 {
@@ -124,8 +132,8 @@ public class AtlasBuilder
 
             AssetDatabase.Refresh();
 
-            string assetsAtlasPath = m_atlasRootPath.Replace(Application.dataPath, "Assets") + "/" + atlasName + "/" + atlasName + ".png";
-            string assetsMaterialPath = assetsAtlasPath.Replace(".png", "Material.mat");
+            string assetsAtlasPath = m_atlasRootPath.Replace(Application.dataPath, "Assets") + "/" + atlasName + ".png";
+            string assetsMaterialPath = m_materialsRootPath.Replace(Application.dataPath, "Assets") + "/" + atlasName + "Material.mat";
 
             //设置图集的ImportSettings
             SetAtlasImportSettings(assetsAtlasPath, atlasName, atlas, textures, rects);
@@ -221,7 +229,7 @@ public class AtlasBuilder
     {
         foreach (var item in atlasRects)
         {
-            LuaCallCS.SaveConfigDecryptData(item.Value, item.Key + ".bin");
+            DataUtilityManager.SaveConfigDecryptData(item.Value, item.Key + ".bin");
         }
     }
 
@@ -246,7 +254,7 @@ public class AtlasBuilder
 
             if (assetPath != imageRootPath + "/" + name)
             {
-                atlasName = assetPath.Replace("Assets/GameAssets/Textures/", "");
+                atlasName = assetPath.Replace("Assets/Textures/", "");
                 atlasName = atlasName.Replace("/" + name, "");
             }
             else

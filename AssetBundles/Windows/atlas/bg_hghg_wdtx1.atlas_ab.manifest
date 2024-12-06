@@ -1,12 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3279803008
+CRC: 1815071492
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8c0610e307df86cb2254d6ab880ef4df
+    Hash: f41409b6d99c1b5c8519785b84ed1a47
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 011d1bb1b97750065fc8e33fbaec9bad
+    Hash: b90360021f95c293bf3f1bef88434a62
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: f41409b6d99c1b5c8519785b84ed1a47
 HashAppended: 0
 ClassTypes:
 - Class: 21
@@ -17,7 +20,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/UpdateAssets/Atlas/bg_hghg_wdtx1/bg_hghg_wdtx1Material.mat
-- Assets/UpdateAssets/Atlas/bg_hghg_wdtx1/bg_hghg_wdtx1.png
+- Assets/UpdateAssets/Atlas/bg_hghg_wdtx1.png
+- Assets/UpdateAssets/Materials/Atlas/bg_hghg_wdtx1Material.mat
 Dependencies: []

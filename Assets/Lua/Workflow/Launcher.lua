@@ -1,1 +1,0 @@
-LuaCallCS.OpenUIPrefabPanel("UI/Workflow/LoginPanel", "UI/LoginPanel.lua", 0)

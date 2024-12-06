@@ -1,12 +1,15 @@
 ManifestFileVersion: 0
-CRC: 4272902024
+CRC: 2444689072
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 85a9e8547b7433fc8b0430070ff43530
+    Hash: f515ad4ab01812f966d19d9ab95077b7
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 011d1bb1b97750065fc8e33fbaec9bad
+    Hash: b90360021f95c293bf3f1bef88434a62
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: f515ad4ab01812f966d19d9ab95077b7
 HashAppended: 0
 ClassTypes:
 - Class: 21
@@ -17,7 +20,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/UpdateAssets/Atlas/Atlas00/Atlas00Material.mat
-- Assets/UpdateAssets/Atlas/Atlas00/Atlas00.png
+- Assets/UpdateAssets/Atlas/Atlas00.png
+- Assets/UpdateAssets/Materials/Atlas/Atlas00Material.mat
 Dependencies: []

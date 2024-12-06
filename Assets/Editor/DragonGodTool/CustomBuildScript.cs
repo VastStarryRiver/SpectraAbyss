@@ -3,18 +3,21 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using Invariable;
 
 
 
 public class CustomBuildScript
 {
-    private static List<string> m_excludedFolders = new List<string> { "Assets/GameAssets" };// 设置需要排除的文件夹
+    private static List<string> m_excludedFolders = new List<string> { "Assets/Png", "Assets/Textures" };// 设置需要排除的文件夹
+    private static string m_scriptsSourcePath = Application.dataPath + "/Scripts/HotUpdate";
+    private static string m_scriptsTargetPath = Application.dataPath.Replace("/Assets", "/HotUpdateScripts/HotUpdate");
     private static HashSet<string> m_excludedAssets = new HashSet<string>();// 收集所有需要排除的资源路径
-    private static string keystorePath = DataUtilityManager.m_localRootPath + "user.keystore"; // Keystore 文件路径
-    private static string keystorePassword = "149630764"; // Keystore 密码
-    private static string keyAlias = "goddragon"; // Alias 名称
-    private static string keyAliasPassword = "149630764"; // Alias 密码
-    private static string m_locationPathName = Environment.GetFolderPath(Environment.SpecialFolder.Desktop).Replace("\\","/") + "/MyGame.apk";//打包的输出路径
+    private static string keystorePath = DataUtilityManager.m_localRootPath + "SpectraAbyss.keystore"; // Keystore 文件路径
+    private const string keystorePassword = "149630764"; // Keystore 密码
+    private const string keyAlias = "spectraabyss"; // Alias 名称
+    private const string keyAliasPassword = "149630764"; // Alias 密码
+    private static string m_locationPathName = Environment.GetFolderPath(Environment.SpecialFolder.Desktop).Replace("\\","/") + "/SpectraAbyss.apk";//打包的输出路径
 
 
 
@@ -84,7 +87,7 @@ public class CustomBuildScript
 
                     if (importer != null)
                     {
-                        importer.SetAssetBundleNameAndVariant("tempExcludedAssetBundle", "");
+                        importer.SetAssetBundleNameAndVariant("tempAssetBundle", "");
                     }
                 }
 

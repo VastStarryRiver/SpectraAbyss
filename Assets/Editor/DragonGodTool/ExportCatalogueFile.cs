@@ -4,19 +4,16 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
-using LitJson;
+using Newtonsoft.Json;
+using Invariable;
 
 
 
 public static class ExportCatalogueFile
 {
     private static string m_rootPath = Application.streamingAssetsPath.Replace("Assets/StreamingAssets", "");
-    private static string m_clientConfigPath = m_rootPath + "ConfigData/Client";
-    private static string m_serverConfigPath = m_rootPath + "ConfigData/Server";
-    private static string m_aesKeyAndIvDataPath = m_rootPath + "ConfigData/ConfigDecryptData";
     private static string m_catalogueFilePath_Windows = m_rootPath + "CatalogueFiles/Windows";
     private static string m_catalogueFilePath_Android = m_rootPath + "CatalogueFiles/Android";
-    private static string m_luaPath = m_rootPath + "Assets/Lua";
 
     private static Dictionary<string,string> m_filesContent = null;
 
@@ -41,6 +38,7 @@ public static class ExportCatalogueFile
         AtlasBuilder.PackSpriteAtlas();
         ExportAssetBundle.BuildAssetBundles_Windows();
         ExportAssetBundle.BuildAssetBundles_Android();
+        ExportDll.BuildDll();
         BuildCatalogueFile_Windows();
         BuildCatalogueFile_Android();
     }
@@ -55,15 +53,13 @@ public static class ExportCatalogueFile
         {
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                SetMd5Files(m_clientConfigPath);
-                SetMd5Files(m_serverConfigPath);
-                SetMd5Files(m_aesKeyAndIvDataPath);
-                SetMd5Files(m_luaPath);
+                SetMd5Files(m_rootPath + "ConfigData");
                 SetMd5Files(catalogueDirectoryPath.Replace("CatalogueFiles", "AssetBundles"));
+                SetMd5Files(catalogueDirectoryPath.Replace("CatalogueFiles", "Dll"));
 
                 if (m_filesContent != null && m_filesContent.Count > 0)
                 {
-                    sw.Write(JsonMapper.ToJson(m_filesContent));
+                    sw.Write(JsonConvert.SerializeObject(m_filesContent));
                     m_filesContent.Clear();
                 }
 
@@ -81,22 +77,17 @@ public static class ExportCatalogueFile
         {
             string suffix = Path.GetExtension(nextFile.Name);
 
-            if (suffix == ".meta" || nextFile.Name == ".emmyrc.json")
+            if (suffix == ".meta" || suffix == ".json")
             {
-                goto A;
+                continue;
             }
 
             string fullPath = directoryPath + "/" + nextFile.Name;
             string savePath = fullPath.Replace(m_rootPath, "");
 
-            if (m_filesContent == null)
-            {
-                m_filesContent = new Dictionary<string, string>();
-            }
+            m_filesContent ??= new Dictionary<string, string>();
 
             m_filesContent.Add(savePath, Get32MD5(nextFile.OpenText().ReadToEnd()));
-
-        A:;
         }
 
         //遍历文件夹
@@ -104,12 +95,10 @@ public static class ExportCatalogueFile
         {
             if (nextFolder.Name == ".idea")
             {
-                goto B;
+                continue;
             }
 
             SetMd5Files(directoryPath + "/" + nextFolder.Name);
-
-        B:;
         }
     }
 

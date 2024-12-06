@@ -1,16 +1,20 @@
 ManifestFileVersion: 0
-CRC: 4268465528
+CRC: 3129704247
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b92f6c776f260441b37e3d891031726d
+    Hash: a3090d8ecc5053a366378f4e4427a60a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
+    Hash: 9a2ca7bdbd1871f7131daf57de908e0c
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: a3090d8ecc5053a366378f4e4427a60a
 HashAppended: 0
 ClassTypes:
 - Class: 83
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/UpdateAssets/Audios/music.mp3
 Dependencies: []

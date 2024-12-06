@@ -1,76 +1,80 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
+using System;
 
-public delegate void LoadAssetBundleCallBack(string name, object asset);
 
-public class AssetBundleManager
+
+namespace Invariable
 {
-    private static Dictionary<string, AssetBundle> m_assetBundles = null;//å·²ç»åŠ è½½çš„AssetBundleåŒ…
-    private static AssetBundleManifest m_mainManifest = null;//ä¸»AssetBundleçš„ç›®å½•æ–‡ä»¶
-
-
-
-    public static void Clear()
+    public class AssetBundleManager
     {
-        if (m_assetBundles != null && m_assetBundles.Count > 0)
+        private static Dictionary<string, AssetBundle> m_assetBundles = null;//ÒÑ¾­¼ÓÔØµÄAssetBundle°ü
+        private static AssetBundleManifest m_mainManifest = null;//Ö÷AssetBundleµÄÄ¿Â¼ÎÄ¼þ
+
+
+
+        public static void Clear()
         {
-            foreach (var item in m_assetBundles)
+            if (m_assetBundles != null && m_assetBundles.Count > 0)
             {
-                item.Value.Unload(true);
+                foreach (var item in m_assetBundles)
+                {
+                    item.Value.Unload(true);
+                }
+
+                m_assetBundles.Clear();
             }
 
-            m_assetBundles.Clear();
+            m_assetBundles = null;
+
+            Caching.ClearCache();
         }
 
-        m_assetBundles = null;
-
-        Caching.ClearCache();
-    }
-
-    public static void LoadAssetBundle(string assetBundlePath, string[] assetNames, LoadAssetBundleCallBack callBack)
-    {
-        if (m_assetBundles == null)
+        public static void LoadAssetBundle(string assetBundlePath, string[] assetNames, Action<string, object> callBack)
         {
-            m_assetBundles = new Dictionary<string, AssetBundle>();
-        }
-
-        if (!m_assetBundles.ContainsKey(assetBundlePath))
-        {
-            string rootPath = DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/";
-
-            if (m_mainManifest == null)
+            if (m_assetBundles == null)
             {
-                LoadAssetBundle(rootPath + DataUtilityManager.m_platform + ".mainbundle");
-                AssetBundle mainAb = m_assetBundles[rootPath + DataUtilityManager.m_platform + ".mainbundle"];
-                m_mainManifest = mainAb.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+                m_assetBundles = new Dictionary<string, AssetBundle>();
             }
 
-            string[] dependencies = m_mainManifest.GetAllDependencies(assetBundlePath.Replace(rootPath, ""));
-            foreach (string dependency in dependencies)
+            if (!m_assetBundles.ContainsKey(assetBundlePath))
             {
-                LoadAssetBundle(rootPath + dependency);
+                string rootPath = DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/";
+
+                if (m_mainManifest == null)
+                {
+                    LoadAssetBundle(rootPath + DataUtilityManager.m_platform + ".mainbundle");
+                    AssetBundle mainAb = m_assetBundles[rootPath + DataUtilityManager.m_platform + ".mainbundle"];
+                    m_mainManifest = mainAb.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+                }
+
+                string[] dependencies = m_mainManifest.GetAllDependencies(assetBundlePath.Replace(rootPath, ""));
+                foreach (string dependency in dependencies)
+                {
+                    LoadAssetBundle(rootPath + dependency);
+                }
+
+                LoadAssetBundle(assetBundlePath);
             }
 
-            LoadAssetBundle(assetBundlePath);
-        }
+            AssetBundle assetBundle = m_assetBundles[assetBundlePath];
 
-        AssetBundle assetBundle = m_assetBundles[assetBundlePath];
-
-        if (assetNames.Length > 0)
-        {
-            foreach (string assetName in assetNames)
+            if (assetNames.Length > 0)
             {
-                object asset = assetBundle.LoadAsset(assetName);
-                callBack(assetName, asset);
+                foreach (string assetName in assetNames)
+                {
+                    object asset = assetBundle.LoadAsset(assetName);
+                    callBack(assetName, asset);
+                }
             }
         }
-    }
 
-    private static void LoadAssetBundle(string assetBundlePath)
-    {
-        if (!m_assetBundles.ContainsKey(assetBundlePath))
+        private static void LoadAssetBundle(string assetBundlePath)
         {
-            m_assetBundles[assetBundlePath] = AssetBundle.LoadFromFile(assetBundlePath);
+            if (!m_assetBundles.ContainsKey(assetBundlePath))
+            {
+                m_assetBundles[assetBundlePath] = AssetBundle.LoadFromFile(assetBundlePath);
+            }
         }
     }
 }

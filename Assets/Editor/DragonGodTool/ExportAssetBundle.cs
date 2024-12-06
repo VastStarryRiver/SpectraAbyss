@@ -14,14 +14,14 @@ public class ExportAssetBundle
     public static void BuildAssetBundles_Windows()
     {
         BuildAssetBundles(m_rootPath + "AssetBundles/Windows", BuildTarget.StandaloneWindows64);
-        RenameMainAssetBundleFile(m_rootPath + "AssetBundles/Windows/Windows");
+        InitMainAssetBundleFile(m_rootPath + "AssetBundles/Windows/Windows");
     }
 
     [MenuItem("GodDragonTool/导出AssetBundles文件/BuildAssetBundles_Android")]
     public static void BuildAssetBundles_Android()
     {
         BuildAssetBundles(m_rootPath + "AssetBundles/Android", BuildTarget.Android);
-        RenameMainAssetBundleFile(m_rootPath + "AssetBundles/Android/Android");
+        InitMainAssetBundleFile(m_rootPath + "AssetBundles/Android/Android");
     }
 
 
@@ -46,16 +46,25 @@ public class ExportAssetBundle
         BuildPipeline.BuildAssetBundles(dir, BuildAssetBundleOptions.None, buildTarget); //把所有设置了AssetBundle信息的资源都打包
     }
 
-    private static void RenameMainAssetBundleFile(string mainBundlePath)
+    private static void InitMainAssetBundleFile(string mainBundlePath)
     {
         if (File.Exists(mainBundlePath))
         {
             string newBundlePath = mainBundlePath + ".mainbundle";
             File.Move(mainBundlePath, newBundlePath);
         }
-        else
+
+        string platform = Path.GetFileName(mainBundlePath);
+        string tempFile = mainBundlePath.Substring(0, mainBundlePath.LastIndexOf(platform)) + "tempAssetBundle";
+
+        if (File.Exists(tempFile))
         {
-            Debug.LogWarning("主AssetBundle文件不存在");
+            File.Delete(tempFile);
+        }
+
+        if (File.Exists(tempFile + ".manifest"))
+        {
+            File.Delete(tempFile + ".manifest");
         }
     }
 
@@ -75,10 +84,9 @@ public class ExportAssetBundle
 
     private static void SetPrefabImportSettings()
     {
-        string dir1 = "Assets/UpdateAssets/UI";
-        string dir2 = "Assets/UpdateAssets/Prefabs";
+        string dir = "Assets/UpdateAssets/Prefabs";
 
-        string[] assetGUIDs = AssetDatabase.FindAssets("t:Prefab", new string[] { dir1, dir2 });//会包括子文件夹内符合要求的文件
+        string[] assetGUIDs = AssetDatabase.FindAssets("t:Prefab", new string[] { dir });//会包括子文件夹内符合要求的文件
 
         if (assetGUIDs.Length <= 0)
         {
@@ -108,6 +116,12 @@ public class ExportAssetBundle
         for (int i = 0; i < assetGUIDs.Length; i++)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[i]);
+
+            if(assetPath.Contains("/Atlas/"))
+            {
+                continue;
+            }
+
             string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "");
             assetBundleName = assetBundleName.Replace(".mat", "");
             SetAssetImportSettings(assetPath, assetBundleName, "mat_ab");
