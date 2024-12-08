@@ -1,0 +1,1096 @@
+Using pre-set license
+Built from '2022.3/china_unity/release' branch; Version is '2022.3.48f1c1 (076abfb8be7c) revision 486079'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26100) 64bit CoreCountrySpecific' Language: 'zh' Physical Memory: 16085 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+E:\UnityEditor\2022.3.48f1c1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+E:/MyProjects/SpectraAbyss
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+53820
+Successfully changed project path to: E:/MyProjects/SpectraAbyss
+E:/MyProjects/SpectraAbyss
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [24836]  Target information:
+
+Player connection [24836]  * "[IP] 192.168.1.6 [Port] 0 [Flags] 2 [Guid] 2501497480 [EditorId] 2501497480 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [24836] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [24836] Host joined alternative multi-casting on [225.0.0.222:34997]...
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Refreshing native plugins compatible for Editor in 25.15 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.48f1c1 (076abfb8be7c)
+[Subsystems] Discovering subsystems at path E:/UnityEditor/2022.3.48f1c1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/MyProjects/SpectraAbyss/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3070 Laptop GPU (ID=0x249d)
+    Vendor:   NVIDIA
+    VRAM:     8044 MB
+    Driver:   30.0.14.9717
+Initialize mono
+Mono path[0] = 'E:/UnityEditor/2022.3.48f1c1/Editor/Data/Managed'
+Mono path[1] = 'E:/UnityEditor/2022.3.48f1c1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'E:/UnityEditor/2022.3.48f1c1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56652
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: E:/UnityEditor/2022.3.48f1c1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: E:/UnityEditor/2022.3.48f1c1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: E:/UnityEditor/2022.3.48f1c1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.006069 seconds.
+- Loaded All Assemblies, in  0.281 seconds
+Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for iOS target not found
+Native extension for Android target not found
+Multiple ADB server instances found, the following ADB server instance have been terminated due to being run from another SDK. Process paths: 
+E:\AndroidSdk\platform-tools\adb.exe
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.Android.AndroidDeploymentTargetsExtension:GetKnownTargets (UnityEditor.DeploymentTargets.IDeploymentTargetsMainThreadContext,UnityEditor.ProgressHandler)
+UnityEditor.Android.TargetScanWorker:ScanSync ()
+UnityEditor.Android.TargetExtension:OnUsbDevicesChanged (UnityEditor.Hardware.UsbDevice[])
+UnityEditor.Android.TargetExtension:OnLoad ()
+UnityEditor.Modules.ModuleManager:InitializePlatformSupportModules ()
+
+Android Extension - Scanning For ADB Devices 2445 ms
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.703 seconds
+Domain Reload Profiling: 2983ms
+	BeginReloadAssembly (82ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (27ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (44ms)
+	LoadAllAssembliesAndSetupDomain (118ms)
+		LoadAssemblies (80ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (117ms)
+			TypeCache.Refresh (115ms)
+				TypeCache.ScanAssembly (103ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (2703ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (2665ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2517ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (105ms)
+			ProcessInitializeOnLoadMethodAttributes (38ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.631 seconds
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Package Manager log level set to [2]
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.642 seconds
+Domain Reload Profiling: 1270ms
+	BeginReloadAssembly (113ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (19ms)
+	RebuildCommonClasses (24ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (26ms)
+	LoadAllAssembliesAndSetupDomain (457ms)
+		LoadAssemblies (338ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (179ms)
+			TypeCache.Refresh (149ms)
+				TypeCache.ScanAssembly (132ms)
+			ScanForSourceGeneratedMonoScriptInfo (20ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (642ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (521ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (22ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (95ms)
+			ProcessInitializeOnLoadAttributes (346ms)
+			ProcessInitializeOnLoadMethodAttributes (50ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (4ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 6.43 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5183 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 44 unused Assets / (352.9 KB). Loaded Objects now: 5650.
+Memory consumption went from 203.3 MB to 202.9 MB.
+Total: 3.281700 ms (FindLiveObjects: 0.327300 ms CreateObjectMapping: 0.165200 ms MarkObjects: 2.634500 ms  DeleteObjects: 0.153400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 6.54 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (290.7 KB). Loaded Objects now: 5650.
+Memory consumption went from 99.3 MB to 99.0 MB.
+Total: 3.336600 ms (FindLiveObjects: 0.347300 ms CreateObjectMapping: 0.183800 ms MarkObjects: 2.733300 ms  DeleteObjects: 0.071300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 6.15 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (329.0 KB). Loaded Objects now: 5650.
+Memory consumption went from 97.1 MB to 96.8 MB.
+Total: 3.097600 ms (FindLiveObjects: 0.378300 ms CreateObjectMapping: 0.191900 ms MarkObjects: 2.458100 ms  DeleteObjects: 0.068200 ms)
+
+Prepare: number of updated asset objects reloaded= 126
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 5.89 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (329.0 KB). Loaded Objects now: 5650.
+Memory consumption went from 97.1 MB to 96.8 MB.
+Total: 3.520000 ms (FindLiveObjects: 0.374000 ms CreateObjectMapping: 0.208900 ms MarkObjects: 2.871400 ms  DeleteObjects: 0.064700 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 5.95 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (329.1 KB). Loaded Objects now: 5650.
+Memory consumption went from 97.1 MB to 96.8 MB.
+Total: 3.922300 ms (FindLiveObjects: 0.559500 ms CreateObjectMapping: 0.352900 ms MarkObjects: 2.926800 ms  DeleteObjects: 0.081700 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 6.67 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (290.7 KB). Loaded Objects now: 5650.
+Memory consumption went from 97.2 MB to 96.9 MB.
+Total: 2.977600 ms (FindLiveObjects: 0.349100 ms CreateObjectMapping: 0.200100 ms MarkObjects: 2.369200 ms  DeleteObjects: 0.058400 ms)
+
+Prepare: number of updated asset objects reloaded= 126
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 7.73 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (290.6 KB). Loaded Objects now: 5650.
+Memory consumption went from 99.0 MB to 98.7 MB.
+Total: 3.463000 ms (FindLiveObjects: 0.361300 ms CreateObjectMapping: 0.199700 ms MarkObjects: 2.809500 ms  DeleteObjects: 0.091500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 6.27 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (290.7 KB). Loaded Objects now: 5650.
+Memory consumption went from 99.0 MB to 98.7 MB.
+Total: 3.445500 ms (FindLiveObjects: 0.450800 ms CreateObjectMapping: 0.204500 ms MarkObjects: 2.697500 ms  DeleteObjects: 0.091600 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.478 seconds
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.088 seconds
+Domain Reload Profiling: 1563ms
+	BeginReloadAssembly (134ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (42ms)
+	RebuildCommonClasses (26ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (29ms)
+	LoadAllAssembliesAndSetupDomain (274ms)
+		LoadAssemblies (312ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (21ms)
+			TypeCache.Refresh (8ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1089ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (576ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (27ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (101ms)
+			ProcessInitializeOnLoadAttributes (384ms)
+			ProcessInitializeOnLoadMethodAttributes (55ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (18ms)
+Refreshing native plugins compatible for Editor in 7.41 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5031 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 39 unused Assets / (322.6 KB). Loaded Objects now: 5654.
+Memory consumption went from 177.3 MB to 177.0 MB.
+Total: 3.228500 ms (FindLiveObjects: 0.550400 ms CreateObjectMapping: 0.185400 ms MarkObjects: 2.388200 ms  DeleteObjects: 0.103300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 9.14 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (329.1 KB). Loaded Objects now: 5654.
+Memory consumption went from 97.4 MB to 97.0 MB.
+Total: 3.530800 ms (FindLiveObjects: 0.419600 ms CreateObjectMapping: 0.183600 ms MarkObjects: 2.861500 ms  DeleteObjects: 0.065200 ms)
+
+Prepare: number of updated asset objects reloaded= 126
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 5.95 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (328.6 KB). Loaded Objects now: 5654.
+Memory consumption went from 97.2 MB to 96.8 MB.
+Total: 2.978000 ms (FindLiveObjects: 0.394800 ms CreateObjectMapping: 0.208100 ms MarkObjects: 2.311600 ms  DeleteObjects: 0.062700 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 5.76 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (328.6 KB). Loaded Objects now: 5654.
+Memory consumption went from 97.2 MB to 96.8 MB.
+Total: 3.389600 ms (FindLiveObjects: 0.372600 ms CreateObjectMapping: 0.235000 ms MarkObjects: 2.666800 ms  DeleteObjects: 0.114100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/ETCAxis.cs: dc574458b1718998792e35cec97f8fd2 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPadInspector.cs: da049d86a3b90f083ec2faaa6d63b925 -> 
+  custom:scripting/monoscript/fileName/QuickPinchInspector.cs: e0d047ca27b8b604d59cba219abeb8a7 -> 
+  custom:scripting/monoscript/fileName/QuickTwist.cs: aefbbb9f9388abdf30e4ade971fe4975 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/ETCButton.cs: 5915cd814f2825c0c8f3312348eb90ae -> 
+  custom:scripting/monoscript/fileName/QuickTouchInspector.cs: c72eaa9e5e610f715d5ff1b7caa6e5ca -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/Finger.cs: 28a57a686330d3ae469a571487b7f79e -> 
+  custom:scripting/monoscript/fileName/ETCSetDirectActionTransform.cs: 8aadb77e9ec85b7967c7597aa2c2658e -> 
+  custom:scripting/monoscript/fileName/QuickDragInspector.cs: 0483cf26a85223663eddcd922f031a8a -> 
+  custom:scripting/monoscript/fileName/ComponentExtensions.cs: da64dbeaaef1376219bdd426cc4a3f25 -> 
+  custom:scripting/monoscript/fileName/HTGuiTools.cs: 77b8e859beb42ec178c79c707e66c5f6 -> 
+  custom:scripting/monoscript/fileName/QuickEnterOverExist.cs: ddccd92c1098129604ef05a5bb88e029 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:scripting/monoscript/fileName/QuickTap.cs: 24e47a5b1328ee09afd8797203bf5341 -> 
+  custom:scripting/monoscript/fileName/ETCDPadInspector.cs: d66ef57cd0b44ef2c6bdc5c488ba426f -> 
+  custom:scripting/monoscript/fileName/ETCGuiTools.cs: 575c186811e149f932e2c5c579382ea5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/EasyTouchMenu.cs: 08f6ed823952b4531eeb8cbe27f90de7 -> 
+  custom:scripting/monoscript/fileName/QuickLongTapInspector.cs: 99fafab513d8bbce26c01b3310d32299 -> 
+  custom:scripting/monoscript/fileName/QuickSwipe.cs: 11abbcce5252b8777508b1ec7275a14d -> 
+  custom:scripting/monoscript/fileName/EasyTouchInspector.cs: 5aa326bf65c0edce85ec5c687b4094f1 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTrigger.cs: cf2ea22897a27582941f66db1a1b061e -> 
+  custom:scripting/monoscript/fileName/ETCAxisInspector.cs: 003e0908e9a6625b9569da787d488724 -> 
+  custom:scripting/monoscript/fileName/ETCAreaInspector.cs: a6e1408a250680ba9059d013111ae69d -> 
+  custom:scripting/monoscript/fileName/ETCJoystick.cs: 0b740d49bb014147b8b615b828377133 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/ETCJoystickInspector.cs: 3f0081b8d204a4bf64cd966dee0ed83e -> 
+  custom:scripting/monoscript/fileName/ETCArea.cs: cb47a858632f5300350728ec433ff20d -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/QuickTouch.cs: dbe7e9056a0fd0fba36fcbce0c832291 -> 
+  custom:scripting/monoscript/fileName/EasyTouchTriggerInspector.cs: 99f816e261eeb110fcda382ed8a4f54e -> 
+  custom:scripting/monoscript/fileName/ETCButtonInspector.cs: ffbc69fb2566500d3cd6646be72f35c2 -> 
+  custom:scripting/monoscript/fileName/BaseFinger.cs: 40b1a7bb504385313504052d7072b970 -> 
+  custom:scripting/monoscript/fileName/ETCInput.cs: ef404211192f281737e8c32a60823eef -> 
+  custom:scripting/monoscript/fileName/EasyTouchInput.cs: 11d076cf63f9ef64c062ff3dcecf1b0c -> 
+  custom:scripting/monoscript/fileName/QuickLongTap.cs: c345ff607d31ced61f57de2e51a4a879 -> 
+  custom:scripting/monoscript/fileName/EasytouchHierachyCallBack.cs: 1b3c17a3c224a1ea647e9a677250be34 -> 
+  custom:scripting/monoscript/fileName/QuickEnterExitInspector.cs: ddfa8f5e542e23452c767e7843572ab9 -> 
+  custom:scripting/monoscript/fileName/QuickDrag.cs: 76eb903749eeb0437ec93136346b4fa1 -> 
+  custom:scripting/monoscript/fileName/EasyTouch.cs: f639e9289c84b42ae0ecf9978999da52 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/TwoFingerGesture.cs: 80e50b6edb45a0e045aad6326383e4cc -> 
+  custom:scripting/monoscript/fileName/QuickPinch.cs: 4074454ed6e268d7f629a6fa1eaa725b -> 
+  custom:scripting/monoscript/fileName/QuickBase.cs: 9ef7881b2bf6da43a3b02404a3b50784 -> 
+  custom:scripting/monoscript/fileName/QuickTapInspector.cs: 2baed4092e3bfbe647e7a02fe38373db -> 
+  custom:scripting/monoscript/fileName/ETCBase.cs: d7340034501ee3b38e27b8148626ddc6 -> 
+  custom:scripting/monoscript/fileName/ETCDPad.cs: 936426f5bf13c98d5d8374254a018219 -> 
+  custom:scripting/monoscript/fileName/EasyTouchWelcomeScreen.cs: e7cba58cba0f31a8a85be0f20ffc4359 -> 
+  custom:scripting/monoscript/fileName/ECamera.cs: e39c1163e319a4f0e0a2200f94b08e51 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/ETCMenu.cs: 71b0e994dc0e671b4292f8d6dfdf9ab1 -> 
+  custom:scripting/monoscript/fileName/ETCTouchPad.cs: 3ba4d5297b24d0972c0e6c00df8e2e8d -> 
+  custom:scripting/monoscript/fileName/QuickSwipeInspector.cs: fede37671ae685033cb456d4176f0b27 -> 
+  custom:scripting/monoscript/fileName/QuickTwistInspector.cs: feba7e3558306c481079f34b3a43b4e8 -> 
+  custom:scripting/monoscript/fileName/Gesture.cs: 9c64ca08996a8d251db39be71f1d3e9f -> 
