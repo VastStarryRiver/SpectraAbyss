@@ -9,6 +9,22 @@ namespace Invariable
 {
     public class ConvenientUtility
     {
+        public static Camera MainUICamera
+        {
+            get
+            {
+                return GameObject.Find("UI_Root/UI_Camera").GetComponent<Camera>();
+            }
+        }
+
+        public static RectTransform MainUIRoot
+        {
+            get
+            {
+                return GameObject.Find("UI_Root").GetComponent<RectTransform>();
+            }
+        }
+
         public static GameObject GetGameObject(UnityEngine.Object obj, string childPath = "")
         {
             GameObject gameObject = null;

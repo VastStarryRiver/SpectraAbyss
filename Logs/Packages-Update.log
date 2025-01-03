@@ -1,5 +1,5 @@
 
-=== Tue Nov 12 00:48:39 2024
+=== Mon Dec 30 20:27:48 2024
 
 Packages were changed.
 Update Mode: mergeDefaultDependencies
@@ -37,7 +37,7 @@ The following packages were added:
   com.unity.modules.wind@1.0.0
   com.unity.modules.xr@1.0.0
 The following packages were updated:
-  com.unity.collab-proxy from version 1.17.2 to 2.5.1
+  com.unity.collab-proxy from version 1.17.2 to 2.5.2
   com.unity.ide.rider from version 3.0.15 to 3.0.31
   com.unity.ide.visualstudio from version 2.0.16 to 2.0.22
   com.unity.render-pipelines.universal from version 14.0.3 to 14.0.11

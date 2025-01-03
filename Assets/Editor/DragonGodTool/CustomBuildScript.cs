@@ -9,7 +9,7 @@ using Invariable;
 
 public class CustomBuildScript
 {
-    private static List<string> m_excludedFolders = new List<string> { "Assets/Png", "Assets/Textures" };// 设置需要排除的文件夹
+    private static List<string> m_excludedFolders = new List<string> { "Assets/GameAssets" };// 设置需要排除的文件夹
     private static string m_scriptsSourcePath = Application.dataPath + "/Scripts/HotUpdate";
     private static string m_scriptsTargetPath = Application.dataPath.Replace("/Assets", "/HotUpdateScripts/HotUpdate");
     private static HashSet<string> m_excludedAssets = new HashSet<string>();// 收集所有需要排除的资源路径

@@ -8,8 +8,8 @@ using Invariable;
 
 public class AtlasBuilder
 {
-    private static string m_pngRootPath = Application.dataPath + "/Png";//大图文件夹的根路径
-    private static string m_texturesRootPath = Application.dataPath + "/Textures";//小图文件夹的根路径
+    private static string m_pngRootPath = Application.dataPath + "/GameAssets/Png";//大图文件夹的根路径
+    private static string m_texturesRootPath = Application.dataPath + "/GameAssets/Textures";//小图文件夹的根路径
     private static string m_atlasRootPath = Application.dataPath + "/UpdateAssets/Atlas";//图集存储路径
     private static string m_materialsRootPath = Application.dataPath + "/UpdateAssets/Materials/Atlas";//图集对应的材质球存储路径
 
@@ -254,7 +254,7 @@ public class AtlasBuilder
 
             if (assetPath != imageRootPath + "/" + name)
             {
-                atlasName = assetPath.Replace("Assets/Textures/", "");
+                atlasName = assetPath.Replace("Assets/GameAssets/Textures/", "");
                 atlasName = atlasName.Replace("/" + name, "");
             }
             else
