@@ -34,7 +34,7 @@ public static class ExportCatalogueFile
     [MenuItem("GodDragonTool/打包流程/一键导出所有热更新资源")]
     public static void OneKeyExportAllAssets()
     {
-        ExportExcelTool.ExportExcelDataToLuaTableString();
+        ExportExcelTool.ExportExcelToDictionary();
         AtlasBuilder.PackSpriteAtlas();
         ExportAssetBundle.BuildAssetBundles_Windows();
         ExportAssetBundle.BuildAssetBundles_Android();
@@ -53,7 +53,7 @@ public static class ExportCatalogueFile
         {
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                SetMd5Files(m_rootPath + "ConfigData");
+                SetMd5Files(m_rootPath + "Bin");
                 SetMd5Files(catalogueDirectoryPath.Replace("CatalogueFiles", "AssetBundles"));
                 SetMd5Files(catalogueDirectoryPath.Replace("CatalogueFiles", "Dll"));
 

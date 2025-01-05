@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ILRuntime.CLR.TypeSystem;
+using System.IO;
 
 
 
@@ -201,6 +203,150 @@ namespace Invariable
             }
 
             return component;
+        }
+
+        public static void SetGray(UnityEngine.Object obj, string childPath = "", bool isGray = true)
+        {
+            Transform trans = GetTransform(obj);
+
+            if (!string.IsNullOrEmpty(childPath))
+            {
+                trans = trans.Find(childPath);
+            }
+
+            if (trans == null)
+            {
+                return;
+            }
+
+            Image image = trans.GetComponent<Image>();
+            RawImage rawImage = trans.GetComponent<RawImage>();
+
+            if (image == null && rawImage == null)
+            {
+                return;
+            }
+
+            if (isGray)
+            {
+                string[] assetNames = new string[] { "GrayscaleMaterial.mat" };
+
+                AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/materials/grayscale/grayscalematerial.mat_ab", assetNames, (name, asset) => {
+                    if (name == assetNames[0])
+                    {
+                        Material material = asset as Material;
+
+                        if (image != null)
+                        {
+                            image.material = material;
+                        }
+                        else if (rawImage != null)
+                        {
+                            rawImage.material = material;
+                        }
+                    }
+                });
+            }
+            else if (image != null)
+            {
+                image.material = null;
+            }
+            else if (rawImage != null)
+            {
+                rawImage.material = null;
+            }
+        }
+
+        public static void SetSpriteImage(UnityEngine.Object obj, string childPath = "", string spritePath = "", bool isSetNativeSize = false)
+        {
+            if (string.IsNullOrEmpty(spritePath))
+            {
+                return;
+            }
+
+            Transform trans = GetTransform(obj);
+
+            if (!string.IsNullOrEmpty(childPath))
+            {
+                trans = trans.Find(childPath);
+            }
+
+            if (trans != null)
+            {
+                Image image = trans.GetComponent<Image>();
+
+                string[] atlasInfo = spritePath.Split('/');
+                string assetBundleName = atlasInfo[0];
+                string[] assetNames = new string[] { assetBundleName + ".png" };
+
+                AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/atlas/" + assetBundleName.ToLower() + ".atlas_ab", assetNames, (name, asset) => {
+                    if (name == assetNames[0])
+                    {
+                        Texture2D atlas = asset as Texture2D;
+                        Sprite sprite = null;
+                        string imageName = atlasInfo[1];
+
+                        sprite = Sprite.Create(atlas, new Rect(0, 0, atlas.width, atlas.height), new Vector2(0.5f, 0.5f));
+
+                        if (sprite != null)
+                        {
+                            image.sprite = sprite;
+
+                            image.sprite.name = imageName;
+
+                            if (isSetNativeSize)
+                            {
+                                image.SetNativeSize();
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        public static void SetTextureRawImage(UnityEngine.Object obj, string childPath = "", string texturePath = "", bool isSetNativeSize = false)
+        {
+            if (string.IsNullOrEmpty(texturePath))
+            {
+                return;
+            }
+
+            Transform trans = GetTransform(obj);
+
+            if (!string.IsNullOrEmpty(childPath))
+            {
+                trans = trans.Find(childPath);
+            }
+
+            if (trans != null)
+            {
+                RawImage rawImage = trans.GetComponent<RawImage>();
+
+                string[] atlasInfo = texturePath.Split('/');
+                string assetBundleName = atlasInfo[0];
+                string[] assetNames = new string[] { assetBundleName + ".png" };
+
+                AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/atlas/" + assetBundleName.ToLower() + ".atlas_ab", assetNames, (name, asset) => {
+                    if (name == assetNames[0])
+                    {
+                        Texture2D atlas = asset as Texture2D;
+                        Sprite sprite = Sprite.Create(atlas, new Rect(0, 0, atlas.width, atlas.height), new Vector2(0.5f, 0.5f));
+                        Texture2D texture = sprite.texture;
+
+                        if (texture != null)
+                        {
+                            rawImage.texture = texture;
+
+                            rawImage.texture.name = atlasInfo[1];
+
+                            if (isSetNativeSize)
+                            {
+                                rawImage.SetNativeSize();
+                            }
+                        }
+                    }
+                });
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Invariable
         public static string m_webRootPath = "";//服务器数据根目录
 #endif
 
-        public static string m_configPath = m_localRootPath + "ConfigData";//存放Excel配置表的路径
+        public static string m_binPath = m_localRootPath + "Bin";//存放bin文件的路径
         public static string m_webIpv4Str = LoadWebDataTxt(3);//服务器的公网地址
         public static int m_webPortInt = int.Parse(LoadWebDataTxt(4));//服务器用于连接客户端的端口号
 
@@ -94,112 +94,7 @@ namespace Invariable
 
         public static string GetConfigData(string configName, int id)
         {
-            if (id <= 0)
-            {
-                return null;
-            }
-
-            int configFileId;
-
-            if (id % 100 == 0)
-            {
-                configFileId = id;
-            }
-            else
-            {
-                configFileId = 100 - id % 100 + id;
-            }
-
-            DirectoryInfo directoryInfo = new DirectoryInfo(DataUtilityManager.m_configPath + "/Client");
-
-            string value = LoadConfigData(directoryInfo, configName, configFileId, id.ToString());
-
-            return value;
-        }
-
-        public static string LoadConfigData(DirectoryInfo directoryInfo, string configName, int configFileId, string id)
-        {
-            string value = "";
-
-            FileInfo[] fileInfos = directoryInfo.GetFiles();
-
-            if (fileInfos.Length > 0)
-            {
-                foreach (var file in fileInfos)
-                {
-                    string name = Path.GetFileName(file.FullName);
-
-                    if (name == configName + configFileId + ".bin")
-                    {
-                        using (FileStream fileStream = file.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None))
-                        {
-                            value = GetConfigStrByName(fileStream, configName, id);
-                        }
-
-                        return value;
-                    }
-                }
-            }
-
-            DirectoryInfo[] directoryInfos = directoryInfo.GetDirectories();
-
-            if (directoryInfos.Length > 0)
-            {
-                foreach (var directory in directoryInfos)
-                {
-                    value = LoadConfigData(directory, configName, configFileId, id);
-
-                    if (value != null)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            return value;
-        }
-
-        public static string GetConfigStrByName(FileStream fileStream, string configName, string id)
-        {
-            string value = "";
-
-            byte[] encryptBytes = ReadFileByteData(fileStream);
-            byte[] compressedBytes;
-
-            if (GetAesKeyAndIvByConfigName(configName, out byte[] key, out byte[] iv))
-            {
-                compressedBytes = DecryptByteData(encryptBytes, key, iv);
-            }
-            else
-            {
-                goto A;
-            }
-
-            byte[] decompressedBytes = DecompressByteData(compressedBytes);
-
-            Dictionary<string, string> configData = Deserialize<Dictionary<string, string>>(decompressedBytes);
-
-            if (configData.ContainsKey(id))
-            {
-                value = configData[id];
-            }
-
-        A:;
-
-            return value;
-        }
-
-        public static byte[] ReadFileByteData(FileStream fileStream)
-        {
-            byte[] byteData = null;
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                fileStream.CopyTo(memoryStream);
-                byteData = memoryStream.ToArray();
-            }
-
-            return byteData;
+            return "";
         }
 
         public static byte[] ReadFileByteData(string path)
@@ -220,33 +115,13 @@ namespace Invariable
 
         public static void CreateFileByBytes(string path, byte[] inputBytes)
         {
-            DataUtilityManager.InitDirectory(path);
+            InitDirectory(path);
 
             using (FileStream fileStream = new FileStream(path, FileMode.Create))
             {
                 using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
                 {
                     binaryWriter.Write(inputBytes);
-                }
-            }
-        }
-
-        public static void CreateTxtFile(string path, string content)
-        {
-            string suffix = Path.GetExtension(path);
-
-            if (suffix != ".txt")
-            {
-                return;
-            }
-
-            DataUtilityManager.InitDirectory(path);
-
-            using (FileStream fileStream = new FileStream(path, FileMode.Create))
-            {
-                using (StreamWriter swreamWriter = new StreamWriter(fileStream))
-                {
-                    swreamWriter.Write(content);
                 }
             }
         }
@@ -373,19 +248,7 @@ namespace Invariable
             return decryptBytes;
         }
 
-        public static byte[] GetRandomByteData(int size)
-        {
-            byte[] randomByteData = new byte[size];//size大小字节的随机数据
-
-            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
-            {
-                rng.GetBytes(randomByteData);
-            }
-
-            return randomByteData;
-        }
-
-        public static void SaveConfigDecryptData(object data, string fileName)
+        public static void SaveSafeFile(object data, string filePath)
         {
             if (data == null)
             {
@@ -394,45 +257,15 @@ namespace Invariable
 
             byte[] inputBytes = SerializeData(data);
             byte[] compressBytes = CompressByteData(inputBytes);
-            byte[] encryptBytes = EncryptByteData(compressBytes, Encoding.UTF8.GetBytes("95gbt368426hyb13"), Encoding.UTF8.GetBytes("i8g3451h5cxmj6rf"));
+            byte[] encryptBytes = EncryptByteData(compressBytes, Encoding.UTF8.GetBytes("86thj449526ujy76"), Encoding.UTF8.GetBytes("i8g7359h5yhtj8hr"));
 
-            string directoryPath = DataUtilityManager.m_configPath + "/ConfigDecryptData";
-
-            DataUtilityManager.InitDirectory(directoryPath);
-
-            CreateFileByBytes(directoryPath + "/" + fileName, encryptBytes);
+            CreateFileByBytes(filePath, encryptBytes);
         }
 
-        public static bool GetAesKeyAndIvByConfigName(string ConfigName, out byte[] key, out byte[] iv)
-        {
-            string path = DataUtilityManager.m_configPath + "/ConfigDecryptData/AesKeyAndIvData.bin";
-
-            if (!File.Exists(path))
-            {
-                goto A;
-            }
-
-            Dictionary<string, Dictionary<string, byte[]>> aesKeyAndIvData = GetFixedDecryptionDeviceDataByFileName<Dictionary<string, Dictionary<string, byte[]>>>(path);
-
-            if (aesKeyAndIvData.ContainsKey(ConfigName))
-            {
-                key = aesKeyAndIvData[ConfigName]["Key"];
-                iv = aesKeyAndIvData[ConfigName]["Iv"];
-                return true;
-            }
-
-        A:;
-
-            key = null;
-            iv = null;
-
-            return false;
-        }
-
-        public static T GetFixedDecryptionDeviceDataByFileName<T>(string path)
+        public static T ReadSafeFile<T>(string path)
         {
             byte[] inputBytes = ReadFileByteData(path);
-            byte[] decryptBytes = DecryptByteData(inputBytes, Encoding.UTF8.GetBytes("95gbt368426hyb13"), Encoding.UTF8.GetBytes("i8g3451h5cxmj6rf"));
+            byte[] decryptBytes = DecryptByteData(inputBytes, Encoding.UTF8.GetBytes("86thj449526ujy76"), Encoding.UTF8.GetBytes("i8g7359h5yhtj8hr"));
             byte[] decompressedBytes = DecompressByteData(decryptBytes);
 
             T result = Deserialize<T>(decompressedBytes);

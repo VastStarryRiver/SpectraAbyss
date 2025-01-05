@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 838715162
+CRC: 3205832224
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -31,4 +31,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_9:
       Name: atlas/atlas02.atlas_ab
+      Dependencies: {}
+    Info_10:
+      Name: materials/grayscale/grayscalematerial.mat_ab
       Dependencies: {}

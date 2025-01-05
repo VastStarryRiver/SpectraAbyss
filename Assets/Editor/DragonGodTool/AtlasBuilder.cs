@@ -8,10 +8,9 @@ using Invariable;
 
 public class AtlasBuilder
 {
-    private static string m_pngRootPath = Application.dataPath + "/GameAssets/Png";//大图文件夹的根路径
     private static string m_texturesRootPath = Application.dataPath + "/GameAssets/Textures";//小图文件夹的根路径
+    private static string m_pngRootPath = Application.dataPath + "/GameAssets/Png";//大图文件夹的根路径
     private static string m_atlasRootPath = Application.dataPath + "/UpdateAssets/Atlas";//图集存储路径
-    private static string m_materialsRootPath = Application.dataPath + "/UpdateAssets/Materials/Atlas";//图集对应的材质球存储路径
 
 
 
@@ -23,35 +22,33 @@ public class AtlasBuilder
             Directory.Delete(m_atlasRootPath, true);
         }
 
-        if (Directory.Exists(m_materialsRootPath))
+        if (Directory.Exists(DataUtilityManager.m_binPath + "/Atlas"))
         {
-            Directory.Delete(m_materialsRootPath, true);
+            Directory.Delete(DataUtilityManager.m_binPath + "/Atlas", true);
         }
 
         SetImageAtlasData(m_texturesRootPath.Replace(Application.dataPath, "Assets"), out Dictionary<string, List<Texture2D>> textureAtlas);
         SetImageAtlasData(m_pngRootPath.Replace(Application.dataPath, "Assets"), out Dictionary<string, List<Texture2D>> pngAtlas);
 
-        CreateAtlasAndMaterial(textureAtlas, out Dictionary<string, Dictionary<string, float[]>> atlasRects);
-        CreateAtlasAndMaterial(pngAtlas, out Dictionary<string, Dictionary<string, float[]>> nullRects);
+        CreateAtlas(textureAtlas, out Dictionary<string, Dictionary<string, float[]>> atlasRects);
+        CreateAtlas(pngAtlas, out Dictionary<string, Dictionary<string, float[]>> _);
 
         if (atlasRects.Count > 0)
         {
-            SaveAtlasTexturesRect(atlasRects);
+            foreach (var item in atlasRects)
+            {
+                DataUtilityManager.SaveSafeFile(item.Value, DataUtilityManager.m_binPath + "/Atlas/" + item.Key + ".bin");
+            }
         }
 
         EditorUtility.ClearProgressBar();
-
-        pngAtlas.Clear();
-        textureAtlas.Clear();
-
-        atlasRects.Clear();
 
         AssetDatabase.Refresh();
     }
 
 
 
-    private static void CreateAtlasAndMaterial(Dictionary<string, List<Texture2D>> atlasTexture, out Dictionary<string, Dictionary<string, float[]>> atlasRect)
+    private static void CreateAtlas(Dictionary<string, List<Texture2D>> atlasTexture, out Dictionary<string, Dictionary<string, float[]>> atlasRect)
     {
         atlasRect = new Dictionary<string, Dictionary<string, float[]>>();
 
@@ -117,9 +114,6 @@ public class AtlasBuilder
                 EditorUtility.DisplayProgressBar("设置" + atlasName + "图集的像素数据中......", "进度：" + progress + "/" + progress, 1);
             }
 
-            DataUtilityManager.InitDirectory(m_atlasRootPath);
-            DataUtilityManager.InitDirectory(m_materialsRootPath);
-
             byte[] bytes = atlas.EncodeToPNG();
 
             using (FileStream fileStream = new FileStream(m_atlasRootPath + "/" + atlasName + ".png", FileMode.Create))
@@ -133,16 +127,9 @@ public class AtlasBuilder
             AssetDatabase.Refresh();
 
             string assetsAtlasPath = m_atlasRootPath.Replace(Application.dataPath, "Assets") + "/" + atlasName + ".png";
-            string assetsMaterialPath = m_materialsRootPath.Replace(Application.dataPath, "Assets") + "/" + atlasName + "Material.mat";
 
             //设置图集的ImportSettings
             SetAtlasImportSettings(assetsAtlasPath, atlasName, atlas, textures, rects);
-
-            //创建图集的材质
-            CreateAtlasMaterial(assetsMaterialPath, assetsAtlasPath);
-
-            //设置图集材质的ImportSettings
-            SetMaterialImportSettings(assetsMaterialPath, atlasName);
 
             progressIndex++;
 
@@ -155,12 +142,13 @@ public class AtlasBuilder
         TextureImporter atlasImporter = AssetImporter.GetAtPath(assetsAtlasPath) as TextureImporter;
 
         atlasImporter.textureType = TextureImporterType.Sprite;
-        atlasImporter.spriteImportMode = SpriteImportMode.Multiple;
-
-        List<SpriteMetaData> spriteMetaDatas = new List<SpriteMetaData>();
 
         if (textures.Length > 1 && rects != null && rects.Length > 1)
         {
+            atlasImporter.spriteImportMode = SpriteImportMode.Multiple;
+
+            List<SpriteMetaData> spriteMetaDatas = new List<SpriteMetaData>();
+
             for (int i = 0; i < textures.Length; i++)
             {
                 Rect rect = rects[i];
@@ -170,19 +158,15 @@ public class AtlasBuilder
 
                 EditorUtility.DisplayProgressBar("设置" + atlasName + "图集ImporterSetting中......", "进度：" + i + "/" + textures.Length, i * 1.0f / textures.Length);
             }
+
+            atlasImporter.spritesheet = spriteMetaDatas.ToArray();
         }
         else
         {
-            SpriteMetaData spriteMetaData = GetSpriteMetaData(new Rect(0, 0, atlas.width, atlas.height), textures[0].name);
-            spriteMetaDatas.Add(spriteMetaData);
+            atlasImporter.spriteImportMode = SpriteImportMode.Single;
 
             EditorUtility.DisplayProgressBar("设置" + atlasName + "图集ImporterSetting中......", "进度：1/1", 1);
         }
-
-        atlasImporter.spritesheet = spriteMetaDatas.ToArray();
-
-        atlasImporter.assetBundleName = "atlas/" + atlasName;
-        atlasImporter.assetBundleVariant = "atlas_ab";
 
         EditorUtility.SetDirty(atlasImporter);
 
@@ -198,39 +182,6 @@ public class AtlasBuilder
         spriteMetaData.rect = new Rect(rect.x, rect.y, rect.width, rect.height);
 
         return spriteMetaData;
-    }
-
-    private static void CreateAtlasMaterial(string assetsMaterialPath, string assetsAtlasPath)
-    {
-        Material material = new Material(Shader.Find("UI/Unlit/Transparent"));
-        AssetDatabase.CreateAsset(material, assetsMaterialPath);//创建材质资源
-
-        material.enableInstancing = true;//打开GPU实例化，提高性能
-
-        Texture2D mainTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(assetsAtlasPath);
-        material.mainTexture = mainTexture;//把图集纹理设置为材质的主纹理
-
-        AssetDatabase.Refresh();
-    }
-
-    private static void SetMaterialImportSettings(string assetsMaterialPath, string atlasName)
-    {
-        AssetImporter materialImporter = AssetImporter.GetAtPath(assetsMaterialPath);
-
-        materialImporter.assetBundleName = "atlas/" + atlasName;
-        materialImporter.assetBundleVariant = "atlas_ab";
-
-        EditorUtility.SetDirty(materialImporter);
-
-        materialImporter.SaveAndReimport();
-    }
-
-    private static void SaveAtlasTexturesRect(Dictionary<string, Dictionary<string, float[]>> atlasRects)
-    {
-        foreach (var item in atlasRects)
-        {
-            DataUtilityManager.SaveConfigDecryptData(item.Value, item.Key + ".bin");
-        }
     }
 
     private static void SetImageAtlasData(string imageRootPath, out Dictionary<string, List<Texture2D>> atlasTextures)
@@ -292,8 +243,15 @@ public class AtlasBuilder
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[i]);
             TextureImporter textureImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+
+            if (textureImporter.textureType == TextureImporterType.Sprite)
+            {
+                continue;
+            }
+
             textureImporter.textureType = TextureImporterType.Sprite;
             textureImporter.isReadable = true;
+
             AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
         }
 

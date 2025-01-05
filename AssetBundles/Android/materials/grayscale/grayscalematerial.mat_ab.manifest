@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 232489598
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: facebcee2210aea623f1d87501e79ab8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5e762ccb57c4caaabbb5a4199ac82c23
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: facebcee2210aea623f1d87501e79ab8
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UpdateAssets/Materials/Grayscale/GrayscaleShader.shader
+- Assets/UpdateAssets/Materials/Grayscale/GrayscaleMaterial.mat
+Dependencies: []
