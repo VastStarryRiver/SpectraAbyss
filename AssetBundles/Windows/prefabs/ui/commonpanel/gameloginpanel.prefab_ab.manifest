@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3413418731
+CRC: 1020234690
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 214f5849f343099704c94b50cf35c33c
+    Hash: 833e9dd8a588992e60131f2b704a0697
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3f45bf64e60799eadc011bb780662977
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 214f5849f343099704c94b50cf35c33c
+    Hash: 833e9dd8a588992e60131f2b704a0697
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -55,4 +55,5 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.SpriteState
 Assets:
 - Assets/UpdateAssets/Prefabs/UI/CommonPanel/GameLoginPanel.prefab
-Dependencies: []
+Dependencies:
+- E:/MyProjects/SpectraAbyss/AssetBundles/Windows/atlas/atlas00.atlas_ab

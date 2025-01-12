@@ -8,12 +8,12 @@ using Invariable;
 
 public class ExportExcelTool
 {
-    [MenuItem("GodDragonTool/导出Excel表的配置数据")]
+    [MenuItem("GodDragonTool/Config/导出Excel表的配置数据")]
     public static void ExportExcelToDictionary()
     {
-        if (Directory.Exists(DataUtilityManager.m_binPath + "/Config"))
+        if (Directory.Exists(DataUtilityManager.m_localRootPath + "Config"))
         {
-            Directory.Delete(DataUtilityManager.m_binPath + "/Config", true);
+            Directory.Delete(DataUtilityManager.m_localRootPath + "Config", true);
         }
 
         DirectoryInfo directoryInfo = new DirectoryInfo(DataUtilityManager.m_localRootPath + "Excel");
@@ -205,7 +205,7 @@ public class ExportExcelTool
             return;
         }
 
-        DataUtilityManager.SaveSafeFile(configData, DataUtilityManager.m_binPath + "/Config/" + platform + "/" + name + ".bin");
+        DataUtilityManager.SaveSafeFile(configData, DataUtilityManager.m_localRootPath + "Config/" + platform + "/" + name + ".bin");
 
         AssetDatabase.Refresh();
     }

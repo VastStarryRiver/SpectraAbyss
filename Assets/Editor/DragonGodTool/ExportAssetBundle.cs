@@ -10,14 +10,14 @@ public class ExportAssetBundle
 
 
 
-    [MenuItem("GodDragonTool/导出AssetBundles文件/BuildAssetBundles_Windows")]
+    [MenuItem("GodDragonTool/AssetBundles/BuildAssetBundles_Windows")]
     public static void BuildAssetBundles_Windows()
     {
         BuildAssetBundles(m_rootPath + "AssetBundles/Windows", BuildTarget.StandaloneWindows64);
         RenameMainAssetBundleFile(m_rootPath + "AssetBundles/Windows/Windows");
     }
 
-    [MenuItem("GodDragonTool/导出AssetBundles文件/BuildAssetBundles_Android")]
+    [MenuItem("GodDragonTool/AssetBundles/BuildAssetBundles_Android")]
     public static void BuildAssetBundles_Android()
     {
         BuildAssetBundles(m_rootPath + "AssetBundles/Android", BuildTarget.Android);
@@ -98,17 +98,17 @@ public class ExportAssetBundle
         for (int i = 0; i < assetGUIDs.Length; i++)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[i]);
-            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "");
-            assetBundleName = assetBundleName.Replace(".prefab", "");
+            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "").Replace(".prefab", "");
             SetAssetImportSettings(assetPath, assetBundleName, "prefab_ab");
         }
     }
 
     private static void SetAtlasImportSettings()
     {
-        string dir = "Assets/UpdateAssets/Atlas";
+        string dir1 = "Assets/UpdateAssets/Atlas";
+        string dir2 = "Assets/UpdateAssets/Png";
 
-        string[] assetGUIDs = AssetDatabase.FindAssets("t:Sprite", new string[] { dir });//会包括子文件夹内符合要求的文件
+        string[] assetGUIDs = AssetDatabase.FindAssets("t:Texture2D", new string[] { dir1, dir2 });//会包括子文件夹内符合要求的文件
 
         if (assetGUIDs.Length <= 0)
         {
@@ -118,17 +118,46 @@ public class ExportAssetBundle
         for (int i = 0; i < assetGUIDs.Length; i++)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[i]);
-            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "");
-            assetBundleName = assetBundleName.Replace(".png", "");
+            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "").Replace(".png", "");
+
+            TextureImporter textureImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+
+            if (textureImporter.textureType != TextureImporterType.Sprite)
+            {
+                textureImporter.textureType = TextureImporterType.Sprite;
+                AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
+            }
+
+            if (assetBundleName.Contains("Atlas"))
+            {
+                SetAssetImportSettings(assetPath, assetBundleName.Replace("/Texture/" + Path.GetFileNameWithoutExtension(assetPath), ""), "atlas_ab");
+            }
+            else
+            {
+                SetAssetImportSettings(assetPath, assetBundleName, "png_ab");
+            }
+        }
+
+        AssetDatabase.Refresh();
+
+        string[] assetGUIDs2 = AssetDatabase.FindAssets("t:SpriteAtlas", new string[] { dir1 });//会包括子文件夹内符合要求的文件
+
+        if (assetGUIDs2.Length <= 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < assetGUIDs2.Length; i++)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs2[i]);
+            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "").Replace("/" + Path.GetFileName(assetPath), "");
             SetAssetImportSettings(assetPath, assetBundleName, "atlas_ab");
         }
     }
 
     private static void SetMaterialImportSettings()
     {
-        string dir = m_rootPath + "Assets/UpdateAssets/Materials";
-
-        DirectoryInfo directoryInfo = new DirectoryInfo(dir);
+        DirectoryInfo directoryInfo = new DirectoryInfo(m_rootPath + "Assets/UpdateAssets/Materials");
         DirectoryInfo[] directoryInfos = directoryInfo.GetDirectories();
 
         foreach (var directory in directoryInfos)
@@ -138,23 +167,27 @@ public class ExportAssetBundle
             //会包括子文件夹内符合要求的文件
             string[] assetGUIDs1 = AssetDatabase.FindAssets("t:Material", new string[] { assetDirectoryPath });
 
-            if (assetGUIDs1.Length != 1)
+            if (assetGUIDs1.Length <= 0)
             {
                 continue;
             }
 
-            string assetPath1 = AssetDatabase.GUIDToAssetPath(assetGUIDs1[0]);
-            string assetBundleName = assetPath1.Replace("Assets/UpdateAssets/", "");
-            assetBundleName = assetBundleName.Replace(".mat", "");
-            SetAssetImportSettings(assetPath1, assetBundleName, "mat_ab");
+            string assetBundleName = "";
+
+            foreach (var guid in assetGUIDs1)
+            {
+                string assetPath1 = AssetDatabase.GUIDToAssetPath(guid);
+                assetBundleName = assetPath1.Replace("Assets/UpdateAssets/", "").Replace(".mat", "");
+                SetAssetImportSettings(assetPath1, assetBundleName, "mat_ab");
+            }
 
             string[] assetGUIDs2 = AssetDatabase.FindAssets("t:Shader", new string[] { assetDirectoryPath });
 
-            if (assetGUIDs2.Length != 1)
+            if (assetGUIDs2.Length <= 0)
             {
                 continue;
             }
-
+            
             string assetPath2 = AssetDatabase.GUIDToAssetPath(assetGUIDs2[0]);
             SetAssetImportSettings(assetPath2, assetBundleName, "mat_ab");
         }
@@ -174,8 +207,7 @@ public class ExportAssetBundle
         for (int i = 0; i < assetGUIDs.Length; i++)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[i]);
-            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "");
-            assetBundleName = assetBundleName.Replace(".anim", "");
+            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "").Replace(".anim", "");
             SetAssetImportSettings(assetPath, assetBundleName, "anim_ab");
         }
     }
@@ -194,8 +226,7 @@ public class ExportAssetBundle
         for (int i = 0; i < assetGUIDs.Length; i++)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[i]);
-            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "");
-            assetBundleName = assetBundleName.Replace(".mp3", "");
+            string assetBundleName = assetPath.Replace("Assets/UpdateAssets/", "").Replace(".mp3", "");
             SetAssetImportSettings(assetPath, assetBundleName, "audio_ab");
         }
     }

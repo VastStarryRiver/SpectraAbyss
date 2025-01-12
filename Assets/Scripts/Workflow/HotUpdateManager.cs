@@ -77,7 +77,7 @@ namespace Invariable
         {
             m_allInstance = new Dictionary<string, ILTypeInstance>();
 
-            string dllPath = Path.Combine(DataUtilityManager.m_localRootPath, "Dll", DataUtilityManager.m_platform, "HotUpdate.dll");
+            string dllPath = Path.Combine(DataUtilityManager.m_localRootPath, "Dll", "HotUpdate.dll");
             m_dllFileStream = new FileStream(dllPath, FileMode.Open);
 
             m_appdomain.LoadAssembly(m_dllFileStream);

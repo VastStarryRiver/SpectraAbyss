@@ -1,22 +1,38 @@
 ManifestFileVersion: 0
-CRC: 2312672842
+CRC: 4210637450
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1598f9d91233a88a014e610d8f8b6f61
+    Hash: 82497623b48cafc871c1ef7bd65a3156
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2d8df09e698f722ada1caa03d3413830
+    Hash: 033fafe2c9f6c610c3a734393882fd4c
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 1598f9d91233a88a014e610d8f8b6f61
+    Hash: 82497623b48cafc871c1ef7bd65a3156
 HashAppended: 0
 ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/UpdateAssets/Atlas/Atlas02.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_FunOpen10.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_rwtx1.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_alpha.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_rwtx7.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_FunOpen11.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_rwtx3.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_rwtx4.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_rwtx6.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_FunOpen12.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_FunOpen13.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_rwtx9.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_rwtx8.png
+- Assets/UpdateAssets/Atlas/Atlas02/Atlas02.spriteatlasv2
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_rwtx2.png
+- Assets/UpdateAssets/Atlas/Atlas02/Texture/02_rwtx5.png
 Dependencies: []

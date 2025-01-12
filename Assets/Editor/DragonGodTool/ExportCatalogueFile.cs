@@ -35,10 +35,10 @@ public static class ExportCatalogueFile
     public static void OneKeyExportAllAssets()
     {
         ExportExcelTool.ExportExcelToDictionary();
-        AtlasBuilder.PackSpriteAtlas();
+        ExportDll.CopyInvariableDll();
+        ExportDll.ExportUpdateDll();
         ExportAssetBundle.BuildAssetBundles_Windows();
         ExportAssetBundle.BuildAssetBundles_Android();
-        ExportDll.BuildDll();
         BuildCatalogueFile_Windows();
         BuildCatalogueFile_Android();
     }
@@ -47,15 +47,20 @@ public static class ExportCatalogueFile
 
     private static void CreeateFiles(string catalogueDirectoryPath)
     {
+        if (Directory.Exists(catalogueDirectoryPath))
+        {
+            Directory.Delete(catalogueDirectoryPath, true);
+        }
+
         DataUtilityManager.InitDirectory(catalogueDirectoryPath);
 
         using (FileStream fs = new FileStream(catalogueDirectoryPath + "/CatalogueFile.txt", FileMode.Create))
         {
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                SetMd5Files(m_rootPath + "Bin");
+                SetMd5Files(m_rootPath + "Config");
+                SetMd5Files(m_rootPath + "Dll");
                 SetMd5Files(catalogueDirectoryPath.Replace("CatalogueFiles", "AssetBundles"));
-                SetMd5Files(catalogueDirectoryPath.Replace("CatalogueFiles", "Dll"));
 
                 if (m_filesContent != null && m_filesContent.Count > 0)
                 {

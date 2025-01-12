@@ -13,16 +13,15 @@ namespace Invariable
     public class DataUtilityManager
     {
 #if !UNITY_EDITOR
-    public static string m_platform = "Android";
-    public static string m_localRootPath = Application.persistentDataPath + "/";
-    public static string m_webRootPath = LoadWebDataTxt(0);
+        public static string m_platform = "Android";
+        public static string m_localRootPath = Application.persistentDataPath + "/";
+        public static string m_webRootPath = LoadWebDataTxt(0);
 #else
         public static string m_platform = "Windows";//当前平台
         public static string m_localRootPath = Application.streamingAssetsPath.Replace("Assets/StreamingAssets", "");//本地数据根目录
         public static string m_webRootPath = "";//服务器数据根目录
 #endif
 
-        public static string m_binPath = m_localRootPath + "Bin";//存放bin文件的路径
         public static string m_webIpv4Str = LoadWebDataTxt(3);//服务器的公网地址
         public static int m_webPortInt = int.Parse(LoadWebDataTxt(4));//服务器用于连接客户端的端口号
 
@@ -42,7 +41,7 @@ namespace Invariable
 
             string extension = Path.GetExtension(path);
 
-            string directoryPath = "";
+            string directoryPath;
 
             if (string.IsNullOrEmpty(extension))
             {

@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 57606562
+CRC: 3929129306
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cb7410e69d61802b65d66900c74e5aa6
+    Hash: 554c1ba2d205ab48b97eeee0e46e18a8
   TypeTreeHash:
     serializedVersion: 2
     Hash: b7cf2bf88ddfce9c067bb6eaeb20cd86
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: cb7410e69d61802b65d66900c74e5aa6
+    Hash: 554c1ba2d205ab48b97eeee0e46e18a8
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -55,4 +55,5 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.SpriteState
 Assets:
 - Assets/UpdateAssets/Prefabs/UI/CommonPanel/GameLoadingPanel.prefab
-Dependencies: []
+Dependencies:
+- E:/MyProjects/SpectraAbyss/AssetBundles/Android/png/bg_hghg_wdtx1.png_ab

@@ -2,16 +2,26 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using System.Diagnostics;
+using Invariable;
 
 public class ExportDll
 {
     private static string m_rootPath = Application.streamingAssetsPath.Replace("Assets/StreamingAssets", "");
     private static string m_slnSourcePath = m_rootPath + "HotUpdate/HotUpdate.sln";
 
-    [MenuItem("GodDragonTool/导出热更新脚本Dll")]
-    public static void BuildDll()
+    [MenuItem("GodDragonTool/DLL/复制InvariableDll到热更新文件夹路径")]
+    public static void CopyInvariableDll()
     {
         File.Copy(m_rootPath + "Library/ScriptAssemblies/Invariable.dll", m_rootPath + "HotUpdate/libs/Invariable.dll", true);
+    }
+
+    [MenuItem("GodDragonTool/DLL/导出HotUpdateDll")]
+    public static void ExportUpdateDll()
+    {
+        if (Directory.Exists(m_rootPath + "Dll"))
+        {
+            Directory.Delete(m_rootPath + "Dll", true);
+        }
 
         // 使用 dotnet CLI 编译项目
         Process process = new Process();
@@ -31,10 +41,9 @@ public class ExportDll
 
         if (File.Exists(sourceDLLPath))
         {
-            string destinationDLLPath1 = Path.Combine(m_rootPath + "Dll/Android", dllName);
-            string destinationDLLPath2 = Path.Combine(m_rootPath + "Dll/Windows", dllName);
-            File.Copy(sourceDLLPath, destinationDLLPath1, true);
-            File.Copy(sourceDLLPath, destinationDLLPath2, true);
+            DataUtilityManager.InitDirectory(m_rootPath + "Dll");
+            string destinationDLLPath = Path.Combine(m_rootPath, "Dll", dllName);
+            File.Copy(sourceDLLPath, destinationDLLPath, true);
         }
     }
 }

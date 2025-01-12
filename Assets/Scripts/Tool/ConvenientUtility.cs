@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using ILRuntime.CLR.TypeSystem;
 using System.IO;
+using UnityEngine.U2D;
 
 
 
@@ -277,19 +278,19 @@ namespace Invariable
 
                 string[] atlasInfo = spritePath.Split('/');
                 string assetBundleName = atlasInfo[0];
-                string[] assetNames = new string[] { assetBundleName + ".png" };
+                string imageName = atlasInfo[1];
 
-                AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/atlas/" + assetBundleName.ToLower() + ".atlas_ab", assetNames, (name, asset) => {
-                    if (name == assetNames[0])
-                    {
-                        Texture2D atlas = asset as Texture2D;
-                        Sprite sprite = null;
-                        string imageName = atlasInfo[1];
+                if (assetBundleName == imageName)
+                {
+                    string[] assetNames = new string[] { imageName + ".png" };
 
-                        sprite = Sprite.Create(atlas, new Rect(0, 0, atlas.width, atlas.height), new Vector2(0.5f, 0.5f));
-
-                        if (sprite != null)
+                    AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/png/" + assetBundleName.ToLower() + ".png_ab", assetNames, (name, asset) => {
+                        if (name == assetNames[0])
                         {
+                            Texture2D texture = asset as Texture2D;
+
+                            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
                             image.sprite = sprite;
 
                             image.sprite.name = imageName;
@@ -299,8 +300,30 @@ namespace Invariable
                                 image.SetNativeSize();
                             }
                         }
-                    }
-                });
+                    });
+                }
+                else
+                {
+                    string[] assetNames = new string[] { assetBundleName + ".spriteatlasv2" };
+
+                    AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/atlas/" + assetBundleName.ToLower() + ".atlas_ab", assetNames, (name, asset) => {
+                        if (name == assetNames[0])
+                        {
+                            SpriteAtlas atlas = asset as SpriteAtlas;
+
+                            Sprite sprite = atlas.GetSprite(imageName);
+
+                            image.sprite = sprite;
+
+                            image.sprite.name = imageName;
+
+                            if (isSetNativeSize)
+                            {
+                                image.SetNativeSize();
+                            }
+                        }
+                    });
+                }
             }
         }
 
@@ -324,28 +347,50 @@ namespace Invariable
 
                 string[] atlasInfo = texturePath.Split('/');
                 string assetBundleName = atlasInfo[0];
-                string[] assetNames = new string[] { assetBundleName + ".png" };
+                string imageName = atlasInfo[1];
 
-                AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/atlas/" + assetBundleName.ToLower() + ".atlas_ab", assetNames, (name, asset) => {
-                    if (name == assetNames[0])
-                    {
-                        Texture2D atlas = asset as Texture2D;
-                        Sprite sprite = Sprite.Create(atlas, new Rect(0, 0, atlas.width, atlas.height), new Vector2(0.5f, 0.5f));
-                        Texture2D texture = sprite.texture;
+                if (assetBundleName == imageName)
+                {
+                    string[] assetNames = new string[] { imageName + ".png" };
 
-                        if (texture != null)
+                    AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/png/" + assetBundleName.ToLower() + ".png_ab", assetNames, (name, asset) => {
+                        if (name == assetNames[0])
                         {
+                            Texture2D texture = asset as Texture2D;
+
                             rawImage.texture = texture;
 
-                            rawImage.texture.name = atlasInfo[1];
+                            rawImage.texture.name = imageName;
 
                             if (isSetNativeSize)
                             {
                                 rawImage.SetNativeSize();
                             }
                         }
-                    }
-                });
+                    });
+                }
+                else
+                {
+                    string[] assetNames = new string[] { assetBundleName + ".spriteatlasv2" };
+
+                    AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/atlas/" + assetBundleName.ToLower() + ".atlas_ab", assetNames, (name, asset) => {
+                        if (name == assetNames[0])
+                        {
+                            SpriteAtlas atlas = asset as SpriteAtlas;
+
+                            Sprite sprite = atlas.GetSprite(imageName);
+
+                            rawImage.texture = sprite.texture;
+
+                            rawImage.texture.name = imageName;
+
+                            if (isSetNativeSize)
+                            {
+                                rawImage.SetNativeSize();
+                            }
+                        }
+                    });
+                }
             }
         }
     }
