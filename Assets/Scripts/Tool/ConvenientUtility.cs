@@ -393,5 +393,10 @@ namespace Invariable
                 }
             }
         }
+
+        public static void PlayAnimation(UnityEngine.Object obj, string childPath = "", string animName = "", WrapMode wrapMode = WrapMode.Once, Action callBack = null)
+        {
+            CoroutineManager.Instance.InvokePlayAnimation(obj, childPath, animName, wrapMode, callBack);
+        }
     }
 }

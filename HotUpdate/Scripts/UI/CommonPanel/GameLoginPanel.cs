@@ -11,17 +11,24 @@ namespace HotUpdate
     {
         Button m_btnLogin;
         Text m_textName;
+        GameObject m_obj;
 
         public void Awake(GameObject gameObject, Transform transform)
         {
             m_btnLogin = transform.Find("Btn_Login").GetComponent<Button>();
             m_textName = transform.Find("Text_Name").GetComponent<Text>();
+            m_obj = gameObject;
         }
 
         public void Start()
         {
-            m_btnLogin.onClick.AddListener(LoginAccount);
             m_textName.text = "Íæ¼ÒÃû³Æ£º£¿£¿£¿";
+
+            ConvenientUtility.PlayAnimation(m_obj, "", "Play", WrapMode.Once, () => {
+                m_btnLogin.onClick.AddListener(LoginAccount);
+                ConvenientUtility.SetSpriteImage(m_obj, "Img_Icon1", "Atlas02/02_FunOpen10", true);
+                ConvenientUtility.SetSpriteImage(m_obj, "Img_Icon2", "Atlas02/02_FunOpen12", true);
+            });
         }
 
 

@@ -77,10 +77,7 @@ namespace Invariable
             {
                 yield return new WaitWhile(() => animation.isPlaying);
 
-                if (callBack != null)
-                {
-                    callBack.Invoke();
-                }
+                callBack?.Invoke();
             }
         }
     }

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 194351585
+CRC: 728453507
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -19,6 +19,8 @@ AssetBundleManifest:
       Name: prefabs/ui/commonpanel/gameloginpanel.prefab_ab
       Dependencies:
         Dependency_0: atlas/atlas00.atlas_ab
+        Dependency_1: animtion/play.anim_ab
+        Dependency_2: atlas/atlas02.atlas_ab
     Info_5:
       Name: animtion/play.anim_ab
       Dependencies: {}

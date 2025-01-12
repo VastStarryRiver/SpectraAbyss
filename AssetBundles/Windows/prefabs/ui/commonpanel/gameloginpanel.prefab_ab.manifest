@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 1020234690
+CRC: 2438738621
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 833e9dd8a588992e60131f2b704a0697
+    Hash: 6f8c1928f30ea15ca04d720c9f6a3d47
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 3f45bf64e60799eadc011bb780662977
+    Hash: 88cbe1785f769386273bcb09329b446c
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 833e9dd8a588992e60131f2b704a0697
+    Hash: 6f8c1928f30ea15ca04d720c9f6a3d47
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -19,6 +19,10 @@ ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
 - Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 111
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -56,4 +60,6 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/UpdateAssets/Prefabs/UI/CommonPanel/GameLoginPanel.prefab
 Dependencies:
+- E:/MyProjects/SpectraAbyss/AssetBundles/Windows/animtion/play.anim_ab
 - E:/MyProjects/SpectraAbyss/AssetBundles/Windows/atlas/atlas00.atlas_ab
+- E:/MyProjects/SpectraAbyss/AssetBundles/Windows/atlas/atlas02.atlas_ab
