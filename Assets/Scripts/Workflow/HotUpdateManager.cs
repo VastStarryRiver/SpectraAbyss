@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using ILRuntime.Runtime.Intepreter;
 using TapSDK.Login;
+using DG.Tweening;
 
 
 
@@ -71,6 +72,14 @@ namespace Invariable
             });
 
             m_appdomain.DelegateManager.RegisterMethodDelegate<string, object>();
+
+            m_appdomain.DelegateManager.RegisterDelegateConvertor<TweenCallback>((act) =>
+            {
+                return new TweenCallback(() =>
+                {
+                    ((Action)act)?.Invoke();
+                });
+            });
         }
 
         private static void LoadAssembly()

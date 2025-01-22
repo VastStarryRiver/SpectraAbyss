@@ -123,3 +123,4 @@ E:\MyProjects\SpectraAbyss\HotUpdate\obj\Release\HotUpdate.csproj.Up2Date
 E:\MyProjects\SpectraAbyss\HotUpdate\obj\Release\HotUpdate.dll
 E:\MyProjects\SpectraAbyss\HotUpdate\obj\Release\HotUpdate.pdb
 E:\MyProjects\SpectraAbyss\HotUpdate\bin\Release\Invariable.dll
+E:\MyProjects\SpectraAbyss\HotUpdate\bin\Release\DOTween.dll
