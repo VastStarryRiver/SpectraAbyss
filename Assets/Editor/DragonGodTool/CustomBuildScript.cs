@@ -21,7 +21,19 @@ public class CustomBuildScript
 
 
 
-    [MenuItem("GodDragonTool/打包流程/打包成APK文件")]
+    [MenuItem("GodDragonTool/打包流程/一键导出所有热更新资源", false, -2)]
+    public static void OneKeyExportAllAssets()
+    {
+        ExportExcelTool.ExportExcelToDictionary();
+        ExportDll.CopyInvariableDll();
+        ExportDll.ExportUpdateDll();
+        ExportAssetBundle.BuildAssetBundles_Windows();
+        ExportAssetBundle.BuildAssetBundles_Android();
+        ExportCatalogueFile.BuildCatalogueFile_Windows();
+        ExportCatalogueFile.BuildCatalogueFile_Android();
+    }
+
+    [MenuItem("GodDragonTool/打包流程/打包成APK文件", false, -1)]
     public static void PackageProject_Android()
     {
         // 确保 keystore 文件存在

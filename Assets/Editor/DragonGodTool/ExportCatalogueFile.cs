@@ -19,28 +19,16 @@ public static class ExportCatalogueFile
 
 
 
-    [MenuItem("GodDragonTool/导出热更新目录文件/BuildCatalogueFile_Windows")]
+    //[MenuItem("GodDragonTool/导出热更新目录文件/BuildCatalogueFile_Windows")]
     public static void BuildCatalogueFile_Windows()
     {
         CreeateFiles(m_catalogueFilePath_Windows);
     }
 
-    [MenuItem("GodDragonTool/导出热更新目录文件/BuildCatalogueFile_Android")]
+    //[MenuItem("GodDragonTool/导出热更新目录文件/BuildCatalogueFile_Android")]
     public static void BuildCatalogueFile_Android()
     {
         CreeateFiles(m_catalogueFilePath_Android);
-    }
-
-    [MenuItem("GodDragonTool/打包流程/一键导出所有热更新资源")]
-    public static void OneKeyExportAllAssets()
-    {
-        ExportExcelTool.ExportExcelToDictionary();
-        ExportDll.CopyInvariableDll();
-        ExportDll.ExportUpdateDll();
-        ExportAssetBundle.BuildAssetBundles_Windows();
-        ExportAssetBundle.BuildAssetBundles_Android();
-        BuildCatalogueFile_Windows();
-        BuildCatalogueFile_Android();
     }
 
 
