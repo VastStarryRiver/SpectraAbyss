@@ -28,6 +28,7 @@ namespace HotUpdate
                 m_btnLogin.onClick.AddListener(LoginAccount);
                 ConvenientUtility.SetSpriteImage(m_obj, "Img_Icon1", "Atlas02/02_FunOpen10", true);
                 ConvenientUtility.SetSpriteImage(m_obj, "Img_Icon2", "Atlas02/02_FunOpen12", true);
+                ConvenientUtility.SetGray(m_obj, "Img_Icon1");
             });
         }
 

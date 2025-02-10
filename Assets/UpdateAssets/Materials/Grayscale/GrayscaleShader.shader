@@ -1,80 +1,66 @@
-Shader "Custom/GrayscaleShader"
+Shader "MyShader/Grayscale"
 {
     Properties
     {
-        _MainTex ("Base (RGB)", 2D) = "white" {}
-        _Threshold ("Black Threshold", Range(0, 1)) = 0.2 // 控制黑色区域的阈值
-        _GrayFactor ("Gray Factor", Range(0, 1)) = 1.0 // 控制灰度化的强度
+        _MainTex ("Base (RGB)", 2D) = "white" { }
     }
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
-        
-        // 设置渲染队列为 "Overlay" 确保透明图层在普通图层之后渲染
-        Tags { "Queue"="Overlay" }
+        Tags
+        {
+            "Queue"="Transparent"
+        }
 
         Pass
         {
-            // 使用透明度混合
+            // 渲染指令
             Blend SrcAlpha OneMinusSrcAlpha
-            ZWrite Off
-            Cull Off
-            Lighting Off
 
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
+            HLSLPROGRAM
+            #pragma vertex analyzeInputData// 指定顶点着色器函数
+            #pragma fragment getOutputData// 指定片段着色器函数
             #include "UnityCG.cginc"
 
-            struct appdata_t
+            sampler2D _MainTex; // 实际的2D纹理对象
+            float4 _MainTex_ST; // 与纹理坐标相关的变换信息（平移和缩放）
+
+            struct vertexStruct
             {
-                float4 vertex : POSITION;
-                float2 texcoord : TEXCOORD0;
+                float4 vertex : POSITION; // 顶点位置（世界空间或对象空间）
+                float3 normal : NORMAL; // 顶点法线
+                float4 color : COLOR; // 顶点颜色（如果有的话）
+                float2 uv : TEXCOORD0; // 纹理坐标
             };
 
-            struct v2f
+            struct fragmentStruct
             {
-                float4 pos : POSITION;
-                float2 uv : TEXCOORD0;
+                float4 pos : SV_POSITION; // 顶点在裁剪空间中的位置
+                float4 color : COLOR; // 顶点颜色（经过插值）
+                float2 uv : TEXCOORD0; // 纹理坐标（经过插值）
+                float3 normal : TEXCOORD1; // 顶点法线（经过插值）
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            float _Threshold;      // 控制黑色区域的阈值
-            float _GrayFactor;     // 控制灰度化的强度
-
-            v2f vert(appdata_t v)
+            fragmentStruct analyzeInputData(vertexStruct v)
             {
-                v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);  // 转换顶点位置到裁剪空间
-                o.uv = TRANSFORM_TEX(v.texcoord, _MainTex); // 处理纹理坐标
+                fragmentStruct o;
+                o.pos = UnityObjectToClipPos(v.vertex);
+                o.color = v.color;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex); // 自动将_MainTex_ST的内容应用到uv坐标上
+                o.normal = v.normal; // 添加法线的初始化
                 return o;
             }
 
-            half4 frag(v2f i) : SV_Target
+            half4 getOutputData(fragmentStruct i) : SV_Target
             {
-                half4 col = tex2D(_MainTex, i.uv);
-
-                if (col.a > 0.0)
-                {
-                    float gray = dot(col.rgb, half3(0.299, 0.587, 0.114));
-
-                    if (gray < _Threshold)
-                    {
-                        col.rgb = gray.xxx * _GrayFactor;
-                    }
-                    else
-                    {
-                        col.rgb = gray.xxx * _GrayFactor;
-                    }
-                }
-
-                return col;
+                half4 color = tex2D(_MainTex, i.uv);
+                float gray = dot(color.rgb, half3(0.299, 0.587, 0.114));//灰度公式
+                color.rgb = gray.xxx;//float3(gray, gray, gray)
+                return color;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 
-    FallBack "Diffuse"
+    Fallback "Diffuse"
 }

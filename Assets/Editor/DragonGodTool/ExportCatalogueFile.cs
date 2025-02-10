@@ -46,7 +46,7 @@ public static class ExportCatalogueFile
         {
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                SetMd5Files(m_rootPath + "Config");
+                SetMd5Files(m_rootPath + "Config/Client");
                 SetMd5Files(m_rootPath + "Dll");
                 SetMd5Files(catalogueDirectoryPath.Replace("CatalogueFiles", "AssetBundles"));
 

@@ -32,14 +32,11 @@ namespace Invariable
             m_nowDownloadNum = 0;
             m_needDownloadNum = -1;
 
-            if (DataUtilityManager.m_platform == "Windows")
-            {
-                m_needDownloadNum = 3;
-            }
-            else
-            {
-                StartCoroutine(DownloadCatalogueFile());
-            }
+#if UNITY_EDITOR
+            m_needDownloadNum = 3;
+#else
+            StartCoroutine(DownloadCatalogueFile());
+#endif
         }
 
         private void Update()
