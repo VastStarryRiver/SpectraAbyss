@@ -6,5 +6,6 @@
 *.csproj
 *.sln
 *.vsconfig
-Assets/StreamingAssets/WebData.txt
-Assets/StreamingAssets/WebData.txt.meta
+WebData.txt
+Assets/StreamingAssets/WebData.bin
+Assets/StreamingAssets/WebData.bin.meta
