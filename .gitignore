@@ -3,6 +3,7 @@
 /Library/
 /Temp/
 /obj/
+/Assets/AddressableAssetsData/
 *.csproj
 *.sln
 *.vsconfig
