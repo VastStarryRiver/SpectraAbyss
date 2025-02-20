@@ -124,3 +124,6 @@ E:\MyProjects\SpectraAbyss\HotUpdate\obj\Release\HotUpdate.dll
 E:\MyProjects\SpectraAbyss\HotUpdate\obj\Release\HotUpdate.pdb
 E:\MyProjects\SpectraAbyss\HotUpdate\bin\Release\Invariable.dll
 E:\MyProjects\SpectraAbyss\HotUpdate\bin\Release\DOTween.dll
+E:\MyProjects\SpectraAbyss\HotUpdate\bin\Release\Unity.Addressables.dll
+E:\MyProjects\SpectraAbyss\HotUpdate\bin\Release\Unity.Addressables.Editor.dll
+E:\MyProjects\SpectraAbyss\HotUpdate\bin\Release\Unity.ResourceManager.dll

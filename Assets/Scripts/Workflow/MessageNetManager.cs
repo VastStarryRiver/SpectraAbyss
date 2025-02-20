@@ -31,9 +31,9 @@ namespace Invariable
 
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            IPAddress address = IPAddress.Parse(DataUtilityManager.m_webIpv4Str);
+            IPAddress address = IPAddress.Parse(DataUtilityManager.WebIpv4Str);
 
-            point = new IPEndPoint(address, DataUtilityManager.m_webPortInt);
+            point = new IPEndPoint(address, DataUtilityManager.WebPortInt);
 
             //异步方法连接服务器端
             clientSocket.BeginConnect(point, HandlerConnect, clientSocket);
@@ -58,7 +58,7 @@ namespace Invariable
 
                 clientSocket = null;
 
-                Debug.Log($"已经从{DataUtilityManager.m_webIpv4Str}:{DataUtilityManager.m_webPortInt}服务器端下线！");
+                Debug.Log($"已经从{DataUtilityManager.WebIpv4Str}:{DataUtilityManager.WebPortInt}服务器端下线！");
             }
         }
 
@@ -84,11 +84,11 @@ namespace Invariable
 
                 socketState = true;
 
-                Debug.Log($"已经成功连接到{DataUtilityManager.m_webIpv4Str}:{DataUtilityManager.m_webPortInt}服务器端！");
+                Debug.Log($"已经成功连接到{DataUtilityManager.WebIpv4Str}:{DataUtilityManager.WebPortInt}服务器端！");
             }
             else
             {
-                Debug.Log($"连接{DataUtilityManager.m_webIpv4Str}:{DataUtilityManager.m_webPortInt}服务器端失败！");
+                Debug.Log($"连接{DataUtilityManager.WebIpv4Str}:{DataUtilityManager.WebPortInt}服务器端失败！");
             }
         }
 

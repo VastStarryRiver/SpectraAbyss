@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Png
+  m_EditorClassIdentifier: 
+  m_GroupName: Png
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bb388bf13d089d54c9dd5decd72bc143
+  m_SerializeEntries:
+  - m_GUID: 03b3917902d82db44b98b7a241c0f31e
+    m_Address: Png/bg_hghg_wdtx3.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7156e3479d877b469babdfd11e3e57b
+    m_Address: Png/bg_hghg_wdtx2.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e08b250c1000bf94f8e7c8e9016cae6a
+    m_Address: Png/bg_hghg_wdtx1.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Texture
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 64d816d3688e51042af934918a53713c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8f39be26e13dc304b8ecc63f288fe50d, type: 2}

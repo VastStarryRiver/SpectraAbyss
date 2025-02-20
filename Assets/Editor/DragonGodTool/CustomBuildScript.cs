@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using System.Collections.Generic;
 using System.IO;
 using System;
 using Invariable;
@@ -9,10 +8,6 @@ using Invariable;
 
 public class CustomBuildScript
 {
-    private static List<string> m_excludedFolders = new List<string> { "Assets/GameAssets" };// 设置需要排除的文件夹
-    private static string m_scriptsSourcePath = Application.dataPath + "/Scripts/HotUpdate";
-    private static string m_scriptsTargetPath = Application.dataPath.Replace("/Assets", "/HotUpdateScripts/HotUpdate");
-    private static HashSet<string> m_excludedAssets = new HashSet<string>();// 收集所有需要排除的资源路径
     private static string keystorePath = DataUtilityManager.m_localRootPath + "SpectraAbyss.keystore"; // Keystore 文件路径
     private const string keystorePassword = "149630764"; // Keystore 密码
     private const string keyAlias = "spectraabyss"; // Alias 名称
@@ -21,16 +16,28 @@ public class CustomBuildScript
 
 
 
-    [MenuItem("GodDragonTool/打包流程/一键导出所有热更新资源", false, -2)]
-    public static void OneKeyExportAllAssets()
+    [MenuItem("GodDragonTool/打包流程/一键导出所有Android热更新资源", false, -3)]
+    public static void OneKeyExportAllAssets_Android()
     {
         ExportExcelTool.ExportExcelToDictionary();
+
         ExportDll.CopyInvariableDll();
         ExportDll.ExportUpdateDll();
-        ExportAssetBundle.BuildAssetBundles_Windows();
-        ExportAssetBundle.BuildAssetBundles_Android();
-        ExportCatalogueFile.BuildCatalogueFile_Windows();
+
+        ExportAddressables.BuildAddressables_Android();
         ExportCatalogueFile.BuildCatalogueFile_Android();
+    }
+
+    [MenuItem("GodDragonTool/打包流程/一键导出所有Windows热更新资源", false, -2)]
+    public static void OneKeyExportAllAssets_Windows()
+    {
+        ExportExcelTool.ExportExcelToDictionary();
+
+        ExportDll.CopyInvariableDll();
+        ExportDll.ExportUpdateDll();
+
+        ExportAddressables.BuildAddressables_Windows();
+        ExportCatalogueFile.BuildCatalogueFile_Windows();
     }
 
     [MenuItem("GodDragonTool/打包流程/打包成APK文件", false, -1)]
@@ -56,24 +63,6 @@ public class CustomBuildScript
 
     private static void PackageProject(BuildTarget target)
     {
-        m_excludedAssets.Clear();
-
-        foreach (string folder in m_excludedFolders)
-        {
-            string[] assetPaths = Directory.GetFiles(folder, "*.*", SearchOption.AllDirectories);
-
-            foreach (string assetPath in assetPaths)
-            {
-                if (Path.GetExtension(assetPath) == ".meta")// 忽略.meta文件
-                {
-                    continue;
-                }
-
-                string relativePath = assetPath.Replace(Application.dataPath, "Assets");
-                m_excludedAssets.Add(relativePath);
-            }
-        }
-
         // 获取所有场景
         string[] scenes = EditorBuildSettingsScene.GetActiveSceneList(EditorBuildSettings.scenes);
 
@@ -93,29 +82,12 @@ public class CustomBuildScript
         {
             try
             {
-                foreach (var assetPath in m_excludedAssets)
-                {
-                    AssetImporter importer = AssetImporter.GetAtPath(assetPath);
-
-                    if (importer != null)
-                    {
-                        importer.SetAssetBundleNameAndVariant("tempAssetBundle", "");
-                    }
-                }
+                ExportAddressables.SetProfileValue("Android");
 
                 // 开始构建
                 BuildPipeline.BuildPlayer(buildPlayerOptions);
 
-                // 构建完成后清理标记
-                foreach (var assetPath in m_excludedAssets)
-                {
-                    AssetImporter importer = AssetImporter.GetAtPath(assetPath);
-
-                    if (importer != null)
-                    {
-                        importer.SetAssetBundleNameAndVariant("", "");
-                    }
-                }
+                ExportAddressables.SetProfileValue("Windows");
             }
             finally
             {

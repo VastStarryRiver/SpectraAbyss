@@ -22,33 +22,35 @@ public static class ExportCatalogueFile
     //[MenuItem("GodDragonTool/导出热更新目录文件/BuildCatalogueFile_Windows")]
     public static void BuildCatalogueFile_Windows()
     {
-        CreeateFiles(m_catalogueFilePath_Windows);
+        CreeateFiles("Windows");
     }
 
     //[MenuItem("GodDragonTool/导出热更新目录文件/BuildCatalogueFile_Android")]
     public static void BuildCatalogueFile_Android()
     {
-        CreeateFiles(m_catalogueFilePath_Android);
+        CreeateFiles("Android");
     }
 
 
 
-    private static void CreeateFiles(string catalogueDirectoryPath)
+    private static void CreeateFiles(string platform)
     {
-        if (Directory.Exists(catalogueDirectoryPath))
+        string dir = m_rootPath + "CatalogueFiles/" + platform;
+
+        if (Directory.Exists(dir))
         {
-            Directory.Delete(catalogueDirectoryPath, true);
+            Directory.Delete(dir, true);
         }
 
-        DataUtilityManager.InitDirectory(catalogueDirectoryPath);
+        DataUtilityManager.InitDirectory(dir);
 
-        using (FileStream fs = new FileStream(catalogueDirectoryPath + "/CatalogueFile.txt", FileMode.Create))
+        using (FileStream fs = new FileStream(dir + "/CatalogueFile.txt", FileMode.Create))
         {
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 SetMd5Files(m_rootPath + "Config/Client");
                 SetMd5Files(m_rootPath + "Dll");
-                SetMd5Files(catalogueDirectoryPath.Replace("CatalogueFiles", "AssetBundles"));
+                SetMd5Files(m_rootPath + "Assets/UpdateAssets");
 
                 if (m_filesContent != null && m_filesContent.Count > 0)
                 {

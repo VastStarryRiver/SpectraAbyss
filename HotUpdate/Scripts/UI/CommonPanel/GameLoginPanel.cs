@@ -24,7 +24,7 @@ namespace HotUpdate
         {
             m_textName.text = "Íæ¼ÒÃû³Æ£º£¿£¿£¿";
 
-            ConvenientUtility.PlayAnimation(m_obj, "", "Play", WrapMode.Once, () => {
+            CoroutineManager.Instance.PlayAnimation(m_obj, "", "Play", WrapMode.Once, () => {
                 m_btnLogin.onClick.AddListener(LoginAccount);
                 ConvenientUtility.SetSpriteImage(m_obj, "Img_Icon1", "Atlas02/02_FunOpen10", true);
                 ConvenientUtility.SetSpriteImage(m_obj, "Img_Icon2", "Atlas02/02_FunOpen12", true);

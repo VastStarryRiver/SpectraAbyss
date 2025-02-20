@@ -30,7 +30,7 @@ namespace Invariable
         {
             if (m_appdomain != null && m_dllFileStream != null)
             {
-                m_appdomain.Invoke("HotUpdate.AssetBundleManager", "Clear", null, null);
+                m_appdomain.Invoke("HotUpdate.AddressablesManager", "Clear", null, null);
                 m_dllFileStream.Dispose();
                 m_dllFileStream.Close();
                 m_dllFileStream = null;

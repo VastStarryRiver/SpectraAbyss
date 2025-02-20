@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -15,20 +14,41 @@ namespace Invariable
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
         public static string m_platform = "Windows";//当前平台
         public static string m_localRootPath = Application.streamingAssetsPath.Replace("Assets/StreamingAssets", "");//本地数据根目录
-        public static string m_webRootPath = "";//服务器数据根目录
 
 #elif UNITY_ANDROID
         public static string m_platform = "Android";
         public static string m_localRootPath = Application.persistentDataPath + "/";
-        public static string m_webRootPath = LoadWebDataTxt(0);
 #endif
 
-        public static string m_webIpv4Str = LoadWebDataTxt(3);//服务器的公网地址
-        public static int m_webPortInt = int.Parse(LoadWebDataTxt(4));//服务器用于连接客户端的端口号
+        private static string[] m_webData = null;
+
+        public static string WebRootPath//服务器数据根目录
+        {
+            get
+            {
+                return LoadWebData(0);
+            }
+        }
+
+        public static string WebIpv4Str//服务器的公网地址
+        {
+            get
+            {
+                return LoadWebData(3);
+            }
+        }
+
+        public static int WebPortInt//服务器用于连接客户端的端口号
+        {
+            get
+            {
+                return int.Parse(LoadWebData(4));
+            }
+        }
 
 
 
-        private class BypassCertificate : CertificateHandler
+        public class BypassCertificate : CertificateHandler
         {
             protected override bool ValidateCertificate(byte[] certificateData)
             {
@@ -62,8 +82,8 @@ namespace Invariable
 
         public static void SetWebQuestData(ref UnityWebRequest requestHandler)
         {
-            string username = LoadWebDataTxt(1);
-            string password = LoadWebDataTxt(2);
+            string username = LoadWebData(1);
+            string password = LoadWebData(2);
             string encodedAuth = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
 
             requestHandler.SetRequestHeader("Authorization", "Basic " + encodedAuth);
@@ -71,23 +91,24 @@ namespace Invariable
             requestHandler.certificateHandler = new BypassCertificate();
         }
 
-        private static string LoadWebDataTxt(int index)
+        public static string LoadWebData(int index)
         {
-            string text = "";
-
-            using (UnityWebRequest requestHandler = UnityWebRequest.Get(Application.streamingAssetsPath + "/WebData.txt"))
+            if(m_webData == null)
             {
-                requestHandler.SendWebRequest();
-
-                while (!requestHandler.isDone)
+                using (UnityWebRequest requestHandler = UnityWebRequest.Get(Application.streamingAssetsPath + "/WebData.bin"))
                 {
-                    // 等待请求完成
+                    requestHandler.SendWebRequest();
+
+                    while (!requestHandler.isDone)
+                    {
+                        // 等待请求完成
+                    }
+
+                    m_webData = ReadSafeFile<string>(requestHandler.downloadHandler.data).Split('\n');
                 }
-
-                string[] des = requestHandler.downloadHandler.text.Split('\n');
-
-                text = des[index].Replace("\r", "");
             }
+
+            string text = m_webData[index].Replace("\r", "");
 
             return text;
         }
@@ -271,6 +292,31 @@ namespace Invariable
             T result = Deserialize<T>(decompressedBytes);
 
             return result;
+        }
+
+        public static T ReadSafeFile<T>(byte[] inputBytes)
+        {
+            byte[] decryptBytes = DecryptByteData(inputBytes, Encoding.UTF8.GetBytes("86thj449526ujy76"), Encoding.UTF8.GetBytes("i8g7359h5yhtj8hr"));
+            byte[] decompressedBytes = DecompressByteData(decryptBytes);
+
+            T result = Deserialize<T>(decompressedBytes);
+
+            return result;
+        }
+
+        public static string FormatFileByteSize(long bytes)
+        {
+            string[] units = { "B", "KB", "MB", "GB", "TB" };
+            int unitIndex = 0;
+            double size = bytes;
+
+            while (size >= 1024 && unitIndex < units.Length - 1)
+            {
+                size /= 1024;
+                unitIndex++;
+            }
+
+            return $"{size:0.##} {units[unitIndex]}";
         }
     }
 }

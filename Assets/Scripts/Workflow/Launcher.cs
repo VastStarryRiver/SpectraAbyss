@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using UnityEngine.UI;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.AddressableAssets;
 
 
 
@@ -12,11 +14,17 @@ namespace Invariable
 {
     public class Launcher : MonoBehaviour
     {
-        private float m_nowDownloadNum;
         private float m_needDownloadNum;
+        private float m_sizeGetNum;
+        private long m_needDownloadSize;
+        private Dictionary<string, long> m_currSizeList;
+        private List<string> m_deletePath;
+        private List<string> m_updatePath;
         private Slider m_sliProgress;
         private Text m_textDes;
         private Text m_textProgress;
+        private bool m_isDownloading;
+        private string m_downloadCatalogueText;
 
 
 
@@ -29,29 +37,68 @@ namespace Invariable
 
             CreateInitScene();
 
-            m_nowDownloadNum = 0;
             m_needDownloadNum = -1;
+            m_sizeGetNum = 0;
+            m_needDownloadSize = 0;
+            m_currSizeList = new Dictionary<string, long>();
+            m_deletePath = new List<string>();
+            m_updatePath = new List<string>();
+            m_isDownloading = false;
+            m_downloadCatalogueText = "";
 
 #if UNITY_EDITOR
-            m_needDownloadNum = 3;
+            m_needDownloadNum = 200;
+            m_sizeGetNum = 200;
+            m_needDownloadSize = 200;
 #else
+            AddressablesManager.SetWebQuestData();
             StartCoroutine(DownloadCatalogueFile());
 #endif
         }
 
         private void Update()
         {
-            if (m_needDownloadNum >= 0)
+            if (m_needDownloadNum >= 0 && m_sizeGetNum >= m_needDownloadNum)
             {
 #if UNITY_EDITOR
-                m_nowDownloadNum += Time.deltaTime;
+                m_currSizeList[Time.time.ToString()] = 1;
+#else
+                if(!m_isDownloading)
+                {
+                    m_isDownloading = true;
+
+                    foreach (var filePath in m_deletePath)
+                    {
+                        FileInfo fileInfo = new FileInfo(DataUtilityManager.m_localRootPath + "/" + filePath);
+
+                        if (fileInfo.Exists)
+                        {
+                            File.Delete(DataUtilityManager.m_localRootPath + "/" + filePath);
+                            long fileSizeInBytes = fileInfo.Length;
+                            m_currSizeList[filePath] = fileSizeInBytes;
+                        }
+                    }
+
+                    foreach (var filePath in m_updatePath)
+                    {
+                        StartCoroutine(DownloadWebFile(filePath));
+                    }
+                }
 #endif
 
-                SetProgress(m_nowDownloadNum, m_needDownloadNum);
+                SetProgress(m_currSizeList, m_needDownloadSize);
 
-                if (m_nowDownloadNum >= m_needDownloadNum)
+                if (GetCurrDownloadSize(m_currSizeList) >= m_needDownloadSize)
                 {
                     m_needDownloadNum = -1;
+
+                    m_currSizeList.Clear();
+
+                    if (!string.IsNullOrEmpty(m_downloadCatalogueText))
+                    {
+                        DataUtilityManager.SaveSafeFile(m_downloadCatalogueText, DataUtilityManager.m_localRootPath + "CatalogueFile.bin");
+                    }
+
                     SdkManager.InitTapTapSdkOptions();
                     MessageNetManager.Play();
                     HotUpdateManager.Init();
@@ -94,76 +141,67 @@ namespace Invariable
 
         private IEnumerator DownloadCatalogueFile()
         {
-            string webPath = DataUtilityManager.m_webRootPath + "CatalogueFiles/" + DataUtilityManager.m_platform + "/CatalogueFile.txt";
+            string webPath = DataUtilityManager.WebRootPath + "CatalogueFiles/" + DataUtilityManager.m_platform + "/CatalogueFile.txt";
             UnityWebRequest requestHandler = UnityWebRequest.Get(webPath);//下载路径需要加上文件的后缀，没有后缀则不加
 
             DataUtilityManager.SetWebQuestData(ref requestHandler);
 
             yield return requestHandler.SendWebRequest();
 
-            if (requestHandler.isHttpError || requestHandler.isNetworkError)
-            {
-                SetDes(requestHandler.error + "\n" + webPath);
-            }
-            else
+            if (requestHandler.result == UnityWebRequest.Result.Success)
             {
                 string downloadCatalogueText = requestHandler.downloadHandler.text;
 
-                DataUtilityManager.InitDirectory(DataUtilityManager.m_localRootPath);
+                m_downloadCatalogueText = downloadCatalogueText;
 
-                using (FileStream fileStream = new FileStream(DataUtilityManager.m_localRootPath + "CatalogueFile.txt", FileMode.OpenOrCreate))
+                if (File.Exists(DataUtilityManager.m_localRootPath + "CatalogueFile.bin"))
                 {
-                    using (StreamReader streamReader = new StreamReader(fileStream))
+                    string localCatalogueText = DataUtilityManager.ReadSafeFile<string>(DataUtilityManager.m_localRootPath + "CatalogueFile.bin");
+
+                    GetCatalogueDifferentData(downloadCatalogueText, localCatalogueText, out List<string> updatePath, out List<string> deletePath);
+
+                    m_needDownloadNum = updatePath.Count + deletePath.Count;
+
+                    m_deletePath = deletePath;
+                    m_updatePath = updatePath;
+
+                    foreach (var filePath in updatePath)
                     {
-                        string localCatalogueText = streamReader.ReadToEnd();
+                        StartCoroutine(GetDownloadWebFileSize(filePath));
+                    }
 
-                        if (string.IsNullOrEmpty(localCatalogueText))
+                    foreach (var filePath in deletePath)
+                    {
+                        FileInfo fileInfo = new FileInfo(DataUtilityManager.m_localRootPath + "/" + filePath);
+
+                        if (fileInfo.Exists)
                         {
-                            using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                            {
-                                streamWriter.Write(downloadCatalogueText);
-
-                                Dictionary<string, string> webFileData = JsonConvert.DeserializeObject<Dictionary<string, string>>(downloadCatalogueText);
-
-                                m_needDownloadNum = webFileData.Count;
-
-                                foreach (var filePath in webFileData.Keys)
-                                {
-                                    StartCoroutine(DownloadWebFile(filePath));
-                                }
-                            }
+                            m_needDownloadSize += fileInfo.Length;
                         }
-                        else
-                        {
-                            using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                            {
-                                GetCatalogueDifferentData(downloadCatalogueText, localCatalogueText, out List<string> updatePath, out List<string> deletePath);
 
-                                m_needDownloadNum = updatePath.Count + deletePath.Count;
-
-                                if (m_needDownloadNum > 0)
-                                {
-                                    foreach (var filePath in deletePath)
-                                    {
-                                        if (File.Exists(DataUtilityManager.m_localRootPath + "/" + filePath))
-                                        {
-                                            File.Delete(DataUtilityManager.m_localRootPath + "/" + filePath);
-                                        }
-
-                                        m_nowDownloadNum++;
-                                    }
-
-                                    foreach (var filePath in updatePath)
-                                    {
-                                        StartCoroutine(DownloadWebFile(filePath));
-                                    }
-
-                                    streamWriter.Write(downloadCatalogueText);
-                                }
-                            }
-                        }
+                        m_sizeGetNum++;
                     }
                 }
+                else
+                {
+                    Dictionary<string, string> webFileData = JsonConvert.DeserializeObject<Dictionary<string, string>>(downloadCatalogueText);
+
+                    m_needDownloadNum = webFileData.Count;
+
+                    foreach (var filePath in webFileData.Keys)
+                    {
+                        m_updatePath.Add(filePath);
+                    }
+
+                    foreach (var filePath in webFileData.Keys)
+                    {
+                        StartCoroutine(GetDownloadWebFileSize(filePath));
+                    }
+                }
+            }
+            else
+            {
+                SetDes(requestHandler.error + "\n" + webPath);
             }
 
             requestHandler.Dispose();
@@ -194,52 +232,139 @@ namespace Invariable
             }
         }
 
-        private IEnumerator DownloadWebFile(string path)
+        private IEnumerator GetDownloadWebFileSize(string path)
         {
-            string webPath = DataUtilityManager.m_webRootPath + path;
-            UnityWebRequest requestHandler = UnityWebRequest.Get(webPath);//下载路径需要加上文件的后缀，没有后缀则不加
+            string webPath = DataUtilityManager.WebRootPath + path;
 
-            DataUtilityManager.SetWebQuestData(ref requestHandler);
-
-            yield return requestHandler.SendWebRequest();
-
-            if (requestHandler.isHttpError || requestHandler.isNetworkError)
+            if (path.Contains("Assets/UpdateAssets/"))
             {
-                SetDes(requestHandler.error + "\n" + webPath);
+                AsyncOperationHandle<long> sizeHandle = Addressables.GetDownloadSizeAsync(path.Replace("Assets/UpdateAssets/", ""));
+
+                yield return sizeHandle;
+
+                if (sizeHandle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    m_needDownloadSize += sizeHandle.Result;
+                }
+
+                Addressables.Release(sizeHandle);
+
+                m_sizeGetNum++;
             }
             else
             {
-                string savePath = "";
+                UnityWebRequest headRequest = UnityWebRequest.Head(webPath);//发送HEAD请求获取文件大小
 
-                if (path.IndexOf("Assets/") == 0)
+                DataUtilityManager.SetWebQuestData(ref headRequest);
+
+                yield return headRequest.SendWebRequest();
+
+                if (headRequest.result == UnityWebRequest.Result.Success)
                 {
-                    savePath = DataUtilityManager.m_localRootPath + path.Replace("Assets/", "");
+                    string contentLength = headRequest.GetResponseHeader("Content-Length");
+
+                    if (!string.IsNullOrEmpty(contentLength) && long.TryParse(contentLength, out long totalSize))
+                    {
+                        m_needDownloadSize += totalSize;
+                    }
                 }
                 else
                 {
-                    savePath = DataUtilityManager.m_localRootPath + path;
+                    SetDes(headRequest.error + "\n" + webPath);
                 }
 
-                DataUtilityManager.InitDirectory(savePath);
+                m_sizeGetNum++;
 
-                using (FileStream fileStream = new FileStream(savePath, FileMode.Create))
-                {
-                    using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
-                    {
-                        binaryWriter.Write(requestHandler.downloadHandler.data);
-                    }
-                }
-
-                m_nowDownloadNum++;
+                headRequest.Dispose();
             }
-
-            requestHandler.Dispose();
         }
 
-        private void SetProgress(float nowDownloadNum, float needDownloadNum)
+        private IEnumerator DownloadWebFile(string path)
         {
-            m_sliProgress.value = nowDownloadNum / needDownloadNum;
-            m_textProgress.text = nowDownloadNum + "/" + needDownloadNum;
+            string webPath = DataUtilityManager.WebRootPath + path;
+
+            if (path.Contains("Assets/UpdateAssets/"))
+            {
+                AsyncOperationHandle downloadHandle = Addressables.DownloadDependenciesAsync(path.Replace("Assets/UpdateAssets/", ""));
+
+                downloadHandle.Completed += (handle) =>
+                {
+                    if (handle.Status != AsyncOperationStatus.Succeeded)
+                    {
+                        SetDes(handle.OperationException + "\n" + webPath);
+                    }
+
+                    long downloadedBytes = downloadHandle.GetDownloadStatus().DownloadedBytes;
+                    m_currSizeList[path] = downloadedBytes;
+
+                    Addressables.Release(downloadHandle);
+                };
+
+                while (!downloadHandle.IsDone)
+                {
+                    long downloadedBytes = downloadHandle.GetDownloadStatus().DownloadedBytes;
+                    m_currSizeList[path] = downloadedBytes;
+                    yield return null;//确保主线程不被阻塞
+                }
+            }
+            else
+            {
+                UnityWebRequest requestHandler = UnityWebRequest.Get(webPath);//下载路径需要加上文件的后缀，没有后缀则不加
+
+                DataUtilityManager.SetWebQuestData(ref requestHandler);
+
+                requestHandler.SendWebRequest();
+
+                while (!requestHandler.isDone)
+                {
+                    long downloadedBytes = (long)requestHandler.downloadedBytes;
+                    m_currSizeList[path] = downloadedBytes;
+                    yield return null;//确保主线程不被阻塞
+                }
+
+                if (requestHandler.result == UnityWebRequest.Result.Success)
+                {
+                    string savePath = DataUtilityManager.m_localRootPath + path;
+
+                    DataUtilityManager.InitDirectory(savePath);
+
+                    using (FileStream fileStream = new FileStream(savePath, FileMode.Create))
+                    {
+                        using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
+                        {
+                            binaryWriter.Write(requestHandler.downloadHandler.data);
+                        }
+                    }
+
+                    long downloadedBytes = (long)requestHandler.downloadedBytes;
+                    m_currSizeList[path] = downloadedBytes;
+                }
+                else
+                {
+                    SetDes(requestHandler.error + "\n" + webPath);
+                }
+
+                requestHandler.Dispose();
+            }
+        }
+
+        private void SetProgress(Dictionary<string, long> currSizeList, long needDownloadSize)
+        {
+            long currSize = GetCurrDownloadSize(currSizeList);
+            m_sliProgress.value = (currSize * 1.00f) / (needDownloadSize * 1.00f);
+            m_textProgress.text = DataUtilityManager.FormatFileByteSize(currSize) + "/" + DataUtilityManager.FormatFileByteSize(needDownloadSize);
+        }
+
+        private long GetCurrDownloadSize(Dictionary<string, long> currSizeList)
+        {
+            long currSize = 0;
+
+            foreach (var item in currSizeList)
+            {
+                currSize += item.Value;
+            }
+
+            return currSize;
         }
 
         private void SetDes(string text)

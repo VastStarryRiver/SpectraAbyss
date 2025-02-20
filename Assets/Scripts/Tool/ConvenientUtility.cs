@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -81,28 +82,27 @@ namespace Invariable
 
             if (!UIManager.AllPanel.ContainsKey(prefabName))
             {
-                string[] assetNames = new string[] { prefabName + ".prefab" };
+                CoroutineManager.Instance.LoadAddressables(prefabPath + ".prefab", (asset) => {
+                    GameObject gameObject = GameObject.Instantiate((GameObject)asset, GameObject.Find("UI_Root/Ts_Panel").transform);
 
-                AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/" + prefabPath.ToLower() + ".prefab_ab", assetNames, (name, asset) => {
-                    if (name == assetNames[0])
-                    {
-                        GameObject gameObject = GameObject.Instantiate((GameObject)asset, GameObject.Find("UI_Root/Ts_Panel").transform);
+                    gameObject.name = prefabName;
 
-                        gameObject.name = prefabName;
+                    Canvas canvas = (Canvas)AddComponent(gameObject, "", "Canvas");
+                    canvas.overrideSorting = true;
+                    canvas.sortingOrder = layer;
+                    canvas.vertexColorAlwaysGammaSpace = true;
 
-                        Canvas canvas = (Canvas)AddComponent(gameObject, "", "Canvas");
-                        canvas.overrideSorting = true;
-                        canvas.sortingOrder = layer;
-                        canvas.vertexColorAlwaysGammaSpace = true;
+                    AddComponent(gameObject, "", "GraphicRaycaster");
 
-                        AddComponent(gameObject, "", "GraphicRaycaster");
-
-                        UIManager.AllPanel[prefabName] = (MonoBehaviour)AddComponent(gameObject, "", prefabName);
-                    }
+                    UIManager.AllPanel[prefabName] = (MonoBehaviour)AddComponent(gameObject, "", prefabName);
                 });
             }
+            else
+            {
+                return UIManager.AllPanel[prefabName];
+            }
 
-            return UIManager.AllPanel[prefabName];
+            return null;
         }
 
         public static void CloseUIPrefabPanel(string prefabName)
@@ -231,19 +231,16 @@ namespace Invariable
             {
                 string[] assetNames = new string[] { "GrayscaleMaterial.mat" };
 
-                AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/materials/grayscale/grayscalematerial.mat_ab", assetNames, (name, asset) => {
-                    if (name == assetNames[0])
-                    {
-                        Material material = asset as Material;
+                CoroutineManager.Instance.LoadAddressables("Materials/Grayscale/GrayscaleMaterial.mat", (asset) => {
+                    Material material = asset as Material;
 
-                        if (image != null)
-                        {
-                            image.material = material;
-                        }
-                        else if (rawImage != null)
-                        {
-                            rawImage.material = material;
-                        }
+                    if (image != null)
+                    {
+                        image.material = material;
+                    }
+                    else if (rawImage != null)
+                    {
+                        rawImage.material = material;
                     }
                 });
             }
@@ -276,50 +273,40 @@ namespace Invariable
                 Image image = trans.GetComponent<Image>();
 
                 string[] atlasInfo = spritePath.Split('/');
-                string assetBundleName = atlasInfo[0];
+                string atlasName = atlasInfo[0];
                 string imageName = atlasInfo[1];
 
-                if (assetBundleName == imageName)
+                if (atlasName == imageName)
                 {
-                    string[] assetNames = new string[] { imageName + ".png" };
+                    CoroutineManager.Instance.LoadAddressables("Png/" + atlasName + ".png", (asset) => {
+                        Texture2D texture = asset as Texture2D;
 
-                    AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/png/" + assetBundleName.ToLower() + ".png_ab", assetNames, (name, asset) => {
-                        if (name == assetNames[0])
+                        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+                        image.sprite = sprite;
+
+                        image.sprite.name = imageName;
+
+                        if (isSetNativeSize)
                         {
-                            Texture2D texture = asset as Texture2D;
-
-                            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-
-                            image.sprite = sprite;
-
-                            image.sprite.name = imageName;
-
-                            if (isSetNativeSize)
-                            {
-                                image.SetNativeSize();
-                            }
+                            image.SetNativeSize();
                         }
                     });
                 }
                 else
                 {
-                    string[] assetNames = new string[] { assetBundleName + ".spriteatlasv2" };
+                    CoroutineManager.Instance.LoadAddressables("Atlas/" + atlasName + "/" + atlasName + ".spriteatlasv2", (asset) => {
+                        SpriteAtlas atlas = asset as SpriteAtlas;
 
-                    AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/atlas/" + assetBundleName.ToLower() + ".atlas_ab", assetNames, (name, asset) => {
-                        if (name == assetNames[0])
+                        Sprite sprite = atlas.GetSprite(imageName);
+
+                        image.sprite = sprite;
+
+                        image.sprite.name = imageName;
+
+                        if (isSetNativeSize)
                         {
-                            SpriteAtlas atlas = asset as SpriteAtlas;
-
-                            Sprite sprite = atlas.GetSprite(imageName);
-
-                            image.sprite = sprite;
-
-                            image.sprite.name = imageName;
-
-                            if (isSetNativeSize)
-                            {
-                                image.SetNativeSize();
-                            }
+                            image.SetNativeSize();
                         }
                     });
                 }
@@ -345,57 +332,85 @@ namespace Invariable
                 RawImage rawImage = trans.GetComponent<RawImage>();
 
                 string[] atlasInfo = texturePath.Split('/');
-                string assetBundleName = atlasInfo[0];
+                string atlasName = atlasInfo[0];
                 string imageName = atlasInfo[1];
 
-                if (assetBundleName == imageName)
+                if (atlasName == imageName)
                 {
-                    string[] assetNames = new string[] { imageName + ".png" };
+                    CoroutineManager.Instance.LoadAddressables("Png/" + atlasName + ".png", (asset) => {
+                        Texture2D texture = asset as Texture2D;
 
-                    AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/png/" + assetBundleName.ToLower() + ".png_ab", assetNames, (name, asset) => {
-                        if (name == assetNames[0])
+                        rawImage.texture = texture;
+
+                        rawImage.texture.name = imageName;
+
+                        if (isSetNativeSize)
                         {
-                            Texture2D texture = asset as Texture2D;
-
-                            rawImage.texture = texture;
-
-                            rawImage.texture.name = imageName;
-
-                            if (isSetNativeSize)
-                            {
-                                rawImage.SetNativeSize();
-                            }
+                            rawImage.SetNativeSize();
                         }
                     });
                 }
                 else
                 {
-                    string[] assetNames = new string[] { assetBundleName + ".spriteatlasv2" };
+                    CoroutineManager.Instance.LoadAddressables("Atlas/" + atlasName + "/" + atlasName + ".spriteatlasv2", (asset) => {
+                        SpriteAtlas atlas = asset as SpriteAtlas;
 
-                    AssetBundleManager.LoadAssetBundle(DataUtilityManager.m_localRootPath + "AssetBundles/" + DataUtilityManager.m_platform + "/atlas/" + assetBundleName.ToLower() + ".atlas_ab", assetNames, (name, asset) => {
-                        if (name == assetNames[0])
+                        Sprite sprite = atlas.GetSprite(imageName);
+
+                        rawImage.texture = sprite.texture;
+
+                        rawImage.texture.name = imageName;
+
+                        if (isSetNativeSize)
                         {
-                            SpriteAtlas atlas = asset as SpriteAtlas;
-
-                            Sprite sprite = atlas.GetSprite(imageName);
-
-                            rawImage.texture = sprite.texture;
-
-                            rawImage.texture.name = imageName;
-
-                            if (isSetNativeSize)
-                            {
-                                rawImage.SetNativeSize();
-                            }
+                            rawImage.SetNativeSize();
                         }
                     });
                 }
             }
         }
 
-        public static void PlayAnimation(UnityEngine.Object obj, string childPath = "", string animName = "", WrapMode wrapMode = WrapMode.Once, Action callBack = null)
+        public static IEnumerator PlayAnimation(UnityEngine.Object obj, string childPath = "", string animName = "", WrapMode wrapMode = WrapMode.Once, Action callBack = null)
         {
-            CoroutineManager.Instance.InvokePlayAnimation(obj, childPath, animName, wrapMode, callBack);
+            if (string.IsNullOrEmpty(animName))
+            {
+                yield break;
+            }
+
+            Transform trans = ConvenientUtility.GetTransform(obj);
+
+            if (trans == null)
+            {
+                yield break;
+            }
+
+            if (!string.IsNullOrEmpty(childPath))
+            {
+                trans = trans.Find(childPath);
+            }
+
+            if (trans == null)
+            {
+                yield break;
+            }
+
+            Animation animation = trans.GetComponent<Animation>();
+
+            if (animation == null)
+            {
+                yield break;
+            }
+
+            animation.wrapMode = wrapMode;
+
+            animation.Play(animName);
+
+            if (wrapMode == WrapMode.Once)
+            {
+                yield return new WaitWhile(() => animation.isPlaying);
+
+                callBack?.Invoke();
+            }
         }
     }
 }
