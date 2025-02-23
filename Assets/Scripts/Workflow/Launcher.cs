@@ -136,7 +136,7 @@ namespace Invariable
             m_textDes = loadingPanel.transform.Find("Text_Des").GetComponent<Text>();
             m_textProgress = loadingPanel.transform.Find("Text_Progress").GetComponent<Text>();
 
-            SetDes("加载中");
+            SetDes("更新中");
         }
 
         private IEnumerator DownloadCatalogueFile()
