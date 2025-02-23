@@ -3,6 +3,7 @@
 /Library/
 /Temp/
 /obj/
+/Logs/
 /Assets/AddressableAssetsData/
 *.csproj
 *.sln
@@ -10,3 +11,4 @@
 WebData.txt
 Assets/StreamingAssets/WebData.bin
 Assets/StreamingAssets/WebData.bin.meta
+UserSettings/Layouts/default-2022.dwlt
