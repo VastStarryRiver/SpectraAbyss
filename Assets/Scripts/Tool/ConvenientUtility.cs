@@ -205,7 +205,7 @@ namespace Invariable
             return component;
         }
 
-        public static void SetGray(UnityEngine.Object obj, string childPath = "", bool isGray = true)
+        public static void SetGray(UnityEngine.Object obj, string childPath = "", bool isGray = true, bool isMask = false)
         {
             Transform trans = GetTransform(obj);
 
@@ -229,9 +229,19 @@ namespace Invariable
 
             if (isGray)
             {
-                string[] assetNames = new string[] { "GrayscaleMaterial.mat" };
+                string path;
 
-                CoroutineManager.Instance.LoadAddressables("Materials/Grayscale/GrayscaleMaterial.mat", (asset) => {
+                if(isMask)
+                {
+                    path = "Materials/UIMaskGrayscale/UIMaskGrayscaleMaterial.mat";
+                }
+                else
+                {
+                    path = "Materials/Grayscale/GrayscaleMaterial.mat";
+                }
+
+                CoroutineManager.Instance.LoadAddressables(path, (asset) =>
+                {
                     Material material = asset as Material;
 
                     if (image != null)
