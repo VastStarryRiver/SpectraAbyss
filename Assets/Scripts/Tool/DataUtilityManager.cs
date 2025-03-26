@@ -11,12 +11,11 @@ namespace Invariable
 {
     public class DataUtilityManager
     {
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
-        public static string m_platform = "Windows";//当前平台
+#if UNITY_EDITOR
+        public static string m_platform = "macOS";
         public static string m_localRootPath = Application.streamingAssetsPath.Replace("Assets/StreamingAssets", "");//本地数据根目录
-
-#elif UNITY_ANDROID
-        public static string m_platform = "Android";
+#else
+        public static string m_platform = "iOS";
         public static string m_localRootPath = Application.persistentDataPath + "/";
 #endif
 
@@ -306,7 +305,7 @@ namespace Invariable
 
         public static string FormatFileByteSize(long bytes)
         {
-            string[] units = { "B", "KB", "MB", "GB", "TB" };
+            string[] units = { "B", "KB", "MB", "G", "T" };
             int unitIndex = 0;
             double size = bytes;
 

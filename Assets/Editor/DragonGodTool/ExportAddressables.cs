@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets.Settings.GroupSchemas;
-using Invariable;
 
 
 
@@ -15,32 +14,18 @@ public class ExportAddressables
 
 
 
-    [MenuItem("GodDragonTool/Addressables/BuildAddressables_Android", false, 1)]
-    public static void BuildAddressables_Android()
+    [MenuItem("GodDragonTool/Addressables/BuildAddressables_iOS", false, 1)]
+    public static void BuildAddressables_iOS()
     {
-        SetProfileValue("Android");
-        BuildAddressables("Android");
+        SetProfileValue("iOS");
+        BuildAddressables("iOS");
     }
 
-    [MenuItem("GodDragonTool/Addressables/BuildAddressables_Windows", false, 3)]
-    public static void BuildAddressables_Windows()
+    [MenuItem("GodDragonTool/Addressables/BuildAddressables_macOS", false, 2)]
+    public static void BuildAddressables_macOS()
     {
-        SetProfileValue("Windows");
-        BuildAddressables("Windows");
-    }
-
-    [MenuItem("GodDragonTool/Addressables/BuildWebBinFile", false, 4)]
-    public static void BuildWebBinFile()
-    {
-        using (FileStream fileStream = new FileStream(DataUtilityManager.m_localRootPath + "WebData.txt", FileMode.Open))
-        {
-            using (StreamReader streamReader = new StreamReader(fileStream))
-            {
-                DataUtilityManager.SaveSafeFile(streamReader.ReadToEnd(), Application.streamingAssetsPath + "/WebData.bin");
-            }
-        }
-
-        AssetDatabase.Refresh();
+        SetProfileValue("macOS");
+        BuildAddressables("macOS");
     }
 
 
