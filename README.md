@@ -1,3 +1,5 @@
+#main分支不再维护，细分为Android和iOS分支
+
 #打包设置
 签名文件：SpectraAbyss.keystore
 签名文件的密码：149630764
