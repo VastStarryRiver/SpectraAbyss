@@ -1,8 +1,4 @@
-#main分支不再维护，细分为Android和iOS分支
-
-#打包设置
-签名文件：SpectraAbyss.keystore
-签名文件的密码：149630764
+#HarmonyOS
 
 #与Assets文件夹在同一目录下的WebData.txt文件自行创建，内容格式如下：
 服务器URL\n
