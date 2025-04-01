@@ -1,4 +1,4 @@
-#main分支不再维护，细分为Android和iOS分支
+#Android
 
 #打包设置
 签名文件：SpectraAbyss.keystore
