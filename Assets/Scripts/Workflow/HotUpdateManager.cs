@@ -9,7 +9,7 @@ using DG.Tweening;
 
 namespace Invariable
 {
-    public class HotUpdateManager
+    public static class HotUpdateManager
     {
         public static ILRuntime.Runtime.Enviorment.AppDomain m_appdomain;
         private static FileStream m_dllFileStream;

@@ -9,7 +9,7 @@ using System.Net.Sockets;
 
 namespace Invariable
 {
-    public class MessageNetManager
+    public static class MessageNetManager
     {
         private static Socket clientSocket;//客户端的Socket对象
         private static IPEndPoint point;//服务器的端口对象

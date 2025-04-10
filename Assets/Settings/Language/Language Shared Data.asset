@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: scene_key7
     m_Metadata:
       m_Items: []
+  - m_Id: 617551125757952
+    m_Key: scene_key8
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: Warcraft
     m_Metadata:
       m_Items: []
+  - m_Id: 617551125757952
+    m_Localized: "Name\uFF1A<color={0}>{1}</color>"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

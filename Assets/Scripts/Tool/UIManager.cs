@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Invariable
 {
-    public class UIManager
+    public static class UIManager
     {
         private static Dictionary<string, MonoBehaviour> allPanel;
         public static Dictionary<string, MonoBehaviour> AllPanel

@@ -16,9 +16,9 @@ namespace HotUpdate
 
         public void Awake(GameObject gameObject, Transform transform)
         {
-            m_sliProgress = gameObject.transform.Find("Sli_Progress").GetComponent<Slider>();
-            m_textDes = gameObject.transform.Find("Text_Des").GetComponent<UIText>();
-            m_textProgress = gameObject.transform.Find("Text_Progress").GetComponent<UIText>();
+            m_sliProgress = gameObject.transform.Find("parent/Sli_Progress").GetComponent<Slider>();
+            m_textDes = gameObject.transform.Find("parent/Text_Des").GetComponent<UIText>();
+            m_textProgress = gameObject.transform.Find("parent/Text_Progress").GetComponent<UIText>();
         }
 
 

@@ -121,22 +121,33 @@ namespace Invariable
 
         private void CreateInitScene()
         {
-            GameObject SceneGameObject = Instantiate(Resources.Load<GameObject>("SceneGameObject"), Vector3.zero, Quaternion.identity);
-            GameObject UI_Root = Instantiate(Resources.Load<GameObject>("UI_Root"), Vector3.zero, Quaternion.identity);
+            GameObject SceneGameObject = GameObject.Find("SceneGameObject");
+            GameObject UI_Root = GameObject.Find("UI_Root");
 
-            SceneGameObject.name = "SceneGameObject";
-            UI_Root.name = "UI_Root";
+            if (SceneGameObject == null)
+            {
+                SceneGameObject = Instantiate(Resources.Load<GameObject>("SceneGameObject"), Vector3.zero, Quaternion.identity);
+                UI_Root = Instantiate(Resources.Load<GameObject>("UI_Root"), Vector3.zero, Quaternion.identity);
 
-            DontDestroyOnLoad(SceneGameObject);
-            DontDestroyOnLoad(UI_Root);
+                SceneGameObject.name = "SceneGameObject";
+                UI_Root.name = "UI_Root";
+
+                DontDestroyOnLoad(SceneGameObject);
+                DontDestroyOnLoad(UI_Root);
+            }
 
             GameObject loadingPanel = Instantiate(Resources.Load<GameObject>("HotUpdateLoadingPanel"), Vector3.zero, Quaternion.identity, UI_Root.transform.Find("Ts_Panel"));
             loadingPanel.name = "HotUpdateLoadingPanel";
-            m_sliProgress = loadingPanel.transform.Find("Sli_Progress").GetComponent<Slider>();
-            m_textDes = loadingPanel.transform.Find("Text_Des").GetComponent<UIText>();
-            m_textProgress = loadingPanel.transform.Find("Text_Progress").GetComponent<UIText>();
+            m_sliProgress = loadingPanel.transform.Find("parent/Sli_Progress").GetComponent<Slider>();
+            m_textDes = loadingPanel.transform.Find("parent/Text_Des").GetComponent<UIText>();
+            m_textProgress = loadingPanel.transform.Find("parent/Text_Progress").GetComponent<UIText>();
 
             SetDes("更新中");
+
+            ConvenientUtility.MainSceneCamera.clearFlags = CameraClearFlags.Skybox;
+            ConvenientUtility.MainSceneCamera.backgroundColor = Color.white;
+
+            LanguageManager.SetLanguageIndex(LanguageManager.LanguageIndex, false);
         }
 
         private IEnumerator DownloadCatalogueFile()

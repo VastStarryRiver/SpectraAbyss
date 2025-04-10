@@ -9,7 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Invariable
 {
-    public class DataUtilityManager
+    public static class DataUtilityManager
     {
 #if UNITY_EDITOR
         public static string m_platform = "macOS";
