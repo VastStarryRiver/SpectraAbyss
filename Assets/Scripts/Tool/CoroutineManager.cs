@@ -28,5 +28,10 @@ namespace Invariable
         {
             StartCoroutine(AddressablesManager.LoadAddressables(addressablesKey, callBack));
         }
+
+        public void InvokeRestartGame()
+        {
+            StartCoroutine(ConvenientUtility.RestartGame());
+        }
     }
 }

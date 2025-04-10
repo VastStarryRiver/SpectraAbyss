@@ -7,7 +7,7 @@ using System;
 
 namespace Invariable
 {
-    public class SdkManager
+    public static class SdkManager
     {
         private const string tapTapId = "lipmkcrzigd2ymxbsr";
         private const string tapTapToken = "X9bqJ44ejsHetkqrrtRFgGpX3wU8stawQB3Aaaei";

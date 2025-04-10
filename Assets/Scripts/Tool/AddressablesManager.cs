@@ -11,7 +11,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Invariable
 {
-    public class AddressablesManager
+    public static class AddressablesManager
     {
         private static Dictionary<string, AsyncOperationHandle<object>> m_allAddressables = null;//已经加载的Addressables包
 
