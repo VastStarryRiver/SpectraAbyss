@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!47 &1
 QualitySettings:
   m_ObjectHideFlags: 0
@@ -119,6 +119,7 @@ QualitySettings:
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
     Android: 1
+    HMIAndroid: 1
     CloudRendering: 2
     Lumin: 2
     GameCoreScarlett: 2

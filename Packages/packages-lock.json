@@ -1,80 +1,28 @@
 {
   "dependencies": {
-    "com.google.external-dependency-manager": {
-      "version": "1.2.183",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://package.openupm.com"
-    },
-    "com.ourpalm.ilruntime": {
-      "version": "1.6.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://registry.npmjs.org"
-    },
-    "com.taptap.sdk.core": {
-      "version": "https://github.com/taptap/TapSDKCore-Unity.git#4.4.3",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.google.external-dependency-manager": "1.2.179"
-      },
-      "hash": "d8c6926ec5dd89c3e35d2bc59c36de674151aff4"
-    },
-    "com.taptap.sdk.login": {
-      "version": "https://github.com/taptap/TapSDKLogin-Unity.git#4.4.3",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.taptap.sdk.core": "4.4.3"
-      },
-      "hash": "b8400a427c89251f42930a4dad842346c3ad8a72"
-    },
-    "com.unity.2d.sprite": {
-      "version": "1.0.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {}
-    },
-    "com.unity.addressables": {
-      "version": "1.22.3",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.scriptablebuildpipeline": "1.21.25",
-        "com.unity.modules.assetbundle": "1.0.0",
-        "com.unity.modules.imageconversion": "1.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0",
-        "com.unity.modules.unitywebrequest": "1.0.0",
-        "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
-      },
-      "url": "https://packages.unity.cn"
-    },
     "com.unity.burst": {
-      "version": "1.8.18",
+      "version": "1.8.17",
       "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.collab-proxy": {
-      "version": "2.6.0",
+      "version": "2.7.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.ide.rider": {
       "version": "3.0.31",
@@ -83,7 +31,7 @@
       "dependencies": {
         "com.unity.ext.nunit": "1.0.6"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.ide.visualstudio": {
       "version": "2.0.22",
@@ -92,28 +40,21 @@
       "dependencies": {
         "com.unity.test-framework": "1.1.9"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.ide.vscode": {
       "version": "1.2.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.mathematics": {
       "version": "1.2.6",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
-    },
-    "com.unity.nuget.newtonsoft-json": {
-      "version": "3.2.1",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.render-pipelines.core": {
       "version": "14.0.11",
@@ -146,19 +87,12 @@
         "com.unity.render-pipelines.core": "14.0.10"
       }
     },
-    "com.unity.scriptablebuildpipeline": {
-      "version": "1.21.25",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.cn"
-    },
     "com.unity.searcher": {
       "version": "4.9.2",
       "depth": 2,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.shadergraph": {
       "version": "14.0.11",
@@ -178,7 +112,7 @@
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.textmeshpro": {
       "version": "3.0.7",
@@ -187,7 +121,7 @@
       "dependencies": {
         "com.unity.ugui": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.timeline": {
       "version": "1.7.6",
@@ -199,7 +133,7 @@
         "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.ugui": {
       "version": "1.0.0",
@@ -218,7 +152,7 @@
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.tuanjie.cn"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
@@ -242,7 +176,10 @@
       "version": "1.0.0",
       "depth": 0,
       "source": "builtin",
-      "dependencies": {}
+      "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.animation": "1.0.0"
+      }
     },
     "com.unity.modules.audio": {
       "version": "1.0.0",
@@ -274,6 +211,12 @@
       "dependencies": {}
     },
     "com.unity.modules.imgui": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.infinity": {
       "version": "1.0.0",
       "depth": 0,
       "source": "builtin",
@@ -357,12 +300,6 @@
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       }
-    },
-    "com.unity.modules.umbra": {
-      "version": "1.0.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {}
     },
     "com.unity.modules.unityanalytics": {
       "version": "1.0.0",

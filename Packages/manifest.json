@@ -1,32 +1,9 @@
 {
-  "scopedRegistries": [
-    {
-      "name": "package.openupm.com",
-      "url": "https://package.openupm.com",
-      "scopes": [
-        "com.google.external-dependency-manager"
-      ]
-    },
-    {
-      "name": "ILRuntime",
-      "url": "https://registry.npmjs.org",
-      "scopes": [
-        "com.ourpalm"
-      ]
-    }
-  ],
   "dependencies": {
-    "com.google.external-dependency-manager": "1.2.183",
-    "com.ourpalm.ilruntime": "1.6.0",
-    "com.taptap.sdk.core": "https://github.com/taptap/TapSDKCore-Unity.git#4.4.3",
-    "com.taptap.sdk.login": "https://github.com/taptap/TapSDKLogin-Unity.git#4.4.3",
-    "com.unity.2d.sprite": "1.0.0",
-    "com.unity.addressables": "1.22.3",
-    "com.unity.collab-proxy": "2.6.0",
+    "com.unity.collab-proxy": "2.7.1",
     "com.unity.ide.rider": "3.0.31",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.ide.vscode": "1.2.5",
-    "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.render-pipelines.universal": "14.0.11",
     "com.unity.test-framework": "1.1.33",
     "com.unity.textmeshpro": "3.0.7",
@@ -42,6 +19,7 @@
     "com.unity.modules.director": "1.0.0",
     "com.unity.modules.imageconversion": "1.0.0",
     "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.infinity": "1.0.0",
     "com.unity.modules.jsonserialize": "1.0.0",
     "com.unity.modules.particlesystem": "1.0.0",
     "com.unity.modules.physics": "1.0.0",
@@ -52,7 +30,6 @@
     "com.unity.modules.tilemap": "1.0.0",
     "com.unity.modules.ui": "1.0.0",
     "com.unity.modules.uielements": "1.0.0",
-    "com.unity.modules.umbra": "1.0.0",
     "com.unity.modules.unityanalytics": "1.0.0",
     "com.unity.modules.unitywebrequest": "1.0.0",
     "com.unity.modules.unitywebrequestassetbundle": "1.0.0",
