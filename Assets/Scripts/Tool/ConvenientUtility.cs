@@ -5,12 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using ILRuntime.CLR.TypeSystem;
 using UnityEngine.U2D;
+using UnityEngine.SceneManagement;
 
 
 
 namespace Invariable
 {
-    public class ConvenientUtility
+    public static class ConvenientUtility
     {
         public static Camera MainUICamera
         {
@@ -25,6 +26,14 @@ namespace Invariable
             get
             {
                 return GameObject.Find("UI_Root").GetComponent<RectTransform>();
+            }
+        }
+
+        public static Camera MainSceneCamera
+        {
+            get
+            {
+                return GameObject.Find("SceneGameObject/Main Camera").GetComponent<Camera>();
             }
         }
 
@@ -75,7 +84,7 @@ namespace Invariable
             return null;
         }
 
-        public static MonoBehaviour OpenUIPrefabPanel(string prefabPath, int layer)
+        public static MonoBehaviour OpenUIPrefabPanel(string prefabPath, int layer, Action callBack = null)
         {
             int startIndex = prefabPath.LastIndexOf("/") + 1;
             string prefabName = prefabPath.Substring(startIndex, prefabPath.Length - startIndex);
@@ -95,6 +104,8 @@ namespace Invariable
                     AddComponent(gameObject, "", "GraphicRaycaster");
 
                     UIManager.AllPanel[prefabName] = (MonoBehaviour)AddComponent(gameObject, "", prefabName);
+
+                    callBack?.Invoke();
                 });
             }
             else
@@ -420,6 +431,36 @@ namespace Invariable
                 yield return new WaitWhile(() => animation.isPlaying);
 
                 callBack?.Invoke();
+            }
+        }
+
+        public static IEnumerator RestartGame()
+        {
+            MainSceneCamera.clearFlags = CameraClearFlags.SolidColor;
+            MainSceneCamera.backgroundColor = Color.black;
+
+            List<string> list = new List<string>();
+
+            foreach (var item in UIManager.AllPanel)
+            {
+                list.Add(item.Key);
+            }
+
+            if (list.Count > 0)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    CloseUIPrefabPanel(list[i]);
+                }
+            }
+
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+
+            while (!asyncLoad.isDone)
+            {
+                float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
+                Debug.Log("╪сть╫Ь╤х: " + (progress * 100) + "%");
+                yield return null;
             }
         }
     }
