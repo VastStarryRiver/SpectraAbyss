@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Networking;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 
@@ -16,21 +14,6 @@ namespace Invariable
         private static Dictionary<string, AsyncOperationHandle<object>> m_allAddressables = null;//已经加载的Addressables包
 
 
-
-        public static void SetWebQuestData()
-        {
-            // 设置全局认证头
-            Addressables.WebRequestOverride = (UnityWebRequest requestHandler) =>
-            {
-                string username = DataUtilityManager.LoadWebData(1);
-                string password = DataUtilityManager.LoadWebData(2);
-                string encodedAuth = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
-
-                requestHandler.SetRequestHeader("Authorization", "Basic " + encodedAuth);
-
-                requestHandler.certificateHandler = new DataUtilityManager.BypassCertificate();
-            };
-        }
 
         public static void Clear()
         {

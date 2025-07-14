@@ -51,7 +51,6 @@ namespace Invariable
             m_sizeGetNum = 200;
             m_needDownloadSize = 200;
 #else
-            AddressablesManager.SetWebQuestData();
             StartCoroutine(DownloadCatalogueFile());
 #endif
         }
@@ -154,8 +153,6 @@ namespace Invariable
         {
             string webPath = DataUtilityManager.WebRootPath + "CatalogueFiles/CatalogueFile.txt";
             UnityWebRequest requestHandler = UnityWebRequest.Get(webPath);//下载路径需要加上文件的后缀，没有后缀则不加
-
-            DataUtilityManager.SetWebQuestData(ref requestHandler);
 
             yield return requestHandler.SendWebRequest();
 
@@ -266,8 +263,6 @@ namespace Invariable
             {
                 UnityWebRequest headRequest = UnityWebRequest.Head(webPath);//发送HEAD请求获取文件大小
 
-                DataUtilityManager.SetWebQuestData(ref headRequest);
-
                 yield return headRequest.SendWebRequest();
 
                 if (headRequest.result == UnityWebRequest.Result.Success)
@@ -321,8 +316,6 @@ namespace Invariable
             else
             {
                 UnityWebRequest requestHandler = UnityWebRequest.Get(webPath);//下载路径需要加上文件的后缀，没有后缀则不加
-
-                DataUtilityManager.SetWebQuestData(ref requestHandler);
 
                 requestHandler.SendWebRequest();
 
