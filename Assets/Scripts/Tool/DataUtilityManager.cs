@@ -21,7 +21,7 @@ namespace Invariable
 
         private static string[] m_webData = null;
 
-        public static string WebRootPath//服务器数据根目录
+        public static string WebRootPath//热更新根目录
         {
             get
             {
@@ -49,6 +49,14 @@ namespace Invariable
 
 
 
+        public class BypassCertificate : CertificateHandler
+        {
+            protected override bool ValidateCertificate(byte[] certificateData)
+            {
+                return true; // 始终返回 true 以忽略证书验证
+            }
+        }
+
         public static void InitDirectory(string path)
         {
             path = path.Replace("\\", "/");
@@ -71,6 +79,17 @@ namespace Invariable
                 //确保路径中的所有文件夹都存在
                 Directory.CreateDirectory(directoryPath);
             }
+        }
+
+        public static void SetWebQuestData(ref UnityWebRequest requestHandler)
+        {
+            string username = LoadWebData(2);
+            string password = LoadWebData(3);
+            string encodedAuth = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+
+            requestHandler.SetRequestHeader("Authorization", "Basic " + encodedAuth);
+
+            requestHandler.certificateHandler = new BypassCertificate();
         }
 
         public static string LoadWebData(int index)
