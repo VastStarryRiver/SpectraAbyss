@@ -1,0 +1,20 @@
+{
+    "name": "Invariable",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7d5ef2062f3704e1ab74aac0e4d5a1a7",
+        "GUID:e8754b6153389406c963cd52996cc80f",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:e34a5702dd353724aa315fb8011f08c3",
+        "GUID:13ba8ce62aa80c74598530029cb2d649"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

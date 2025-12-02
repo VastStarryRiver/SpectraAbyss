@@ -4,8 +4,8 @@ apply plugin: 'com.android.library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 // Android Resolver Dependencies Start
-    implementation 'com.taptap.sdk:tap-core-unity:4.4.3' // Packages/com.taptap.sdk.core/Mobile/Editor/NativeDependencies.xml:7
-    implementation 'com.taptap.sdk:tap-login-unity:4.4.3' // Packages/com.taptap.sdk.login/Mobile/Editor/NativeDependencies.xml:7
+    implementation 'com.taptap.sdk:tap-core-unity:4.9.1' // Packages/com.taptap.sdk.core/Mobile/Editor/NativeDependencies.xml:7
+    implementation 'com.taptap.sdk:tap-login-unity:4.9.1' // Packages/com.taptap.sdk.login/Mobile/Editor/NativeDependencies.xml:7
 // Android Resolver Dependencies End
 **DEPS**}
 
