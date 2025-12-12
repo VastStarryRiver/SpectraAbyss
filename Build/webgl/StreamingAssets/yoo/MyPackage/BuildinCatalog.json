@@ -1,0 +1,11 @@
+{
+    "FileVersion": "1.0.0",
+    "PackageName": "MyPackage",
+    "PackageVersion": "main",
+    "Wrappers": [
+        {
+            "BundleGUID": "273df4e207d032ec40a6fe3e2a530251",
+            "FileName": "273df4e207d032ec40a6fe3e2a530251.bundle"
+        }
+    ]
+}

@@ -16,7 +16,7 @@ namespace Invariable
 
         public void OnEnter()
         {
-            StartGame();
+            InitializeOperationSystem();
         }
 
         public void OnExit()
@@ -30,23 +30,35 @@ namespace Invariable
         }
 
         /// <summary>
-        /// 开始游戏
+        /// 初始化运行系统
         /// </summary>
-        private void StartGame()
+        private void InitializeOperationSystem()
         {
             GameManager.Instance.InvokeEventCallBack("Launcher_ShowTips", "初始化运行系统");
 
             LanguageManager.Instance.SetLanguageKey(LanguageManager.Instance.LanguageKey, false);
-            SdkManager.Instance.InitTapTapSdkOptions();
-            MessageNetManager.Instance.Reset();
 
+#if !UNITY_EDITOR && UNITY_WEBGL
+            MessageNetManager.Instance.ResetWebSocket();
+            SdkManager.Instance.InitMiniGameSDK(StartGame);
+#else
+            MessageNetManager.Instance.ResetSocket();
+            SdkManager.Instance.InitTapTapSdkOptions();
+            StartGame();
+#endif
+        }
+
+        /// <summary>
+        /// 开始游戏
+        /// </summary>
+        private void StartGame()
+        {
             YooAssetManager.Instance.PreLoadDll((hotUpdateAss) =>
             {
                 GameManager.Instance.InvokeEventCallBack("Launcher_ShowTips", "开始游戏");
                 Type type = hotUpdateAss.GetType("HotUpdate.StartGame");
                 MethodInfo methodInfo = type.GetMethod("Play", BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
                 methodInfo.Invoke(null, null);
-                GameManager.Instance.InvokeEventCallBack("Launcher_StartGame");
             });
         }
     }

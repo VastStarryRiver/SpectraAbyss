@@ -2,7 +2,11 @@
     "name": "MyTools",
     "rootNamespace": "",
     "references": [
-        "GUID:473716eaeb01ba24a8d6a0fd68b323a5"
+        "GUID:473716eaeb01ba24a8d6a0fd68b323a5",
+        "GUID:e34a5702dd353724aa315fb8011f08c3",
+        "GUID:4d1926c9df5b052469a1c63448b7609a",
+        "GUID:eb6ae48726f0b434e9d6ea7d36a67545",
+        "GUID:2373f786d14518f44b0f475db77ba4de"
     ],
     "includePlatforms": [
         "Editor"

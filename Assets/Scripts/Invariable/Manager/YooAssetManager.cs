@@ -76,8 +76,13 @@ namespace Invariable
         {
             BinAsset data = Resources.Load<BinAsset>("LocalAssets/WebData");
             string[] webData = ConfigUtils.ReadSafeFile<string>(data.bytes).Split('\n');
+
             ConfigUtils.SetWebData(webData);
-            YooAssets.SetDownloadSystemUnityWebRequest(CreateWebRequestWithAuth);
+
+            if (!string.IsNullOrEmpty(ConfigUtils.Username) && !string.IsNullOrEmpty(ConfigUtils.Password))
+            {
+                YooAssets.SetDownloadSystemUnityWebRequest(CreateWebRequestWithAuth);
+            }
         }
 
         /// <summary>
@@ -92,19 +97,28 @@ namespace Invariable
                 return;
             }
 
+            string dllName = "";
+
 #if UNITY_EDITOR
             Assembly hotUpdateAss = AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
             m_hotUpdateAssembly = hotUpdateAss;
             callBack?.Invoke(hotUpdateAss);
-#else
-            AsyncLoadAsset<BinAsset>("Android_HotUpdate.dll", (data) =>
+            return;
+
+#elif UNITY_ANDROID
+            dllName = "Android_HotUpdate.dll";
+
+#elif UNITY_WEBGL
+            dllName = "WebGL_HotUpdate.dll";
+#endif
+
+            AsyncLoadAsset<BinAsset>(dllName, (data) =>
             {
                 byte[] bytes = ConfigUtils.ReadSafeFile<byte[]>(data.bytes);
                 Assembly hotUpdateAss = Assembly.Load(bytes);
                 m_hotUpdateAssembly = hotUpdateAss;
                 callBack?.Invoke(hotUpdateAss);
             });
-#endif
         }
 
         /// <summary>

@@ -36,7 +36,7 @@ namespace Invariable
         {
             GameManager.Instance.InvokeEventCallBack("Launcher_ShowTips", "获取资源版本");
 
-            var operation = YooAssetManager.Instance.Package.RequestPackageVersionAsync();
+            var operation = YooAssetManager.Instance.Package.RequestPackageVersionAsync(false);
             yield return operation;
 
             if (operation.Status == EOperationStatus.Succeed)

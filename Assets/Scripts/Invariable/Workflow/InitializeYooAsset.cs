@@ -1,6 +1,10 @@
 using YooAsset;
 using System.Collections;
 
+#if UNITY_WEBGL
+using WeChatWASM;
+#endif
+
 
 
 namespace Invariable
@@ -16,7 +20,7 @@ namespace Invariable
 
         public void OnEnter()
         {
-            InitializeSystem();
+            InitializeAssetSystem();
         }
 
         public void OnExit()
@@ -32,7 +36,7 @@ namespace Invariable
         /// <summary>
         /// 初始化YooAsset资源管理系统
         /// </summary>
-        private void InitializeSystem()
+        private void InitializeAssetSystem()
         {
             if (YooAssets.Initialized)
             {
@@ -45,6 +49,8 @@ namespace Invariable
             GameManager.Instance.InvokeEventCallBack("Launcher_ShowTips", "初始化资源管理系统");
 
             YooAssets.Initialize();
+
+            YooAssets.SetOperationSystemMaxTimeSlice(1000);
 
             GameManager.Instance.InvokeEventCallBack("Launcher_ShowTips", "初始化资源管理系统，成功！");
 
@@ -77,7 +83,7 @@ namespace Invariable
             }
             else if (playMode == EPlayMode.HostPlayMode)
             {
-                string defaultHostServer = ConfigUtils.UpdatePath;
+                string defaultHostServer = ConfigUtils.CDNPath;
                 string fallbackHostServer = defaultHostServer;
                 IRemoteServices remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
                 FileSystemParameters cacheFileSystemParams = FileSystemParameters.CreateDefaultCacheFileSystemParameters(remoteServices);
@@ -86,6 +92,22 @@ namespace Invariable
                 HostPlayModeParameters createParameters = new HostPlayModeParameters();
                 createParameters.BuildinFileSystemParameters = buildinFileSystemParams;
                 createParameters.CacheFileSystemParameters = cacheFileSystemParams;
+
+                initOperation = package.InitializeAsync(createParameters);
+            }
+            else if (playMode == EPlayMode.WebPlayMode)
+            {
+                string defaultHostServer = ConfigUtils.CDNPath;
+                string fallbackHostServer = defaultHostServer;
+                var remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
+
+                WebPlayModeParameters createParameters = new WebPlayModeParameters();
+
+#if UNITY_WEBGL
+                string packageRoot = $"{WX.env.USER_DATA_PATH}/__GAME_FILE_CACHE/yoo";
+                ConfigUtils.m_localRootPath = packageRoot + "/";
+                createParameters.WebServerFileSystemParameters = WechatFileSystemCreater.CreateFileSystemParameters(packageRoot, remoteServices, null);
+#endif
 
                 initOperation = package.InitializeAsync(createParameters);
             }

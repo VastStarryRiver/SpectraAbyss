@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "cn.unity.uos.cdn": {
+      "version": "https://cnb.cool/unity/uos/UosCdnSDK.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "bb6d3a7b152662c98a7d1b2833fc4c862c4e9e1f"
+    },
+    "cn.unity.uos.launcher": {
+      "version": "https://cnb.cool/unity/uos/UOSLauncher.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+      },
+      "hash": "e1540186f8eaae4a4e0ca840d769bf9f09b5f8ec"
+    },
     "com.code-philosophy.hybridclr": {
       "version": "https://github.com/focus-creative-games/hybridclr_unity.git",
       "depth": 0,
@@ -44,6 +60,13 @@
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
+    "com.qq.weixin.minigame": {
+      "version": "https://gitee.com/wechat-minigame/minigame-tuanjie-transform-sdk.git#main",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "98c94c1219b8ddf48d2836e946c5d5d16bfd2cca"
+    },
     "com.taptap.sdk.core": {
       "version": "https://github.com/taptap/tapsdk-unity-dist.git?path=/Core#4.9.1",
       "depth": 0,
@@ -63,7 +86,7 @@
       "hash": "b59e883bd5709f6d67035f389121f23834e3c379"
     },
     "com.tuyoogame.yooasset": {
-      "version": "2.3.17",
+      "version": "2.3.18",
       "depth": 0,
       "source": "registry",
       "dependencies": {

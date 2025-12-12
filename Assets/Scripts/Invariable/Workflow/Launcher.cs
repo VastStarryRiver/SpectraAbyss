@@ -9,7 +9,7 @@ namespace Invariable
 {
     public class Launcher : MonoBehaviour
     {
-        public EPlayMode m_playMode;
+        private EPlayMode m_playMode;
         private GameLoadingPanel m_hotUpdatePanel;
 
 
@@ -24,6 +24,16 @@ namespace Invariable
                 gameManager.AddComponent<GameManager>();
             }
             DontDestroyOnLoad(gameManager);
+
+#if UNITY_EDITOR
+            m_playMode = EPlayMode.EditorSimulateMode;
+
+#elif UNITY_ANDROID
+            m_playMode = EPlayMode.HostPlayMode;
+
+#elif UNITY_WEBGL
+            m_playMode = EPlayMode.WebPlayMode;
+#endif
         }
 
         private void OnEnable()

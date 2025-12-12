@@ -6,231 +6,224 @@ using Invariable;
 
 
 
-public class ConfigTool
+namespace MyTools
 {
-    [MenuItem("Tools/导出Excel表的配置数据", false, -2)]
-    public static void ExportConfig()
+    public class ConfigTool
     {
-        if (Directory.Exists(ConfigUtils.m_configBinPath))
+        [MenuItem("VastStarryRiver/Config/导出Web配置", false, 10)]
+        public static void BuildWebBinFile()
         {
-            Directory.Delete(ConfigUtils.m_configBinPath, true);
+            using (FileStream fileStream = new FileStream(ConfigUtils.m_localRootPath + "WebData.txt", FileMode.Open))
+            {
+                using (StreamReader streamReader = new StreamReader(fileStream))
+                {
+                    ConfigUtils.SaveSafeFile(streamReader.ReadToEnd(), ConfigUtils.m_localResourcePath + "/WebData.bin");
+                }
+            }
+
+            AssetDatabase.Refresh();
         }
 
-        DirectoryInfo directoryInfo = new DirectoryInfo(ConfigUtils.m_configExcelPath);
-
-        FileInfo[] fileInfos = directoryInfo.GetFiles();
-
-        foreach (var item in fileInfos)
+        [MenuItem("VastStarryRiver/Config/导出Excel配置", false, 11)]
+        public static void ExportConfig()
         {
-            string excelPath = item.FullName.Replace("\\", "/");
-
-            using (FileStream fileStream = new FileStream(excelPath, FileMode.Open))
+            if (Directory.Exists(ConfigUtils.m_configBinPath))
             {
-                IExcelDataReader excelReader = null;
+                Directory.Delete(ConfigUtils.m_configBinPath, true);
+            }
 
-                if (excelPath.EndsWith(".xls"))
-                {
-                    excelReader = ExcelReaderFactory.CreateBinaryReader(fileStream);
-                }
-                else if (excelPath.EndsWith(".xlsx"))
-                {
-                    excelReader = ExcelReaderFactory.CreateOpenXmlReader(fileStream);
-                }
+            DirectoryInfo directoryInfo = new DirectoryInfo(ConfigUtils.m_configExcelPath);
 
-                if (excelReader != null)
+            FileInfo[] fileInfos = directoryInfo.GetFiles();
+
+            foreach (var item in fileInfos)
+            {
+                string excelPath = item.FullName.Replace("\\", "/");
+
+                using (FileStream fileStream = new FileStream(excelPath, FileMode.Open))
                 {
-                    //判断Excel文件中是否存在至少一张数据表
-                    if (excelReader.ResultsCount > 0)
+                    IExcelDataReader excelReader = null;
+
+                    if (excelPath.EndsWith(".xls"))
                     {
-                        LoadExcelRowData(excelReader);
+                        excelReader = ExcelReaderFactory.CreateBinaryReader(fileStream);
+                    }
+                    else if (excelPath.EndsWith(".xlsx"))
+                    {
+                        excelReader = ExcelReaderFactory.CreateOpenXmlReader(fileStream);
                     }
 
-                    excelReader.Dispose();
-                    excelReader.Close();
-                }
-            }
-        }
-
-        EditorUtility.ClearProgressBar();
-
-        AssetDatabase.Refresh();
-    }
-
-    [MenuItem("Tools/导出Web配置", false, -1)]
-    public static void BuildWebBinFile()
-    {
-        using (FileStream fileStream = new FileStream(ConfigUtils.m_localRootPath + "WebData.txt", FileMode.Open))
-        {
-            using (StreamReader streamReader = new StreamReader(fileStream))
-            {
-                ConfigUtils.SaveSafeFile(streamReader.ReadToEnd(), ConfigUtils.m_localResourcePath + "/WebData.bin");
-            }
-        }
-
-        AssetDatabase.Refresh();
-    }
-
-    [MenuItem("Tools/移动热更新DLL", false, 0)]
-    public static void MoveHotUpdateDLL()
-    {
-        string platform = EditorUserBuildSettings.activeBuildTarget.ToString();
-        string path = ConfigUtils.m_localRootPath + "HybridCLRData/HotUpdateDlls/" + platform + "/HotUpdate.dll";
-        byte[] bytes = File.ReadAllBytes(path);
-        ConfigUtils.SaveSafeFile(bytes, ConfigUtils.m_hotUpdateDllPath + "/" + platform + "/HotUpdate.dll.bin");
-        AssetDatabase.Refresh();
-    }
-
-
-
-    private static void LoadExcelRowData(IExcelDataReader excelReader)
-    {
-        var clientColumnIndex = new List<int>();
-        var serverColumnIndex = new List<int>();
-        var fieldNameList = new List<string>();
-        var dataTypeList = new List<string>();
-        var clientConfigData = new Dictionary<string, Dictionary<string, string>>();
-        var serverConfigData = new Dictionary<string, Dictionary<string, string>>();
-
-        do
-        {
-            clientColumnIndex.Clear();
-            serverColumnIndex.Clear();
-            fieldNameList.Clear();
-            dataTypeList.Clear();
-            clientConfigData.Clear();
-            serverConfigData.Clear();
-
-            string key = "";
-            int keyIndex = 1;
-
-            Dictionary<string, int> configKey = new Dictionary<string, int>();
-
-            while (excelReader.Read()/*下一行*/)
-            {
-                List<string> columnData = LoadExcelColumnData(excelReader);
-
-                if (excelReader.Depth == 0)
-                {
-                    continue;
-                }
-                else if (excelReader.Depth == 1)
-                {
-                    for (int i = 0; i < columnData.Count; i++)
+                    if (excelReader != null)
                     {
-                        if (columnData[i] == "1")
+                        //判断Excel文件中是否存在至少一张数据表
+                        if (excelReader.ResultsCount > 0)
                         {
-                            clientColumnIndex.Add(i);
+                            LoadExcelRowData(excelReader);
                         }
-                        else if (columnData[i] == "2")
-                        {
-                            serverColumnIndex.Add(i);
-                        }
-                        else if (columnData[i] == "3")
-                        {
-                            clientColumnIndex.Add(i);
-                            serverColumnIndex.Add(i);
-                        }
-                    }
 
-                    continue;
-                }
-                else if (excelReader.Depth == 2)
-                {
-                    fieldNameList = columnData;
-
-                    for (int i = 0; i < columnData.Count; i++)
-                    {
-                        if (columnData[i] == "Index")
-                        {
-                            keyIndex = i;
-                            break;
-                        }
-                    }
-
-                    continue;
-                }
-                else if (excelReader.Depth == 3)
-                {
-                    dataTypeList = columnData;
-                    continue;
-                }
-
-                if (columnData[0] == "NO")
-                {
-                    continue;
-                }
-
-                for (int i = 1; i < columnData.Count; i++)
-                {
-                    if (clientColumnIndex.Contains(i))
-                    {
-                        LoadExcelData(dataTypeList[i], fieldNameList[i], columnData[i], ref clientConfigData, columnData[keyIndex]);
-                    }
-
-                    if (serverColumnIndex.Contains(i))
-                    {
-                        LoadExcelData(dataTypeList[i], fieldNameList[i], columnData[i], ref serverConfigData, columnData[keyIndex]);
+                        excelReader.Dispose();
+                        excelReader.Close();
                     }
                 }
-
-                if (columnData[0] == "END")
-                {
-                    goto over;
-                }
-
-                EditorUtility.DisplayProgressBar("配置表" + excelReader.Name + "正在导出数据中", "导出进度" + (excelReader.Depth + 1) + "/" + excelReader.RowCount, (excelReader.Depth + 1) * 1.0f / excelReader.RowCount);
             }
 
-        over:;
+            EditorUtility.ClearProgressBar();
 
-            SaveConfigData("Client", excelReader.Name, clientConfigData);
-            //SaveConfigData("Server", excelReader.Name, serverConfigData);
+            AssetDatabase.Refresh();
         }
-        while (excelReader.NextResult()/*下一张表*/);
-    }
 
-    private static List<string> LoadExcelColumnData(IExcelDataReader excelReader)
-    {
-        List<string> columnData = new List<string>();
 
-        for (int i = 0; i < excelReader.FieldCount; i++)
+
+        private static void LoadExcelRowData(IExcelDataReader excelReader)
         {
-            string value;
+            var clientColumnIndex = new List<int>();
+            var serverColumnIndex = new List<int>();
+            var fieldNameList = new List<string>();
+            var dataTypeList = new List<string>();
+            var clientConfigData = new Dictionary<string, Dictionary<string, string>>();
+            var serverConfigData = new Dictionary<string, Dictionary<string, string>>();
 
-            try
+            do
             {
-                value = excelReader.GetString(i);
+                clientColumnIndex.Clear();
+                serverColumnIndex.Clear();
+                fieldNameList.Clear();
+                dataTypeList.Clear();
+                clientConfigData.Clear();
+                serverConfigData.Clear();
+
+                string key = "";
+                int keyIndex = 1;
+
+                Dictionary<string, int> configKey = new Dictionary<string, int>();
+
+                while (excelReader.Read()/*下一行*/)
+                {
+                    List<string> columnData = LoadExcelColumnData(excelReader);
+
+                    if (excelReader.Depth == 0)
+                    {
+                        continue;
+                    }
+                    else if (excelReader.Depth == 1)
+                    {
+                        for (int i = 0; i < columnData.Count; i++)
+                        {
+                            if (columnData[i] == "1")
+                            {
+                                clientColumnIndex.Add(i);
+                            }
+                            else if (columnData[i] == "2")
+                            {
+                                serverColumnIndex.Add(i);
+                            }
+                            else if (columnData[i] == "3")
+                            {
+                                clientColumnIndex.Add(i);
+                                serverColumnIndex.Add(i);
+                            }
+                        }
+
+                        continue;
+                    }
+                    else if (excelReader.Depth == 2)
+                    {
+                        fieldNameList = columnData;
+
+                        for (int i = 0; i < columnData.Count; i++)
+                        {
+                            if (columnData[i] == "Index")
+                            {
+                                keyIndex = i;
+                                break;
+                            }
+                        }
+
+                        continue;
+                    }
+                    else if (excelReader.Depth == 3)
+                    {
+                        dataTypeList = columnData;
+                        continue;
+                    }
+
+                    if (columnData[0] == "NO")
+                    {
+                        continue;
+                    }
+
+                    for (int i = 1; i < columnData.Count; i++)
+                    {
+                        if (clientColumnIndex.Contains(i))
+                        {
+                            LoadExcelData(dataTypeList[i], fieldNameList[i], columnData[i], ref clientConfigData, columnData[keyIndex]);
+                        }
+
+                        if (serverColumnIndex.Contains(i))
+                        {
+                            LoadExcelData(dataTypeList[i], fieldNameList[i], columnData[i], ref serverConfigData, columnData[keyIndex]);
+                        }
+                    }
+
+                    if (columnData[0] == "END")
+                    {
+                        goto over;
+                    }
+
+                    EditorUtility.DisplayProgressBar("配置表" + excelReader.Name + "正在导出数据中", "导出进度" + (excelReader.Depth + 1) + "/" + excelReader.RowCount, (excelReader.Depth + 1) * 1.0f / excelReader.RowCount);
+                }
+
+            over:;
+
+                SaveConfigData("Client", excelReader.Name, clientConfigData);
+                //SaveConfigData("Server", excelReader.Name, serverConfigData);
             }
-            catch
+            while (excelReader.NextResult()/*下一张表*/);
+        }
+
+        private static List<string> LoadExcelColumnData(IExcelDataReader excelReader)
+        {
+            List<string> columnData = new List<string>();
+
+            for (int i = 0; i < excelReader.FieldCount; i++)
             {
-                value = excelReader.GetDouble(i).ToString();
+                string value;
+
+                try
+                {
+                    value = excelReader.GetString(i);
+                }
+                catch
+                {
+                    value = excelReader.GetDouble(i).ToString();
+                }
+
+                columnData.Add(value);
             }
 
-            columnData.Add(value);
+            return columnData;
         }
 
-        return columnData;
-    }
-
-    private static void LoadExcelData(string type, string name, string data, ref Dictionary<string, Dictionary<string, string>> content, string key)
-    {
-        if (!content.ContainsKey(key))
+        private static void LoadExcelData(string type, string name, string data, ref Dictionary<string, Dictionary<string, string>> content, string key)
         {
-            content[key] = new Dictionary<string, string>();
+            if (!content.ContainsKey(key))
+            {
+                content[key] = new Dictionary<string, string>();
+            }
+
+            content[key][name] = data;
         }
 
-        content[key][name] = data;
-    }
-
-    private static void SaveConfigData(string platform, string name, Dictionary<string, Dictionary<string, string>> configData)
-    {
-        if (configData.Count <= 0)
+        private static void SaveConfigData(string platform, string name, Dictionary<string, Dictionary<string, string>> configData)
         {
-            return;
+            if (configData.Count <= 0)
+            {
+                return;
+            }
+
+            ConfigUtils.SaveSafeFile(configData, ConfigUtils.m_configBinPath + "/" + name + ".bin");
+
+            AssetDatabase.Refresh();
         }
-
-        ConfigUtils.SaveSafeFile(configData, ConfigUtils.m_configBinPath + "/" + name + ".bin");
-
-        AssetDatabase.Refresh();
     }
 }

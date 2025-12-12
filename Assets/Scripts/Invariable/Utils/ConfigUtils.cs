@@ -27,8 +27,14 @@ namespace Invariable
         public readonly static string m_localResourcePath = m_localRootPath + "Assets/Resources/LocalAssets";
         public readonly static string m_keystorePath = m_localRootPath + "SpectraAbyss.keystore";
         public readonly static string m_hotUpdateDllPath = m_localRootPath + "Assets/GameAssets/DLL";
+        public readonly static string m_cdnPath = m_localRootPath + "CDN";
+        public readonly static string m_miniBuildPath = m_localRootPath + "Build";
+        public readonly static string m_miniWebglPath = m_miniBuildPath + "/webgl";
 
-        public static string UpdatePath//热更新资源的地址
+        /// <summary>
+        /// CDN地址
+        /// </summary>
+        public static string CDNPath
         {
             get
             {
@@ -36,25 +42,48 @@ namespace Invariable
             }
         }
 
-        public static string WebIpv4Str//服务器的公网地址
+        /// <summary>
+        /// 服务器的公网地址
+        /// </summary>
+        public static string WebIpv4Str
         {
             get
             {
-                string[] list = GetWebData(1).Split(":");
+                string data = GetWebData(1);
+
+                if (string.IsNullOrEmpty(data))
+                {
+                    return "";
+                }
+
+                string[] list = data.Split(":");
                 return list[0];
             }
         }
 
-        public static int WebPortInt//服务器用于连接客户端的端口号
+        /// <summary>
+        /// 服务器用于连接客户端的端口号
+        /// </summary>
+        public static int WebPortInt
         {
             get
             {
-                string[] list = GetWebData(1).Split(":");
+                string data = GetWebData(1);
+
+                if (string.IsNullOrEmpty(data))
+                {
+                    return 0;
+                }
+
+                string[] list = data.Split(":");
                 return int.Parse(list[1]);
             }
         }
 
-        public static string Username//请求下载的认证用户名
+        /// <summary>
+        /// 请求下载的认证用户名
+        /// </summary>
+        public static string Username
         {
             get
             {
@@ -62,13 +91,18 @@ namespace Invariable
             }
         }
 
-        public static string Password//请求下载的认证密码
+        /// <summary>
+        /// 请求下载的认证密码
+        /// </summary>
+        public static string Password
         {
             get
             {
                 return GetWebData(3);
             }
         }
+
+
 
         public static void GetConfigData(string configName, int id, string name = "", Action<string> callBack = null)
         {
@@ -333,6 +367,11 @@ namespace Invariable
 
         private static string GetWebData(int index)
         {
+            if (m_webData == null || index >= m_webData.Length)
+            {
+                return "";
+            }
+
             string text = m_webData[index].Replace("\r", "");
             return text;
         }

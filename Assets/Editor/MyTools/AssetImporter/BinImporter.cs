@@ -3,15 +3,20 @@ using UnityEditor.AssetImporters;
 using UnityEngine;
 using Invariable;
 
-[ScriptedImporter(1, ".bin")]
-public class BinImporter : ScriptedImporter
+
+
+namespace MyTools
 {
-    public override void OnImportAsset(AssetImportContext ctx)
+    [ScriptedImporter(1, ".bin")]
+    public class BinImporter : ScriptedImporter
     {
-        byte[] bytes = File.ReadAllBytes(ctx.assetPath);
-        BinAsset asset = ScriptableObject.CreateInstance<BinAsset>();
-        asset.bytes = bytes;
-        ctx.AddObjectToAsset("main obj", asset);
-        ctx.SetMainObject(asset);
+        public override void OnImportAsset(AssetImportContext ctx)
+        {
+            byte[] bytes = File.ReadAllBytes(ctx.assetPath);
+            BinAsset asset = ScriptableObject.CreateInstance<BinAsset>();
+            asset.bytes = bytes;
+            ctx.AddObjectToAsset("main obj", asset);
+            ctx.SetMainObject(asset);
+        }
     }
 }

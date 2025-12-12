@@ -7,6 +7,12 @@ public class LoginPanel : UIPanel
 {
     private void Awake()
     {
+#if !UNITY_EDITOR && UNITY_WEBGL
+        Utils.SetImage(gameObject, "parent/Btn_Login", "Atlas00/00_login2");
+#else
+        Utils.SetImage(gameObject, "parent/Btn_Login", "Atlas00/00_login1");
+#endif
+
         Utils.PlayAnimation(gameObject, null, "Play", WrapMode.Once, () =>
         {
             Utils.SetImage(gameObject, "parent/Img_State1", "Atlas02/02_rwtx5");
@@ -31,6 +37,11 @@ public class LoginPanel : UIPanel
                 LanguageManager.Instance.SetLanguageKey("English");
             });
         });
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.InvokeEventCallBack("Launcher_StartGame");
     }
 
 
