@@ -60,6 +60,16 @@ namespace HotUpdate
 
                 if (type == null)
                 {
+                    type = Type.GetType("HotUpdate." + componentName);
+                }
+
+                if (type == null)
+                {
+                    type = Type.GetType("Invariable." + componentName);
+                }
+
+                if (type == null)
+                {
                     type = FindTypeTool.GetComponentType(componentName);
                 }
 
