@@ -34,7 +34,7 @@ namespace Invariable
 
                 wXUpdateManager.OnUpdateReady((result) =>
                 {
-                    WX.cloud.Init(new ICloudConfig() { env = "cloud1-1g2b6j3i1f54bc8f" });
+                    WX.cloud.Init(new ICloudConfig() { env = "" });
                     callBack?.Invoke();
                 });
 
@@ -46,7 +46,7 @@ namespace Invariable
                     }
                     else
                     {
-                        WX.cloud.Init(new ICloudConfig() { env = "cloud1-1g2b6j3i1f54bc8f" });
+                        WX.cloud.Init(new ICloudConfig() { env = "" });
                         callBack?.Invoke();
                     }
                 });
