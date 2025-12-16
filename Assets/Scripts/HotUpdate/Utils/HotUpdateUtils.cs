@@ -56,16 +56,16 @@ namespace HotUpdate
 
             if (component == null)
             {
+                component = gameObject.GetComponent("HotUpdate." + componentName);
+            }
+
+            if (component == null)
+            {
                 Type type = Type.GetType(componentName);
 
                 if (type == null)
                 {
                     type = Type.GetType("HotUpdate." + componentName);
-                }
-
-                if (type == null)
-                {
-                    type = Type.GetType("Invariable." + componentName);
                 }
 
                 if (type == null)

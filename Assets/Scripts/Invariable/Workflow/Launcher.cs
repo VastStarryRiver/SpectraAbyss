@@ -16,15 +16,6 @@ namespace Invariable
 
         private void Awake()
         {
-            DebugLogTool.InitDebugErrorLog();
-            GameObject gameManager = GameObject.Find("GameManager");
-            if (gameManager == null)
-            {
-                gameManager = new GameObject("GameManager");
-                gameManager.AddComponent<GameManager>();
-            }
-            DontDestroyOnLoad(gameManager);
-
 #if UNITY_EDITOR
             m_playMode = EPlayMode.EditorSimulateMode;
 
@@ -34,6 +25,11 @@ namespace Invariable
 #elif UNITY_WEBGL
             m_playMode = EPlayMode.WebPlayMode;
 #endif
+
+            DebugLogTool.InitDebugErrorLog();
+
+            Utils.CreateManagerInstance("GameManager");
+            Utils.CreateManagerInstance("AudioManager", new string[] { "AudioListener" });
         }
 
         private void OnEnable()

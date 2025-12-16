@@ -152,11 +152,10 @@ namespace Invariable
 
         public static void RestartGame()
         {
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && !UNITY_WEBGL
             Application.logMessageReceived -= DebugLogTool.ShowDebugErrorLog;
 #endif
             UIManager.Instance.CloseAllUIPanel();
-
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -518,12 +517,83 @@ namespace Invariable
             if (wrapMode == WrapMode.Once)
             {
                 yield return new WaitWhile(() => animation.isPlaying);
+                callBack?.Invoke();
+            }
+        }
 
-                if (callBack != null)
+        public static void CreateManagerInstance(string managerName, string[] components = null)
+        {
+            GameObject obj = GameObject.Find(managerName);
+
+            if (obj != null)
+            {
+                return;
+            }
+
+            obj = new GameObject(managerName);
+
+            if (components != null && components.Length > 0)
+            {
+                for (int i = 0; i < components.Length; i++)
                 {
-                    callBack.Invoke();
+                    AddComponent(obj, "", components[i]);
                 }
             }
+
+            AddComponent(obj, "", managerName);
+
+            UnityEngine.Object.DontDestroyOnLoad(obj);
+        }
+
+        public static Component AddComponent(UnityEngine.Object obj, string childPath, string componentName)
+        {
+            GameObject gameObject = Utils.GetGameObject(obj);
+
+            if (gameObject == null)
+            {
+                return null;
+            }
+
+            if (!string.IsNullOrEmpty(childPath))
+            {
+                Transform trans = gameObject.transform.Find(childPath);
+
+                if (trans == null)
+                {
+                    return null;
+                }
+
+                gameObject = trans.gameObject;
+            }
+
+            Component component = gameObject.GetComponent(componentName);
+
+            if (component == null)
+            {
+                component = gameObject.GetComponent("Invariable." + componentName);
+            }
+
+            if (component == null)
+            {
+                Type type = Type.GetType(componentName);
+
+                if (type == null)
+                {
+                    type = Type.GetType("Invariable." + componentName);
+                }
+
+                if (type == null)
+                {
+                    type = FindTypeTool.GetComponentType(componentName);
+                }
+
+                if (type != null)
+                {
+                    component = gameObject.AddComponent(type);
+                }
+            }
+
+            return component;
         }
     }
 }
