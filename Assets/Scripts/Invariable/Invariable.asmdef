@@ -1,0 +1,24 @@
+{
+    "name": "Invariable",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:e34a5702dd353724aa315fb8011f08c3",
+        "GUID:543a2a0410124c04dab2751abcaf6d87",
+        "GUID:67db3e66202e3dc40944076d390a96b0",
+        "GUID:13ba8ce62aa80c74598530029cb2d649",
+        "GUID:afccbff78309d9e49a78ed2fd8e69c02",
+        "GUID:9b141a98a376450991ae06af55d1ecb2",
+        "GUID:65753b4018ebb4a9bbea17491706dcd8",
+        "CloudService"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

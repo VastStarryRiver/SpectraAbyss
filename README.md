@@ -1,202 +1,190 @@
 # 框架内容概述
 
-Unity 客户端框架。用 HybridCLR 做代码热更，用 YooAsset 做资源热更，启动流程、UI、配置、网络和 SDK 都收在同一套程序集分层里。
+## 1. 文档
 
-| 项 | 值 |
-| --- | --- |
-| 引擎 | Unity 2022.3.51f1c1 |
-| 启动场景 | `Assets/Scenes/Start.unity` |
-| 主目标 | Android（最低 API 22），竖屏 |
+先阅读本文件，再按需求阅读对应文档：
 
-## 能力概览
+1. [FrameworkAndProcess.md](Doc/FrameworkAndProcess.md) `框架架构与运行流程`
+   - 项目技术栈
+   - 程序集边界
+   - 启动、资源更新、HybridCLR 热更新流程
+   - 管理器、事件、计时器、UI、配置、UOS 云存档等模块
+2. [ScriptDevGuide.md](Doc/ScriptDevGuide.md) `脚本开发与修改指南`
+   - 新脚本应该放在哪里
+   - 新增 UI、业务功能、配置表、资源、平台能力的方法
+   - 常用 API、命名约定和修改检查清单
+3. [HotUpdateBuildAdapt.md](Doc/HotUpdateBuildAdapt.md) `构建热更新与平台适配`
+   - 编辑器 / 安卓 / 苹果 / 鸿蒙差异
+   - HybridCLR DLL、YooAsset、CDN 与 APP 构建顺序
+   - 热更新发布边界（含云函数上传与远程调用）
+4. [NewProjectSetup.md](Doc/NewProjectSetup.md) `新项目准备`
+   - 复制工程后的环境恢复与版本控制注意
+   - UOS 后台、商店包名、签名与网络权限
+   - 工程内配置修改、云函数部署、首发构建与验证清单
 
-- **代码热更**：HybridCLR 编译 `HotUpdate` 程序集，产物以 `.bin` 放进 `GameAssets/DLL`，随资源包下发。
-- **资源热更**：YooAsset 2.3.18，资源包名 `MyPackage`。编辑器走 `EditorSimulateMode`，真机走 `HostPlayMode`，远端地址由 `RemoteServices` 提供。
-- **启动状态机**：`Launcher` 依次执行初始化资源系统、检查清单、下载资源、热更结束，再进入游戏。
-- **UI**：分层 Canvas（`UI_Root/Canvas_n/Ts_Panel`），`UIManager` 管理面板生命周期，热更侧用 `HotUpdateUtils.OpenUIPrefabPanel` 打开界面。
-- **配置**：Excel 导出为 `.bin`，运行时按 `Config_{表名}` 地址加载；多语言读 `Language` 表。
-- **网络**：`MessageNetManager` 负责与服务器通信。
-- **SDK**：接入第三方登录。
-- **实体裁剪**：`CullingGroupManager` 按包围球控制场景对象显隐。
+## 2. 亮点分析
 
-## 程序集分层
+| 维度 | 质量 | 亮点 | 关键实现 |
+|---|---|---|---|
+| 架构与热更 | 优 | 单向依赖零反向引用，AOT↔热更仅 3 处反射触点；热更 DLL / 配置 bytes / UI Prefab 全走 YooAsset，可纯热更发布；HybridCLR AOT 元数据并行加载 | `HotUpdateOver` / `Utils` / `YooAssetManager` |
+| 平台适配 | 优 | 编辑器 / 安卓 / 苹果 / 鸿蒙统一入口；设备访客登录、TMP 键盘、`Screen.safeArea` | `SdkManager`、`GetPlatformId` |
+| 启动流程 | 优 | 状态机串行驱动启动链，各节点职责单一，失败可定位到具体节点 | `Launcher`、`StateMachine`、`InitializeYooAsset` → `HotUpdateOver` |
+| 事件与计时 | 优 | 泛型事件总线触发快照（快照列表经 `PoolUtils` 池化复用）并逐 listener 隔离；秒/帧双最小堆计时器由 `Update` 驱动；事件 / 计时器 key 全常量化 | `GameManager`、`InvariableConst` / `HotUpdateConst` |
+| 配置表系统 | 优 | CFGT magic + schemaHash 三处同源；导表严格失败保证一致性；三层缓存与大表分帧物化；独立回读交叉验证 | `ConfigReader` / `ConfigManagerCore` / `ConfigValidator`、schemaHash |
+| UI 系统 | 优 | 打开页面单一入口且加载中去重；UIPanel / UIPopup 职责切分；FloatText 内部 item 对象池复用、播完自动隐藏与对称清理 | `Utils.OpenUIPrefabPanel`、`UIPanel` / `UIPopup`、`FloatTextPanel` |
+| 音频系统 | 优 | BGM 单通道循环，SFX 每 clip 一源打断重播；仅挂载播放；音量经平台层本地持久化 | `AudioManager`、`SdkManager` |
+| 资源与性能 | 优 | 同地址在途去重；闲置句柄 180s / 30s 扫描逐出并白名单兜底；配置分帧物化、字符串缓存、`PoolUtils` 对象池降峰值 | `YooAssetManager`、`ConfigManagerCore`、`TryUnloadUnusedAsset` |
+| 云服务 | 优 | 密钥走环境变量分层；写后 2s 防抖 + 串行上传 + dirty 重标记；世界榜/日榜快照增量维护 Top100，查看只读 3 次请求；命名空间服务端自拼 | `CloudHelper` / `CloudManager` / `SdkManager`、`ReportRankScore` / `GetRankList` |
+| 编辑器工具链 | 优 | Excel→bytes→生成代码→运行时校验→独立回读闭环；菜单 priority 编码流水线顺序；生成代码 UTF-8 无 BOM + LF + 防注入 | `ConfigImporter` / `CodeGenerator` / `DllTool` / `AssetBundleTool` |
 
-| 程序集 | 位置 | 职责 |
-| --- | --- | --- |
-| `Invariable` | `Assets/Scripts/Invariable` | AOT 常驻：启动、资源、管理器、通用组件。包体更新才能改。 |
-| `HotUpdate` | `Assets/Scripts/HotUpdate` | 热更逻辑：登录等业务 UI、开局流程。只引用 `Invariable`。 |
-| `MyTools` | `Assets/Editor/MyTools` | 编辑器工具：配置导出、图集、打包等。 |
+## 3. 一句话概述
 
-`Invariable` 依赖 YooAsset、UniTask、DOTween、TextMesh Pro、ExcelDataReader 等。`HotUpdate` 被 HybridCLR 标为热更程序集。
+这是一个基于团结引擎1.9.3的 3D APP 框架，使用：
 
-## 目录
+- `Invariable` 程序集承载不可热更的启动框架、平台 SDK、资源管理和基础组件；
+- `HotUpdate` 程序集承载可通过 HybridCLR 更新的业务代码、UI 脚本和生成配置；
+- `CloudService` 程序集承载 UOS Func Stateless 云函数与云存档数据模型；
+- YooAsset 管理远程资源和热更新 DLL；
+- 真机用设备访客换 UOS token，热更走 HostPlayMode；
+- 启动完成后通过反射调用 `HotUpdate.StartGame.Play()` 进入业务层。
 
-```
-CometRider/
-├── Assets/
-│   ├── Scenes/Start.unity              # 唯一进包场景
-│   ├── Scripts/
-│   │   ├── Invariable/
-│   │   │   ├── Workflow/               # Launcher、热更状态节点、RemoteServices
-│   │   │   ├── Manager/                # UI / 音频 / 语言 / 网络 / SDK / 资源 / 裁剪
-│   │   │   ├── Component/              # UIButton、LoopScrollList、Rocker、圆形图等
-│   │   │   ├── Utils/                  # Singleton、状态机、配置读写、日志
-│   │   │   └── ScriptableObject/       # BinAsset
-│   │   └── HotUpdate/
-│   │       ├── UI/                     # 业务面板（如 LoginPanel）
-│   │       ├── Workflow/               # 热更完成后的开局逻辑
-│   │       └── Utils/                  # 热更侧打开 UI、动态加组件
-│   ├── GameAssets/                     # YooAsset 收集根目录
-│   │   ├── Atlas/                      # Atlas00–03
-│   │   ├── Prefabs/UI/                 # CommonPanel、Workflow
-│   │   ├── Config/                     # Language / Player / RoleRune 等 .bin
-│   │   ├── Audios/
-│   │   ├── Materials/
-│   │   ├── Animation/
-│   │   ├── Png/
-│   │   ├── Scenes/
-│   │   ├── DLL/Android/                # HotUpdate 与 AOT 补充 DLL
-│   │   └── LocalAssets/
-│   ├── Resources/LocalAssets/          # 启动必需：UI_Root、SceneGameObject、HotUpdatePanel
-│   ├── StreamingAssets/yoo/            # 内置资源清单
-│   ├── Editor/MyTools/                 # 配置导出、图集、Bin 导入、打包脚本
-│   ├── ToolPackage/                    # UniTask 2.5.10、DOTween、TextMesh Pro
-│   └── Plugins/                        # ExcelDataReader、Android Gradle 模板
-├── Packages/manifest.json
-└── ProjectSettings/
+核心调用链：
+
+```text
+Assets/Scenes/Start.scene
+  -> Invariable.Launcher
+  -> InitializeYooAsset
+  -> CheckCatalogUpdate
+  -> CheckResourceUpdates
+  -> HotUpdateOver
+  -> CloudManager.InitCloudData
+  -> YooAssetManager.PreLoadDll
+  -> 反射 HotUpdate.StartGame.Play
+  -> Utils.OpenUIPrefabPanel("MainPanel", 0)
 ```
 
-## 启动流程
+## 4. 最重要的目录边界
 
-`Start` 场景挂 `Launcher`。`Awake` 里按平台选播放模式，并创建 `GameManager`、`AudioManager`。
+```text
+Assets/
+├─ Scripts/
+│  ├─ Invariable/          # 不可热更：启动、平台、资源、基础能力、云存档客户端、配置底座
+│  ├─ HotUpdate/           # 可热更：业务、UI、生成配置
+│  └─ CloudService/        # 不可热更：UOS 云函数与云存档数据模型
+├─ GameAssets/             # YooAsset 收集的动态资源
+│  ├─ DLL/{Android|iOS|OpenHarmony}/  # 加密后的 HotUpdate/AOT DLL .bin
+│  ├─ Prefabs/UI/          # UI 预制体
+│  ├─ Prefabs/Model/       # 运行时 3D 预制体
+│  ├─ Models/Fbx/          # FBX 源（Prefab 依赖）
+│  ├─ Models/Textures/     # 3D 贴图
+│  ├─ Audios/              # 音频
+│  ├─ Atlas/               # 图集
+│  ├─ Animation/           # 动画
+│  ├─ Materials/           # 材质
+│  ├─ Png/                 # 独立图片
+│  ├─ Config/              # 导表 bytes（YooAsset Config 组）
+│  └─ Scenes/              # 动态场景（含 3D 世界相机）
+├─ Resources/LocalAssets/  # 首包本地资源：加载面板
+├─ Scenes/                 # 唯一构建场景 Start.scene
+├─ ProjectSettings/        # UIParticle 等设置资产
+├─ Editor/MyTools/         # 编辑器工具（仅 Editor 平台）
+│  ├─ Config/              # Excel 导表与校验
+│  ├─ DllTool/             # HybridCLR DLL 生成与复制
+│  ├─ AssetBundle/         # YooAsset Bundle 构建
+│  ├─ CustomBuild/         # 安卓/苹果/鸿蒙打包与 CDN 复制
+│  ├─ AssetImporter/       # .bin 导入为 BinAsset
+│  ├─ AssetProcess/        # 音频/图片/图集/3D 模型导入设置（VastStarryRiver/资源处理 菜单）
+│  ├─ AtlasBuilder/        # 通用纹理打包（多图合 Multiple Sprite PNG，ContextMenu BuildAtlas，输出在 Editor 目录）
+│  └─ InspectorEditor/     # 自定义 Inspector（UIButtonEditor）
+├─ ToolPackage/            # 本地第三方库
+│  ├─ DOTween/             # 预编译 DLL + Modules 源码
+│  ├─ TextMesh Pro/
+│  ├─ UniTask/
+│  └─ YooAsset/            # 工程内 YooAsset 扩展
+├─ Plugins/                # 预编译库（ExcelDataReader.dll 等）
+├─ UOSLauncherEncrypt/     # UOS Launcher 自带加密模块，勿改
+├─ HybridCLRGenerate/      # HybridCLR 生成物（link.xml、AOTGenericReferences.cs）
+└─ Settings/               # 工程设置资产
 
-```
-InitializeYooAsset
-        ↓
-CheckCatalogUpdate
-        ↓
-CheckResourceUpdates
-        ↓
-HotUpdateOver
-        ↓
-Launcher_StartGame → 销毁热更界面与 Launcher
-```
-
-编辑器默认 `EditorSimulateMode`，Android 默认 `HostPlayMode`。进度和文案通过事件 `Launcher_ShowProgress` / `Launcher_ShowTips` 刷新 `HotUpdatePanel`。
-
-启动时若不存在，会从 `Resources/LocalAssets` 实例化并 `DontDestroyOnLoad`：
-
-- `UI_Root`：UI 相机与分层 Canvas
-- `SceneGameObject`：场景主相机
-
-## 资源与寻址
-
-YooAsset 包 `MyPackage` 开启 Addressable。收集规则见 `Assets/AssetBundleCollectorSetting.asset`。
-
-| 分组 | 收集路径 | 地址规则 |
-| --- | --- | --- |
-| Animation | `GameAssets/Animation` | 组名 + 文件名 |
-| Atlas | `GameAssets/Atlas/Atlas00`–`03` | 组名 + 文件名，按 Collector 打包 |
-| Audios | `GameAssets/Audios` | 组名 + 文件名 |
-| Config | `GameAssets/Config` | 组名 + 文件名 |
-| Materials | `GameAssets/Materials` | 组名 + 文件名 |
-| Png | `GameAssets/Png` | 组名 + 文件名 |
-| Prefabs | `GameAssets/Prefabs/UI` | 组名 + 文件名，按 Collector 打包 |
-| Scenes | `GameAssets/Scenes` | 组名 + 文件名 |
-| DLL | `GameAssets/DLL` | 文件夹 + 文件名 |
-| LocalAssets | `GameAssets/LocalAssets` | 组名 + 文件名（带 LocalAssets 标签） |
-
-运行时常用地址：
-
-- UI：`Prefabs_{面板名}`
-- 音频：`Audios_{文件名}`
-- 配置：`Config_{表名}`
-- 图集 / 材质：由 `Utils.SetImage` / `Utils.SetGray` 按路径拼 key
-
-真机走 Host 模式时，`RemoteServices` 按本地环境配置拼下载地址。环境相关文件不进库。
-
-## 配置表
-
-菜单：**Config**（编辑器自定义菜单下）
-
-| 菜单 | 作用 |
-| --- | --- |
-| 导出 Web 配置 | 把本地环境配置导出为运行时可用的二进制 |
-| 导出 Excel 配置 | 读取根目录 `Excel/`，按 Sheet 导出到 `Assets/GameAssets/Config/{Sheet名}.bin` |
-
-Excel 约定（从第 0 行起）：
-
-1. 第 0 行忽略
-2. 第 1 行：`1` 客户端、`2` 服务端、`3` 两端
-3. 第 2 行：字段名；列名为 `Index` 的列作为主键
-4. 第 3 行：类型
-5. 数据行；首列为 `NO` 跳过，`END` 结束当前表
-
-`.bin` 由编辑器导出，`BinImporter` 把它导入成 `BinAsset`，运行时用 `ConfigUtils.GetConfigData` 取值。
-
-`Utils.GetetTextByKey` 按 `LanguageManager.LanguageKey`（`Chinese` / `English`）读 `Language` 表。未设置时：系统 `zh-CN` 用中文，其余默认中文。
-
-## 运行时模块
-
-| 类型 | 说明 |
-| --- | --- |
-| `GameManager` | 启动事件总线（`Launcher_*`） |
-| `YooAssetManager` | 异步加载资源 |
-| `UIManager` | 面板注册与关闭 |
-| `AudioManager` | 按名加载并播放 AudioClip |
-| `LanguageManager` | 语言 key，切换后可重启场景 |
-| `SdkManager` | 第三方登录 |
-| `MessageNetManager` | 网络收发、`BindReceiveMessage` / `Send` |
-| `CullingGroupManager` | 实体进出视野时显隐 |
-| `UIPanel` / `UIPopup` | 面板基类；弹窗用 DOTween 缩放 |
-| `UIButton` | 单击 / 双击 / 长按 / 按下抬起，可转发给 ScrollRect |
-| `LoopScrollList` | 横/纵向循环列表 |
-| `Rocker` | 虚拟摇杆 |
-| `CircleImage` / `CircleRawImage` | 圆形裁剪 |
-| `DebugLogTool` | 真机错误日志落盘 |
-
-热更侧打开界面：
-
-```csharp
-HotUpdateUtils.OpenUIPrefabPanel("Prefabs/UI/Workflow/LoginPanel", 0);
+Excel/                     # 配置源文件（Player.xlsx、RoleRune.xlsx）
 ```
 
-## 本地开发
+## 5. 修改位置快速决策
 
-1. 安装 **Unity 2022.3.51f1c1**（或同系列 2022.3 LTS），用 Hub 打开本仓库根目录。
-2. 等 Package Manager 拉齐依赖（YooAsset、HybridCLR、Spine 等走 Git / OpenUPM）。
-3. 打开 `Assets/Scenes/Start.unity`，进入 Play。编辑器走模拟模式，不访问远端资源。
-4. 若要导出配置：把 Excel 放到仓库根目录 `Excel/`，执行 **Config → 导出 Excel 配置**。
-5. 真机 Host 模式所需的环境配置放在本地，不要提交。
+| 需求 | 默认修改位置 | 是否可只发布热更新 |
+|---|---|---:|
+| 新玩法、数值逻辑、业务状态 | `Assets/Scripts/HotUpdate` | 是 |
+| 新 UI 页面脚本 | `Assets/Scripts/HotUpdate/UI` | 是，但预制体也要进入 YooAsset 更新 |
+| 修改 Excel 数值 | `Excel`，然后重新导出配置 | 是 |
+| UI 基础控件、资源框架、启动链 | `Assets/Scripts/Invariable` | 否，通常需要重新发布安装包 |
+| 平台登录、本地/云读写入口 | `Invariable/Manager/SdkManager.cs` | 否 |
+| 云存档初始化、排行榜拉取、云缓存 | `Invariable/Manager/CloudManager.cs` | 否 |
+| 云函数 | `Assets/Scripts/CloudService` | 否；改后需重新上传云函数并切远程调用 |
+| 云存档数据模型 DTO | `Assets/Scripts/CloudService/Model` | 否；改契约需同步重新上传云函数 |
+| 编辑器导出/构建工具 | `Assets/Editor/MyTools` | 不属于运行时发布 |
+| 修改启动加载面板 | `Assets/Resources/LocalAssets` 与 `Invariable/Workflow` | 通常否 |
+| 新动态图片、音频、Prefab、场景 | `Assets/GameAssets` | 可通过资源更新发布 |
+| 修改资源地址规则 | `Assets/AssetBundleCollectorSetting.asset` | 高风险，需重新构建并验证全量资源 |
 
-真机包大致步骤：
+基本原则：
 
-1. HybridCLR 生成并编译 `HotUpdate`，把 DLL（及需要的 AOT 补充 DLL）放到 `Assets/GameAssets/DLL/Android/`。
-2. YooAsset 构建 `MyPackage`，内置部分进 `StreamingAssets/yoo`，更新部分上传到资源服务器。
-3. 打 Android 包。签名文件只放本机，不要提交。
+1. **业务需求优先写入 `HotUpdate`。**
+2. 只有“热更新 DLL 加载前必须执行”或“直接依赖平台 SDK”的代码才放入 `Invariable`。
+3. `Invariable` 不得直接编译引用 `HotUpdate`，通过反射跨越程序集边界。
+4. `HotUpdate/Config/Generated/Config_*.cs` 是生成文件，数值修改应改 Excel 后重新导出；底座在 `Invariable/Config`。
+5. 不要直接修改 `Assets/GameAssets/DLL/{Android|iOS|OpenHarmony}/*.dll.bin`；它们由 DLL 工具生成。
 
-`HybridCLRData/`、`HybridCLRGenerate/`、`Build/`、`CDN/`、`Bundles/` 均为本地产物，不要提交。
+## 6. 后续需求建议
 
-## 第三方依赖
+为了快速且安全地新增或修改脚本，最好想先清楚需求内容，具体包含：
 
-**Package Manager**
+```text
+【目标】
+要新增或修复什么？
 
-| 包 | 用途 |
-| --- | --- |
-| `com.code-philosophy.hybridclr` | 代码热更 |
-| `com.tuyoogame.yooasset` 2.3.18 | 资源热更 |
-| `com.esotericsoftware.spine.*` 4.2 | Spine 动画 |
-| `com.coffee.ui-particle` | UGUI 粒子 |
-| `com.unity.nuget.newtonsoft-json` | JSON |
-| `com.google.external-dependency-manager` | Android 原生依赖 |
+【验收条件】
+玩家执行什么操作后，应看到什么结果？
 
-**内置在 `Assets/ToolPackage`**
+【影响平台】
+编辑器 / 安卓 / 苹果 / 鸿蒙 / 全部
 
-- UniTask 2.5.10
-- DOTween
-- TextMesh Pro
+【热更新要求】
+是否必须仅通过热更新发布？
 
-**Plugins**
+【涉及资源】
+Prefab、图片、音频、场景、Excel 表名及资源地址（如有）
 
-- `ExcelDataReader.dll`：编辑器导表
-- `Plugins/Android/*Template.gradle`：Android 原生依赖模板
+【复现步骤】
+BUG 出现前的操作、实际结果、预期结果、日志或截图
+
+【兼容要求】
+是否需要兼容已有存档、已发布资源清单或已发布客户端？
+```
+
+## 7. 后续修改代码时的流程
+
+1. 读取本目录文档和相关源码；
+2. 判断修改应位于 `HotUpdate`、`Invariable` 还是编辑器工具层；
+3. 搜索调用方、Prefab 绑定、YooAsset 地址和平台条件编译；
+4. 实施最小范围修改；
+5. 检查编译边界、空引用、生命周期、事件/计时器清理；
+6. 尽可能进行静态检查或引擎编译验证；
+7. 汇报改动文件和内容、发布平台类型、需在编辑器/真机完成的验证。
+
+## 8. 框架状态摘要
+
+- 引擎：团结引擎 `1.9.3`，对应 Unity `2022.3.62t11`。
+- 唯一构建场景：`Assets/Scenes/Start.scene`。
+- YooAsset 包名：`MyPackage`。
+- HybridCLR 热更新程序集：`HotUpdate`。
+- 热更新入口：`HotUpdate.StartGame.Play()`。
+- 首个业务页面：`MainPanel`，UI 层级 `0`。
+- UI 根节点依赖固定路径：`UI_Root/Canvas_{0..3}/Ts_Panel`。
+- 启动状态机：`Invariable.StateMachine`，节点为 `InitializeYooAsset` → `CheckCatalogUpdate` → `CheckResourceUpdates` → `HotUpdateOver`。
+- 配置表类型：`int` / `int[]` / `float` / `float[]` / `string` / `string[]`；源表位于 `Excel/`（仅 .xlsx/.xls），导表产物为 `GameAssets/Config/*.bytes` 与 `HotUpdate/Config/Generated/Config_*.cs`。
+- 平台键：`SdkManager.Instance.GetPlatformId()` 返回 `editor` / `android` / `ios` / `ohos`；DLL 与本机 CDN 前缀为 `Android` / `iOS` / `OpenHarmony`。`GetCDNPath()` 按端返回 `CDNPathAndroid` / `CDNPathiOS` / `CDNPathOpenHarmony`。
+- 安全区按宿主 Canvas 把 `Screen.safeArea` 换成画布偏移。
+- 渲染：内置管线 + Linear。3D 模型放 `GameAssets/Models` 与 `Prefabs/Model`，动态加载用 `YooAssetManager.Instance.AsyncLoadAsset<GameObject>`，不用 `OpenUIPrefabPanel`。
+- UOS：Launcher / CloudSave / Func Stateless；玩家存档 namespace 为 `kv_{CloudManager.CloudSaveGameId}_player`，排行榜快照为 `kv_{CloudManager.CloudSaveGameId}_rank`，须与 `CloudHelper.Secrets.GameId` 一致。后台显示名（仅展示）：玩家存档「安卓玩家数据」/「苹果玩家数据」/「鸿蒙玩家数据」，快照「世界排行榜」/「每日排行榜」。玩家存档 JSON 含 `CloudDataKeys.UserId` / `NickName` / `AvatarUrl`；排行榜条目为 `UserId` / `NickName` / `AvatarUrl` / `Data` 并列（`Data` 只保留排行分数等业务数据）。昵称与头像无平台来源时传空，不覆盖已有资料。
+- `HotUpdate` 引用 `Invariable` 与 `CloudService`（消费 Model DTO，如 `PlayerCloudData`）；项目内程序集统一名称引用，第三方包用 GUID。
+- 云读写业务入口：`SdkManager.SetCloudData` / `GetCloudData`；云初始化：`CloudManager.InitCloudData`。
